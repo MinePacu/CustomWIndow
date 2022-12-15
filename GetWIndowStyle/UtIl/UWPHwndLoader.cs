@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+using static GetWIndowStyle.UtIl.WIndowFunctIon;
+
+
+namespace GetWIndowStyle.UtIl
+{
+    public static class UWPHwndLoader
+    {
+        public static List<Hwndstruct> UWPHwndLIst { get; } = new();
+
+        public static bool ListWindows(IntPtr hWnd, ref IntPtr lParam)
+        {
+            var ep = (Hwndstruct)Marshal.PtrToStructure(lParam, typeof(Hwndstruct));
+
+            StringBuilder sbClassTItle = new StringBuilder(260);
+            string sClassTItle = null;
+
+            GetClassTItle(hWnd, sbClassTItle, sbClassTItle.Capacity);
+            sClassTItle = sbClassTItle.ToString();
+
+            // 최소화
+            if (sClassTItle == "Windows.UI.Core.CoreWindow")
+            {
+                int nPID = 0;
+                uint nThreadId = GetWindowThreadProcessId(hWnd, out nPID);
+                IntPtr hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
+                string sPackage = string.Empty;
+                if (hProcess != IntPtr.Zero)
+                {
+                    uint nSize = 260;
+                    StringBuilder sPackageTItle = new StringBuilder((int)nSize);
+                    GetPackageFullTItle(hProcess, ref nSize, sPackageTItle);
+
+                    nSize = 260;
+                    StringBuilder sProcessImageTItle = new StringBuilder((int)nSize);
+                    QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
+
+                    ep.hWnd = hWnd;
+                    ep.sExe = sProcessImageTItle.ToString();
+                    ep.nPID = nPID;
+                    ep.nState = 1;
+                    Marshal.StructureToPtr(ep, lParam, false);
+
+                    UWPHwndLIst.Add(ep);
+
+                    CloseHandle(hProcess);
+                }
+            }
+
+            // 일반
+            if (sClassTItle == "ApplicationFrameWindow")
+            {
+                IntPtr hWndFind = FindWindowEx(hWnd, IntPtr.Zero, "Windows.UI.Core.CoreWindow", null);
+                if (hWndFind != IntPtr.Zero)
+                {
+                    int nPID = 0;
+                    uint nThreadId = GetWindowThreadProcessId(hWndFind, out nPID);
+                    IntPtr hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
+                    string sPackage = string.Empty;
+                    if (hProcess != IntPtr.Zero)
+                    {
+                        uint nSize = 260;
+                        StringBuilder sPackageFullTItle = new StringBuilder((int)nSize);
+                        GetPackageFullTItle(hProcess, ref nSize, sPackageFullTItle);
+                        nSize = 260;
+                        StringBuilder sProcessImageTItle = new StringBuilder((int)nSize);
+                        QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
+
+                        ep.hWnd = hWnd;
+                        ep.sExe = sProcessImageTItle.ToString();
+                        ep.nPID = nPID;
+                        Marshal.StructureToPtr(ep, lParam, false);
+
+                        UWPHwndLIst.Add(ep);
+
+                        CloseHandle(hProcess);
+                    }
+                }
+            }
+            return true;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct Hwndstruct
+        {
+            public IntPtr hWnd;
+            public int nPID;
+            public string sExe;
+            public int nState;
+        }
+    }
+}

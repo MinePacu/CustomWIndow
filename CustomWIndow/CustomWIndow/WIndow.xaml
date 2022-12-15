@@ -1,0 +1,24 @@
+<Window
+    x:Class="CustomWIndow.WIndow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    SizeChanged="Window_SizeChanged"
+    Closed="Window_Closed">
+
+    <Grid>
+        <NavigationView x:Name="n" SelectionChanged="n_SelectionChanged" IsBackButtonVisible="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Setting" Content="기본 설정" Tag="Primary" />
+                <NavigationViewItem Icon="Setting" Content="추가 설정" Tag="Advanced" />
+            </NavigationView.MenuItems>
+
+            <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Frame x:Name="content" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+            </ScrollViewer>
+        </NavigationView>
+    </Grid>
+</Window>

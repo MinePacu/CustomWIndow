@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="CustomWIndow.Pages.AdvancedSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel
+        Margin="0, 7, 0, 0">
+        <labs:SettingsCard
+            Header="DWM 다시 시작"
+            Description="DWM을 다시 시작합니다. 다시 시작한 후, 이 프로그램을 다시 시작합니다."
+            IsClickEnabled="True"
+            Click="SettingsCard_Click">
+            <labs:SettingsCard.HeaderIcon>
+                <FontIcon 
+                    FontFamily="Segoe Fluent Icons" 
+                    Glyph="&#xe943;"/>
+            </labs:SettingsCard.HeaderIcon>
+        </labs:SettingsCard>
+    </StackPanel>
+</Page>
