@@ -3,9 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+
+using CustomWIndow.UtIl;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -38,6 +41,20 @@ namespace CustomWIndow
         public App()
         {
             this.InitializeComponent();
+
+            ConfIg.Load();
+
+            if (ConfIg.Instance.AutoAdmin && SysFunction.IsAdmin() == false)
+            {
+                ProcessStartInfo psi = new(Environment.CurrentDirectory + "\\CustomWIndow.exe")
+                {
+                    Verb = "Runas",
+                    UseShellExecute = true,
+                };
+
+                Process.Start(psi);
+                Environment.Exit(0);
+            }
         }
 
         /// <summary>

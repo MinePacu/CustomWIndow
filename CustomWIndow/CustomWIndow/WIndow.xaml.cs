@@ -44,8 +44,6 @@ namespace CustomWIndow
             if (AppthFunction.GetAppTh() == Appth.Dark)
                 Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(this), DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
 
-            ConfIg.Load();
-
             app.Resize(new(ConfIg.Instance.ProgramWIndowCon.WIndowGaro, ConfIg.Instance.ProgramWIndowCon.WIndowSero));
 
             n.SelectedItem = n.MenuItems[0];
