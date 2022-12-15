@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\AdvancedSettings.xaml" />
+    <None Remove="Pages\ConfIgPage.xaml" />
     <None Remove="WIndow.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +27,12 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25247-preview" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Pages\ConfIgPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 	
   <ItemGroup>

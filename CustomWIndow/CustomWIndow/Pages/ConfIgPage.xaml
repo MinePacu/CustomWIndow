@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="CustomWIndow.Pages.ConfIgPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel
+        Margin="0, 14, 0, 0">
+        <labs:SettingsExpander
+            Header="관리자 권한으로 실행">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon 
+                    FontFamily="Segoe Fluent Icons"
+                    Glyph="&#xe713;"/>
+            </labs:SettingsExpander.HeaderIcon>
+            
+            <Button 
+                x:Name="RestartWithAdminbutton"
+                Content="관리자 권한으로 다시 시작"
+                Click="RestartWithAdminbutton_Click"/>
+
+            <labs:SettingsExpander.Items>
+                <labs:SettingsCard
+                    Header="자동으로 관리자 권한으로 시작"
+                    Description="프로그램을 열면 자동으로 관리자 권한을 부여합니다.">
+                    
+                    <ToggleSwitch 
+                        x:Name="AutoAdminToggle"
+                        Toggled="AutoAdminToggle_Toggled"/>
+                </labs:SettingsCard>
+            </labs:SettingsExpander.Items>
+        </labs:SettingsExpander>
+    </StackPanel>
+</Page>
+ 

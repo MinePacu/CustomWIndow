@@ -41,6 +41,8 @@ namespace CustomWIndow.UtIl
             /// <br/>ㅤ창 설정을 저장하는 클래스
             /// </summary>
             public WIndowConfIg WIndowConfIg { get; set; } = new();
+
+            public bool AutoAdmin { get; set; } = false;
         }
 
         public static ConfIgEle Instance { get; set; } = new();

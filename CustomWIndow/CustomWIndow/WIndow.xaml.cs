@@ -13,6 +13,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.Windows.AppLifecycle;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,6 +31,7 @@ namespace CustomWIndow
         {
             ("Primary", typeof(Pages.SettingsPage)),
             ("Advanced", typeof(Pages.AdvancedSettings)),
+            ("Config", typeof(Pages.ConfIgPage)),
         };
 
         public WIndow()
@@ -53,9 +55,9 @@ namespace CustomWIndow
         {
             Type _page = null;
 
-            if (navIteTag == "sett")
+            if (navIteTag == "Config")
             {
-
+                _page = typeof(Pages.ConfIgPage);
             }
 
             else
@@ -79,7 +81,7 @@ namespace CustomWIndow
         {
             if (args.IsSettingsSelected == true)
             {
-                N_NavIgate("sett", args.RecommendedNavigationTransitionInfo);
+                N_NavIgate("Config", args.RecommendedNavigationTransitionInfo);
             }
 
             else if (args.SelectedItemContainer == null == false)
