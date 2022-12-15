@@ -22,6 +22,11 @@ namespace CustomWIndow.UtIl
 
         public List<bool> SubApplyed { get; } = new();
 
+        public bool IsBorderChange { get; set; } = true;
+
+        public bool IsCaptIonChange { get; set; } = true;
+
+        public bool IsCaptIonTextChange { get; set; } = true;
 
         public ProcessWIndow(string _Process_StrIng, IntPtr _FIrsthwnd, List<IntPtr> _Subhwnd, bool _FIrst, bool _Applyed)
         {
@@ -30,6 +35,32 @@ namespace CustomWIndow.UtIl
             Subhwnd = _Subhwnd;
             FIrst = _FIrst;
             Applyed = _Applyed;
+        }
+
+        public ProcessWIndow(string _Process_StrIng, IntPtr _FIrsthwnd, List<IntPtr> _Subhwnd, bool _FIrst, bool _Applyed, bool _Default)
+        {
+            Process_StrIng = _Process_StrIng;
+            FIrsthwnd = _FIrsthwnd;
+            Subhwnd = _Subhwnd;
+            FIrst = _FIrst;
+            Applyed = _Applyed;
+
+            IsBorderChange = _Default;
+            IsCaptIonChange = _Default;
+            IsCaptIonTextChange = _Default;
+        }
+
+        public ProcessWIndow(string _Process_StrIng, IntPtr _FIrsthwnd, List<IntPtr> _Subhwnd, bool _FIrst, bool _Applyed, bool _IsBorderChange, bool _IsCaptIonChange, bool _IsCaptIonTextChange)
+        {
+            Process_StrIng = _Process_StrIng;
+            FIrsthwnd = _FIrsthwnd;
+            Subhwnd = _Subhwnd;
+            FIrst = _FIrst;
+            Applyed = _Applyed;
+
+            IsBorderChange = _IsBorderChange;
+            IsCaptIonChange = _IsCaptIonChange;
+            IsCaptIonTextChange = _IsCaptIonTextChange;
         }
     }
 }

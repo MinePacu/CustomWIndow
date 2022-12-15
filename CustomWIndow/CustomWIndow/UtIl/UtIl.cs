@@ -25,6 +25,10 @@ namespace CustomWIndow.UtIl
 
         internal const string HKeyWIndowsAppTh = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize";
 
+        public static int Bordercolor { get; set; }
+        public static int CaptIonColor { get; set; }
+        public static int CaptIonTextColor { get; set; }
+
         public static async Task GetApplyHwnd()
         {
             int tep = 0;
@@ -105,12 +109,7 @@ namespace CustomWIndow.UtIl
                                                     if (tep_ < Process_WIndow[tep_].Subhwnd.Count)
                                                     {
                                                         // 윈도우 핸들러 중복 걸러내기
-                                                        if (hwnd == Process_WIndow[tep].Subhwnd[tep_])
-                                                        {
-                                                            Process_WIndow[tep].SubApplyed[tep_] = true;
-                                                        }
-
-                                                        else
+                                                        if (hwnd == Process_WIndow[tep].Subhwnd[tep_] == false)
                                                         {
                                                             Process_WIndow[tep].Subhwnd[tep_] = hwnd;
                                                             Process_WIndow[tep].SubApplyed[tep_] = false;
@@ -157,7 +156,7 @@ namespace CustomWIndow.UtIl
                 tep++;
             }
 
-            await ApplyTItlebar(ConfIg.Instance.ColorConfIg.BorderColor, ConfIg.Instance.ColorConfIg.CaptIonColor, ConfIg.Instance.ColorConfIg.CaptIonTextColor);
+            await ApplyTItlebar(Bordercolor, CaptIonColor, CaptIonTextColor);
             await Task.Delay(1240);
         }
 
@@ -173,10 +172,19 @@ namespace CustomWIndow.UtIl
                 {
                     if (process_wIndow.SubApplyed[subtep] == false)
                     {
-                        _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
-                        _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_BORDER_COLOR, bcolor);
-                        _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_CAPTION_COLOR, ccolor);
-                        _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_TEXT_COLOR, ctcolor);
+                        if (process_wIndow.IsBorderChange)
+                            _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_BORDER_COLOR, bcolor);
+                        else
+                        {
+                            if (AppthFunction.GetAppTh() == Enum.Appth.Dark)
+                                _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
+                        }
+
+                        if (process_wIndow.IsCaptIonChange)
+                            _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_CAPTION_COLOR, ccolor);
+
+                        if (process_wIndow.IsCaptIonTextChange)
+                            _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_TEXT_COLOR, ctcolor);
 
                         process_wIndow.SubApplyed[subtep] = true;
                     }

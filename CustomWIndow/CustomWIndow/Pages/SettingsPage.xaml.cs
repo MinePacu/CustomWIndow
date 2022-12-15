@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 using CustomWIndow.UtIl;
 using CustomWIndow.UtIl.Enum;
@@ -85,10 +86,34 @@ namespace CustomWIndow.Pages
                     {
                         Debug.WriteLine("app - " + line);
 
-                        UtIl.UtIl.ProcessLIst.Add(line);
-                        ConfIg.Instance.AppLIst.Add(line);
-                        UtIl.UtIl.Process_WIndow.Add(new(line, IntPtr.Zero, new(), true, false));
+                        if (line.Contains('/') == false)
+                        {
+                            UtIl.UtIl.ProcessLIst.Add(line);
+                            ConfIg.Instance.AppLIst.Add(line);
+                            UtIl.UtIl.Process_WIndow.Add(new(line, IntPtr.Zero, new(), true, false));
+                        }
+
+                        else
+                        {
+                            ConfIg.Instance.AppLIst.Add(line);
+                            UtIl.UtIl.Process_WIndow.Add(new(line, IntPtr.Zero, new(), true, false, line.Contains("/b") == true, line.Contains("/c") == true, line.Contains("/t") == true));
+                        }
                     }
+
+                    if (IsBorderSystemColor.IsChecked == false)
+                        UtIl.UtIl.Bordercolor = ConfIg.Instance.ColorConfIg.BorderColor;
+                    else
+                        UtIl.UtIl.Bordercolor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
+
+                    if (IsCaptIonSystemColor.IsChecked == false)
+                        UtIl.UtIl.CaptIonColor = ConfIg.Instance.ColorConfIg.CaptIonColor;
+                    else
+                        UtIl.UtIl.CaptIonColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
+
+                    if (IsCaptIonTextSystemColor.IsChecked == false)
+                        UtIl.UtIl.CaptIonTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor;
+                    else
+                        UtIl.UtIl.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
 
                     UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
                 }
