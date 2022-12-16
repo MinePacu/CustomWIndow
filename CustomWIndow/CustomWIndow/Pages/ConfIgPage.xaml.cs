@@ -24,6 +24,8 @@ namespace CustomWIndow.Pages
 
             if (SysFunction.IsAdmin())
                 RestartWithAdminbutton.IsEnabled = false;
+
+            AutoAdminToggle.IsOn = ConfIg.Instance.AutoAdmin;
         }
 
         void AutoAdminToggle_Toggled(object sender, RoutedEventArgs e)

@@ -44,7 +44,7 @@ namespace CustomWIndow
 
             ConfIg.Load();
 
-            if (ConfIg.Instance.AutoAdmin && SysFunction.IsAdmin() == false)
+            if (ConfIg.Instance.AutoAdmin && (SysFunction.IsAdmin() == false))
             {
                 ProcessStartInfo psi = new(Environment.CurrentDirectory + "\\CustomWIndow.exe")
                 {
