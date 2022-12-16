@@ -42,6 +42,8 @@ namespace CustomWIndow.UtIl
             /// </summary>
             public WIndowConfIg WIndowConfIg { get; set; } = new();
 
+            public EtcConfIg EtcConfIg { get; set; } = new();
+
             public bool AutoAdmin { get; set; } = false;
         }
 
@@ -139,6 +141,11 @@ namespace CustomWIndow.UtIl
         {
             public bool IsTaskbarBorderColor { get; set; } = false;
             public bool IsContextPopupBorderColor { get; set; } = false;
+        }
+
+        public class EtcConfIg
+        {
+            public bool IsTaskbarborder { get; set; } = true;
         }
     }
 }

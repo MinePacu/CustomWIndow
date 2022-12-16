@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
+using CustomWIndow.UtIl;
 using CustomWIndow.UtIl.WindowFunction;
 
 using Microsoft.UI.Xaml;
@@ -30,11 +31,17 @@ namespace CustomWIndow.Pages
         public AdvancedSettings()
         {
             this.InitializeComponent();
+            Extraborder1.IsOn = ConfIg.Instance.EtcConfIg.IsTaskbarborder;
         }
 
         void SettingsCard_Click(object sender, RoutedEventArgs e)
         {
             Dwm.RestartDWMwithProgram();
+        }
+
+        void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.EtcConfIg.IsTaskbarborder = ((ToggleSwitch) sender).IsOn;
         }
     }
 }

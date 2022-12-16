@@ -263,7 +263,7 @@ namespace CustomWIndow.UtIl
                                 if (process.ProcessName == "explorer")
                                 {
                                     string classTItle = StringUtIl.GetClassTItle(hwnd);
-                                    if (classTItle == "Shell_TrayWnd")
+                                    if (classTItle == "Shell_TrayWnd" && ConfIg.Instance.EtcConfIg.IsTaskbarborder)
                                         Process_WIndow_LIst.Add(new(process.ProcessName, (int)ThreadId, hwnd, false, true, true, false, false));
 
                                     if (IsWIndowPopup(hwnd))
