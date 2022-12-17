@@ -11,6 +11,8 @@ using CustomWIndow.UtIl.Enum;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
+using Windows.UI;
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -21,6 +23,29 @@ namespace CustomWIndow.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        public Color BorderColor
+        {
+            get { return (Color)GetValue(BorderColorProperty); }
+            set { SetValue(BorderColorProperty, value); }
+        }
+
+        public Color CaptionColor
+        {
+            get { return (Color)GetValue(CaptionColorProperty); }
+            set { SetValue(CaptionColorProperty, value); }
+        }
+
+        public Color CaptionTextColor
+        {
+            get { return (Color)GetValue(CaptionTextColorProperty); }
+            set { SetValue(CaptionTextColorProperty, value); }
+        }
+
+        public static readonly DependencyProperty BorderColorProperty = DependencyProperty.Register("BorderColor", typeof(Color), typeof(SettingsPage), null);
+        public static readonly DependencyProperty CaptionColorProperty = DependencyProperty.Register("CatprionColor", typeof(Color), typeof(SettingsPage), null);
+        public static readonly DependencyProperty CaptionTextColorProperty = DependencyProperty.Register("CaptionTextColor", typeof(Color), typeof(SettingsPage), null);
+
+
         public SettingsPage()
         {
             this.InitializeComponent();
@@ -62,6 +87,10 @@ namespace CustomWIndow.Pages
             WIndowCornermodeCombo.SelectedIndex = (int) ConfIg.Instance.WIndowCornermode;
 
             TaskToggle.IsOn = ProcessChecker.IsTaskWork;
+
+            BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
+            CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
+            CaptionTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor_;
         }
 
         async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)

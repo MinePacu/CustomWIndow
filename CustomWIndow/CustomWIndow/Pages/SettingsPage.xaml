@@ -170,7 +170,7 @@
                    FontWeight="Bold" />
 
                 <labs:SettingsExpander
-                Header="창 모서리 색">
+                Header="창 테두리 색">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -179,15 +179,26 @@
                         <labs:SettingsCard>
                             <labs:SettingsCard.Header>
                                 <CheckBox
-                                Content="시스템 색상 사용하기" 
-                                x:Name="IsBorderSystemColor"
-                                Checked="IsBorderSystemColor_Checked"
-                                Unchecked="IsBorderSystemColor_Checked"/>
+                                    Content="시스템 색상 사용하기" 
+                                    x:Name="IsBorderSystemColor"
+                                    Checked="IsBorderSystemColor_Checked"
+                                    Unchecked="IsBorderSystemColor_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
                         <labs:SettingsCard Header="색 설정">
                             <labs:SettingsCard.Content>
-                                <Button Content="설정" x:Name="borderColorbutton" Click="borderColorbutton_Click"/>
+                                <Button 
+                                    x:Name="borderColorbutton" 
+                                    Click="borderColorbutton_Click">
+                                    <Border
+                                        Width="70"
+                                        Height="25">
+                                        <Border.Background>
+                                            <SolidColorBrush 
+                                                Color="{x:Bind BorderColor, Mode=TwoWay}"/>
+                                        </Border.Background>
+                                    </Border>
+                                </Button>
                             </labs:SettingsCard.Content>
                         </labs:SettingsCard>
                     </labs:SettingsExpander.Items>
@@ -210,16 +221,28 @@
                                 Unchecked="IsCaptIonSystemColor_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
-                        <labs:SettingsCard Header="색 설정">
+                        <labs:SettingsCard 
+                            Header="색 설정">
                             <labs:SettingsCard.Content>
-                                <Button Content="설정" x:Name="captIonColorbutton" Click="captIonColorbutton_Click"/>
+                                <Button 
+                                    x:Name="captIonColorbutton" 
+                                    Click="captIonColorbutton_Click">
+                                    <Border
+                                        Width="70"
+                                        Height="25">
+                                        <Border.Background>
+                                            <SolidColorBrush 
+                                                Color="{x:Bind CaptionColor, Mode=TwoWay}"/>
+                                        </Border.Background>
+                                    </Border>
+                                </Button>
                             </labs:SettingsCard.Content>
                         </labs:SettingsCard>
                     </labs:SettingsExpander.Items>
                 </labs:SettingsExpander>
 
                 <labs:SettingsExpander
-                Header="창 캡션 텍스트 색">
+                    Header="창 캡션 텍스트 색">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -238,19 +261,32 @@
                             </labs:SettingsCard.Content>
                         </labs:SettingsCard>
                         <labs:SettingsCard 
-                        Description="창 캡션 색에서 시스템 색상을 사용하면 가독성이 확보되지 않습니다."
-                        ToolTipService.ToolTip="창 캡션 색에서 시스템 색상을 사용하고 캡션 텍스트 색도 시스템 색상을 사용하면 캡션 텍스트가 나오지 않습니다.">
+                            Description="창 캡션 색에서 시스템 색상을 사용하면 가독성이 확보되지 않습니다."
+                            ToolTipService.ToolTip="창 캡션 색에서 시스템 색상을 사용하고 캡션 텍스트 색도 시스템 색상을 사용하면 캡션 텍스트가 나오지 않습니다.">
                             <labs:SettingsCard.Header>
                                 <CheckBox
-                                Content="시스템 색상 사용하기" 
-                                x:Name="IsCaptIonTextSystemColor"
-                                Checked="IsCaptIonTextSystemColor_Checked"
-                                Unchecked="IsCaptIonTextSystemColor_Checked"/>
+                                    Content="시스템 색상 사용하기" 
+                                    x:Name="IsCaptIonTextSystemColor"
+                                    Checked="IsCaptIonTextSystemColor_Checked"
+                                    Unchecked="IsCaptIonTextSystemColor_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
                         <labs:SettingsCard Header="색 설정">
                             <labs:SettingsCard.Content>
-                                <Button Content="설정" x:Name="captIonTextColorbutton" Click="captIonTextColorbutton_Click"/>
+                                <Button 
+                                    x:Name="captIonTextColorbutton" 
+                                    Click="captIonTextColorbutton_Click">
+                                    <Button.Content>
+                                        <Border
+                                            Width="70"
+                                            Height="25">
+                                            <Border.Background>
+                                                <SolidColorBrush 
+                                                    Color="{x:Bind CaptionTextColor, Mode=TwoWay}"/>
+                                            </Border.Background>
+                                        </Border>
+                                    </Button.Content>
+                                </Button>
                             </labs:SettingsCard.Content>
                         </labs:SettingsCard>
                     </labs:SettingsExpander.Items>
