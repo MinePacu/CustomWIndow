@@ -347,6 +347,7 @@ namespace CustomWIndow.Pages
             {
                 ConfIg.Instance.ColorConfIg.BorderColor = ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color);
                 ConfIg.Instance.ColorConfIg.BorderColor_ = ((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color;
+                BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color));
             }
         }
@@ -387,6 +388,7 @@ namespace CustomWIndow.Pages
             {
                 ConfIg.Instance.ColorConfIg.CaptIonColor = ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color);
                 ConfIg.Instance.ColorConfIg.CaptIonColor_ = ((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color;
+                CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color));
             }
         }
@@ -427,6 +429,7 @@ namespace CustomWIndow.Pages
             {
                 ConfIg.Instance.ColorConfIg.CaptIonTextColor = ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color);
                 ConfIg.Instance.ColorConfIg.CaptIonTextColor_ = ((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color;
+                CaptionTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(((ColorPicker) ((ScrollViewer)ColorwIndow.Content).Content).Color));
             }
         }

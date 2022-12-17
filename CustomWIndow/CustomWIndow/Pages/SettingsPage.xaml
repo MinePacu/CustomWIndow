@@ -191,7 +191,7 @@
                                     x:Name="borderColorbutton" 
                                     Click="borderColorbutton_Click">
                                     <Border
-                                        Width="70"
+                                        Width="110"
                                         Height="25">
                                         <Border.Background>
                                             <SolidColorBrush 
@@ -228,7 +228,7 @@
                                     x:Name="captIonColorbutton" 
                                     Click="captIonColorbutton_Click">
                                     <Border
-                                        Width="70"
+                                        Width="110"
                                         Height="25">
                                         <Border.Background>
                                             <SolidColorBrush 
@@ -278,7 +278,7 @@
                                     Click="captIonTextColorbutton_Click">
                                     <Button.Content>
                                         <Border
-                                            Width="70"
+                                            Width="110"
                                             Height="25">
                                             <Border.Background>
                                                 <SolidColorBrush 
