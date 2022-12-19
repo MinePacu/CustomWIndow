@@ -133,6 +133,13 @@
                                     </Paragraph>
                                 </RichTextBlock>
                             </Grid>
+
+                            <Button 
+                                Grid.Column="3"
+                                Content="목록 관리"
+                                x:Name="ExceptProgrammanage"
+                                HorizontalAlignment="Right"
+                                Click="ExceptProgrammanage_Click"/>
                         </Grid>
                     </Expander.Header>
 

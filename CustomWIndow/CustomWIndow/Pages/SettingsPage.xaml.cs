@@ -7,6 +7,7 @@ using System.Linq;
 
 using CustomWIndow.UtIl;
 using CustomWIndow.UtIl.Enum;
+using CustomWIndow.Windows;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -329,7 +330,7 @@ namespace CustomWIndow.Pages
             {
                 XamlRoot = this.Content.XamlRoot,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                Title = "모서리 색",
+                Title = "테두리 색",
                 PrimaryButtonText = "설정",
                 CloseButtonText = "취소",
 
@@ -475,6 +476,37 @@ namespace CustomWIndow.Pages
             var Combo = (ComboBox)sender;
 
             ConfIg.Instance.WIndowCornermode = (DWM_WINDOW_CORNER_PREFERENCE) Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), Combo.SelectedIndex);
+        }
+
+        private void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
+        {
+            string[] lines = NonProgram_LIst.Text.Split("\r");
+
+            if (lines.Length == 0)
+                return;
+
+            ConfIg.Instance.NonappLIst.Clear();
+            ProcessChecker.ProcessColorChangeExceptLIst.Clear();
+
+            foreach (string line in lines)
+            {
+                if (line.Contains('/') == false)
+                {
+                    ConfIg.Instance.NonappLIst.Add(line);
+                    UtIl.ProcessChecker.ProcessColorChangeExceptLIst.Add(new(line, false));
+                }
+
+                else
+                {
+                    string[] optIons = line.Split(" ");
+
+                    ConfIg.Instance.NonappLIst.Add(line);
+                    ProcessChecker.ProcessColorChangeExceptLIst.Add(new(optIons[0], line.Contains("/b") == false, line.Contains("/c") == false, line.Contains("/t") == false));
+                }
+            }
+
+            var ExceptProgramWindow = new ExceptProgramWindow();
+            ExceptProgramWindow.Activate();
         }
     }
 }
