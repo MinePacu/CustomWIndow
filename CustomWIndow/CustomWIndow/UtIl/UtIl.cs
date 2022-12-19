@@ -29,6 +29,8 @@ namespace CustomWIndow.UtIl
         public static int CaptIonColor { get; set; }
         public static int CaptIonTextColor { get; set; }
 
+        public static bool IsTaskWork { get; set; } = false;
+
         public static async Task GetApplyHwnd()
         {
             int tep = 0;

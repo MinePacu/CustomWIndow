@@ -208,14 +208,27 @@ namespace CustomWIndow.Pages
             else
             {
                 toggle.IsEnabled = false;
+                if (ProcessChecker.IsTaskWork)
+                {
+                    ProcessChecker.cts.Cancel();
+                    await ProcessChecker.task;
 
-                ProcessChecker.cts.Cancel();
-                await ProcessChecker.task;
+                    ProcessChecker.cts.Dispose();
+                    ProcessChecker.cts = new();
 
-                //UtIl.UtIl.ProcessLIst.Clear();
+                    ProcessChecker.IsTaskWork = false;
+                }
 
-                ProcessChecker.cts.Dispose();
-                ProcessChecker.cts = new();
+                else if (UtIl.UtIl.IsTaskWork)
+                {
+                    UtIl.UtIl.cts.Cancel();
+                    await UtIl.UtIl.task;
+
+                    UtIl.UtIl.cts.Dispose();
+                    UtIl.UtIl.cts = new();
+
+                    UtIl.UtIl.IsTaskWork = false;
+                }
 
                 toggle.IsEnabled = true;
                 if (SelectOptIon.SelectedIndex == 0)
@@ -223,7 +236,6 @@ namespace CustomWIndow.Pages
                 else
                     NonProgram_LIst.IsReadOnly = false;
 
-                ProcessChecker.IsTaskWork = false;
                 SelectOptIon.IsEnabled = true;
             }
         }
