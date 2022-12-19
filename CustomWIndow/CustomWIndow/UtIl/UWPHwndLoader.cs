@@ -20,7 +20,7 @@ namespace CustomWIndow.UtIl
             StringBuilder sbClassTItle = new StringBuilder(260);
             string sClassTItle = null;
 
-            GetClassTItle(hWnd, sbClassTItle, sbClassTItle.Capacity);
+            StringUtIl.GetClassTItle(hWnd);
             sClassTItle = sbClassTItle.ToString();
 
             // 최소화
