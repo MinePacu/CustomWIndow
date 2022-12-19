@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using CustomWIndow.UtIl.Enum;
 
-using Microsoft.Win32;
-
 using CustomWIndow.UtIl.WindowFunction;
 using static CustomWIndow.UtIl.WIndowFunctIon;
 

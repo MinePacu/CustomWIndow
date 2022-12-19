@@ -46,9 +46,6 @@ namespace CustomWIndow.UtIl
         [DllImport("User32.dll", CharSet = CharSet.Unicode)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
 
-        [DllImport("User32.dll", EntryPoint = "GetClassName", CharSet = CharSet.Unicode)]
-        public static extern int GetClassTItle(IntPtr hWnd, StringBuilder lpClassTItle, int nMaxCount);
-
         [DllImport("Kernel32.dll", EntryPoint = "GetPackageFullName", CharSet = CharSet.Unicode)]
         public static extern bool GetPackageFullTItle(IntPtr hProcess, ref uint packageFullTItleLength, StringBuilder packageFullTItle);
 
