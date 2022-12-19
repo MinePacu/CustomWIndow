@@ -47,7 +47,10 @@ namespace CustomWIndow.UtIl
 
             IsBorderChange = _Default;
             IsCaptIonChange = _Default;
-            IsCaptIonTextChange = _Default;
+            if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 0)
+                IsCaptIonTextChange = false;
+            else
+                IsCaptIonTextChange = _Default;
         }
 
         public ProcessWIndow(string _Process_StrIng, IntPtr _FIrsthwnd, List<IntPtr> _Subhwnd, bool _FIrst, bool _Applyed, bool _IsBorderChange, bool _IsCaptIonChange, bool _IsCaptIonTextChange)
@@ -60,7 +63,10 @@ namespace CustomWIndow.UtIl
 
             IsBorderChange = _IsBorderChange;
             IsCaptIonChange = _IsCaptIonChange;
-            IsCaptIonTextChange = _IsCaptIonTextChange;
+            if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 0)
+                IsCaptIonTextChange = false;
+            else
+                IsCaptIonTextChange = _IsCaptIonTextChange;
         }
     }
 }
