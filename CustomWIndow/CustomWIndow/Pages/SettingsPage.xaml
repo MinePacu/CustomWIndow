@@ -143,14 +143,15 @@
                         </Grid>
                     </Expander.Header>
 
-                    <StackPanel HorizontalAlignment="Stretch">
+                    <StackPanel 
+                        HorizontalAlignment="Stretch">
                         <TextBox Margin="40, 0, 25, 0" 
-                        TextWrapping="Wrap"
-                        AcceptsReturn="True" 
-                        x:Name="NonProgram_LIst"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        ScrollViewer.VerticalScrollMode="Auto"/>
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True" 
+                            x:Name="NonProgram_LIst"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            ScrollViewer.VerticalScrollMode="Auto"/>
                     </StackPanel>
                 </Expander>
 

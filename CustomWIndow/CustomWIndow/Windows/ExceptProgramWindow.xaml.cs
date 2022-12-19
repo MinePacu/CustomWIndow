@@ -34,6 +34,11 @@ namespace CustomWIndow.Windows
 
             if (AppthFunction.GetAppTh() == Appth.Dark)
                 Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(this), DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
+
+            var apppresenter = (OverlappedPresenter) WIndow.Presenter;
+
+            apppresenter.IsMaximizable = false;
+            apppresenter.IsResizable = false;
         }
     }
 }

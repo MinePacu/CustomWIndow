@@ -9,6 +9,7 @@ using CustomWIndow.UtIl;
 using CustomWIndow.UtIl.Enum;
 using CustomWIndow.Windows;
 
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -46,7 +47,7 @@ namespace CustomWIndow.Pages
         public static readonly DependencyProperty CaptionColorProperty = DependencyProperty.Register("CatprionColor", typeof(Color), typeof(SettingsPage), null);
         public static readonly DependencyProperty CaptionTextColorProperty = DependencyProperty.Register("CaptionTextColor", typeof(Color), typeof(SettingsPage), null);
 
-
+        
         public SettingsPage()
         {
             this.InitializeComponent();
@@ -478,7 +479,7 @@ namespace CustomWIndow.Pages
             ConfIg.Instance.WIndowCornermode = (DWM_WINDOW_CORNER_PREFERENCE) Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), Combo.SelectedIndex);
         }
 
-        private void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
+        private async void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
         {
             string[] lines = NonProgram_LIst.Text.Split("\r");
 
@@ -505,8 +506,16 @@ namespace CustomWIndow.Pages
                 }
             }
 
+            NonProgram_LIst.IsEnabled = false;
+
             var ExceptProgramWindow = new ExceptProgramWindow();
             ExceptProgramWindow.Activate();
+
+            ExceptProgramWindow.Closed += delegate
+            {
+                NonProgram_LIst.IsEnabled = true;
+                ExceptProgramWindow.Content = null;
+            };
         }
     }
 }
