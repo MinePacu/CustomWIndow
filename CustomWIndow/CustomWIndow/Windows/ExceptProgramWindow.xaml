@@ -12,6 +12,7 @@
     <StackPanel>
         <controls:DataGrid 
             AutoGenerateColumns="False"
+            IsReadOnly="True"
             Margin="14" 
             ItemsSource="{x:Bind Util:ProcessChecker.ProcessColorChangeExceptLIst}">
             <controls:DataGrid.Columns>

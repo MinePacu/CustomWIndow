@@ -481,28 +481,31 @@ namespace CustomWIndow.Pages
 
         private async void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
         {
-            string[] lines = NonProgram_LIst.Text.Split("\r");
-
-            if (lines.Length == 0)
-                return;
-
-            ConfIg.Instance.NonappLIst.Clear();
-            ProcessChecker.ProcessColorChangeExceptLIst.Clear();
-
-            foreach (string line in lines)
+            if (ProcessChecker.IsTaskWork == false || UtIl.UtIl.IsTaskWork == false)
             {
-                if (line.Contains('/') == false)
-                {
-                    ConfIg.Instance.NonappLIst.Add(line);
-                    UtIl.ProcessChecker.ProcessColorChangeExceptLIst.Add(new(line, false));
-                }
+                string[] lines = NonProgram_LIst.Text.Split("\r");
 
-                else
-                {
-                    string[] optIons = line.Split(" ");
+                if (lines.Length == 0)
+                    return;
 
-                    ConfIg.Instance.NonappLIst.Add(line);
-                    ProcessChecker.ProcessColorChangeExceptLIst.Add(new(optIons[0], line.Contains("/b") == false, line.Contains("/c") == false, line.Contains("/t") == false));
+                ConfIg.Instance.NonappLIst.Clear();
+                ProcessChecker.ProcessColorChangeExceptLIst.Clear();
+
+                foreach (string line in lines)
+                {
+                    if (line.Contains('/') == false)
+                    {
+                        ConfIg.Instance.NonappLIst.Add(line);
+                        UtIl.ProcessChecker.ProcessColorChangeExceptLIst.Add(new(line, false));
+                    }
+
+                    else
+                    {
+                        string[] optIons = line.Split(" ");
+
+                        ConfIg.Instance.NonappLIst.Add(line);
+                        ProcessChecker.ProcessColorChangeExceptLIst.Add(new(optIons[0], line.Contains("/b") == false, line.Contains("/c") == false, line.Contains("/t") == false));
+                    }
                 }
             }
 
