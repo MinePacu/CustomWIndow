@@ -15,6 +15,7 @@
   <ItemGroup>
     <None Remove="Pages\AdvancedSettings.xaml" />
     <None Remove="Pages\ConfIgPage.xaml" />
+    <None Remove="Pages\SubPages\AddExceptPage.xaml" />
     <None Remove="WIndow.xaml" />
     <None Remove="Windows\ExceptProgramWindow.xaml" />
   </ItemGroup>
@@ -51,6 +52,12 @@
 	
   <ItemGroup>
     <Page Update="Windows\ExceptProgramWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Pages\SubPages\AddExceptPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

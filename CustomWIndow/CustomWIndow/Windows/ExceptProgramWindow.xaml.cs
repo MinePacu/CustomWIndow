@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 using CustomWIndow.UtIl.Enum;
 using CustomWIndow.UtIl;
@@ -9,6 +11,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Windowing;
 
 using WinRT.Interop;
+using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,6 +24,7 @@ namespace CustomWIndow.Windows
     public sealed partial class ExceptProgramWindow : Window
     {
         AppWindow WIndow;
+        public List<ProcessColorChangeExcept> tempExceptLIst { get; set; } = new();
 
         public ExceptProgramWindow()
         {
@@ -38,7 +42,43 @@ namespace CustomWIndow.Windows
             var apppresenter = (OverlappedPresenter) WIndow.Presenter;
 
             apppresenter.IsMaximizable = false;
-            apppresenter.IsResizable = false;
+            //apppresenter.IsResizable = false;
+        }
+
+        private async void AddExceptProgram_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog AddExceptProgramWindow = new()
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                Title = "제외 프로그램 추가",
+                PrimaryButtonText = "추가",
+                CloseButtonText = "취소",
+
+                DefaultButton = ContentDialogButton.Close,
+
+                Content = new Pages.SubPages.AddExceptPage(),
+            };
+
+            var AddedExceptProgram = await AddExceptProgramWindow.ShowAsync();
+
+            if (AddedExceptProgram == ContentDialogResult.Primary)
+            {
+                var AddExceptProgramPage = (Pages.SubPages.AddExceptPage)AddExceptProgramWindow.Content;
+
+                Debug.WriteLine("Debug Process String - " + AddExceptProgramPage.ProcessString);
+                Debug.WriteLine("Debug IsExceptBorderColorChange - " + AddExceptProgramPage.IsExceptBorderColorChange);
+                Debug.WriteLine("Debug IsExceptCaptionrColorChange - " + AddExceptProgramPage.IsExceptCaptionrColorChange);
+                Debug.WriteLine("Debug IsExceptCaptionTextColorChange - " + AddExceptProgramPage.IsExceptCaptionTextColorChange);
+
+                ProcessColorChangeExcept tempExceptProgram = new(AddExceptProgramPage.ProcessString, AddExceptProgramPage.IsExceptBorderColorChange == false, AddExceptProgramPage.IsExceptCaptionrColorChange == false, AddExceptProgramPage.IsExceptCaptionTextColorChange == false);
+
+                ProcessChecker.ProcessColorChangeExceptLIst.Add(tempExceptProgram);
+                tempExceptLIst.Add(tempExceptProgram);
+
+                ProcessExceptGrid.ItemsSource = null;
+                ProcessExceptGrid.ItemsSource = ProcessChecker.ProcessColorChangeExceptLIst;
+            }
         }
     }
 }

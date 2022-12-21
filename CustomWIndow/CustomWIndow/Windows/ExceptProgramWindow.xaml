@@ -14,6 +14,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             Margin="14" 
+            x:Name="ProcessExceptGrid"
             ItemsSource="{x:Bind Util:ProcessChecker.ProcessColorChangeExceptLIst}">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn
@@ -31,5 +32,12 @@
             </controls:DataGrid.Columns>
         </controls:DataGrid>
 
+        <Button 
+            Content="제외 프로그램 추가"
+            Background="{ThemeResource AccentAAFillColorDefaultBrush}"
+            HorizontalAlignment="Right"
+            Margin="0, 0, 14, 0"
+            x:Name="AddExceptProgram"
+            Click="AddExceptProgram_Click"/>
     </StackPanel>
 </Window>

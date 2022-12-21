@@ -163,8 +163,8 @@
                 <labs:SettingsCard 
                     Header="창 모서리 설정">
                     <ComboBox
-                    x:Name="WIndowCornermodeCombo"
-                    SelectionChanged="WIndowCornermodeCombo_SelectionChanged">
+                        x:Name="WIndowCornermodeCombo"
+                        SelectionChanged="WIndowCornermodeCombo_SelectionChanged">
                         <ComboBoxItem Content="기본"/>
                         <ComboBoxItem Content="둥글게 하지 않음"/>
                         <ComboBoxItem Content="둥글게"/>
@@ -178,7 +178,7 @@
                    FontWeight="Bold" />
 
                 <labs:SettingsExpander
-                Header="창 테두리 색">
+                    Header="창 테두리 색">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -213,8 +213,8 @@
                 </labs:SettingsExpander>
 
                 <labs:SettingsExpander
-                Header="창 캡션 색"
-                Description="기본은 윈도우 색상 및 설정에 따릅니다.">
+                    Header="창 캡션 색"
+                    Description="기본은 윈도우 색상 및 설정에 따릅니다.">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>

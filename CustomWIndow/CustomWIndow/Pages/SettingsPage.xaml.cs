@@ -509,7 +509,7 @@ namespace CustomWIndow.Pages
                 }
             }
 
-            NonProgram_LIst.IsEnabled = false;
+            NonProgram_LIst.IsEnabled = false; 
 
             var ExceptProgramWindow = new ExceptProgramWindow();
             ExceptProgramWindow.Activate();
@@ -517,7 +517,17 @@ namespace CustomWIndow.Pages
             ExceptProgramWindow.Closed += delegate
             {
                 NonProgram_LIst.IsEnabled = true;
+
+                foreach (var ExceptProgram in ExceptProgramWindow.tempExceptLIst)
+                {
+                    string Line = "\r" + ExceptProgram.ProcessStrIng + " " + (ExceptProgram.IsBorderChange == false ? "/b " : "") + (ExceptProgram.IsCaptIonChange == false ? "/c " : "") + (ExceptProgram.IsCaptIonTextChange == false ? "/t " : "");
+
+                    NonProgram_LIst.Text += Line;
+                    ConfIg.Instance.NonappLIst.Add(Line.Replace("\r", ""));
+                }
+
                 ExceptProgramWindow.Content = null;
+                ExceptProgramWindow = null;
             };
         }
     }
