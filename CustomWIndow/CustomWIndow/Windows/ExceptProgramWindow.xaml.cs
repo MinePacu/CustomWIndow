@@ -80,5 +80,24 @@ namespace CustomWIndow.Windows
                 ProcessExceptGrid.ItemsSource = ProcessChecker.ProcessColorChangeExceptLIst;
             }
         }
+
+        private void RemoveExceptProgram_Click(object sender, RoutedEventArgs e)
+        {
+            var Index = ProcessExceptGrid.SelectedIndex;
+
+            ProcessChecker.ProcessColorChangeExceptLIst.RemoveAt(Index);
+            ProcessExceptGrid.ItemsSource = null;
+            ProcessExceptGrid.ItemsSource = ProcessChecker.ProcessColorChangeExceptLIst;
+
+            ConfIg.Instance.NonappLIst.RemoveAt(Index);
+        }
+
+        private void ProcessExceptGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count >= 1)
+            {
+                RemoveExceptProgram.IsEnabled = true;
+            }
+        }
     }
 }

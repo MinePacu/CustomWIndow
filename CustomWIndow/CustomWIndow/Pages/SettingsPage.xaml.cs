@@ -521,9 +521,19 @@ namespace CustomWIndow.Pages
                 foreach (var ExceptProgram in ExceptProgramWindow.tempExceptLIst)
                 {
                     string Line = "\r" + ExceptProgram.ProcessStrIng + " " + (ExceptProgram.IsBorderChange == false ? "/b " : "") + (ExceptProgram.IsCaptIonChange == false ? "/c " : "") + (ExceptProgram.IsCaptIonTextChange == false ? "/t " : "");
-
-                    NonProgram_LIst.Text += Line;
                     ConfIg.Instance.NonappLIst.Add(Line.Replace("\r", ""));
+                }
+
+                NonProgram_LIst.Text = "";
+
+                int tep = 0;
+                foreach (var Nonapp in ConfIg.Instance.NonappLIst)
+                {
+                    if (tep == ConfIg.Instance.NonappLIst.Count)
+                        NonProgram_LIst.Text += Nonapp;
+                    else
+                        NonProgram_LIst.Text += Nonapp + "\r";
+                    tep++;
                 }
 
                 ExceptProgramWindow.Content = null;
