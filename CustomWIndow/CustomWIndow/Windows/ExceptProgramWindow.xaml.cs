@@ -66,10 +66,10 @@ namespace CustomWIndow.Windows
             {
                 var AddExceptProgramPage = (Pages.SubPages.AddExceptPage)AddExceptProgramWindow.Content;
 
-                Debug.WriteLine("Debug Process String - " + AddExceptProgramPage.ProcessString);
-                Debug.WriteLine("Debug IsExceptBorderColorChange - " + AddExceptProgramPage.IsExceptBorderColorChange);
-                Debug.WriteLine("Debug IsExceptCaptionrColorChange - " + AddExceptProgramPage.IsExceptCaptionrColorChange);
-                Debug.WriteLine("Debug IsExceptCaptionTextColorChange - " + AddExceptProgramPage.IsExceptCaptionTextColorChange);
+                //Debug.WriteLine("Debug Process String - " + AddExceptProgramPage.ProcessString);
+                //Debug.WriteLine("Debug IsExceptBorderColorChange - " + AddExceptProgramPage.IsExceptBorderColorChange);
+                //Debug.WriteLine("Debug IsExceptCaptionrColorChange - " + AddExceptProgramPage.IsExceptCaptionrColorChange);
+                //Debug.WriteLine("Debug IsExceptCaptionTextColorChange - " + AddExceptProgramPage.IsExceptCaptionTextColorChange);
 
                 ProcessColorChangeExcept tempExceptProgram = new(AddExceptProgramPage.ProcessString, AddExceptProgramPage.IsExceptBorderColorChange == false, AddExceptProgramPage.IsExceptCaptionrColorChange == false, AddExceptProgramPage.IsExceptCaptionTextColorChange == false);
 
