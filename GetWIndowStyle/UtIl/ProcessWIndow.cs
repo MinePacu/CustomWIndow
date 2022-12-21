@@ -20,4 +20,16 @@ namespace GetWIndowStyle.UtIl
             ThreadHwnd = _ThreadHwnd;
         }
     }
+
+    public class HwndClass
+    {
+        public string HwndCaptIon { get; set; }
+        public IntPtr hwnd { get; set; }
+
+        public HwndClass(string _hwndCation, IntPtr _hwnd)
+        {
+            HwndCaptIon = _hwndCation;
+            hwnd = _hwnd;
+        }
+    }
 }

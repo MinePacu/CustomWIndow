@@ -4,6 +4,10 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 
+using ConsoleTables;
+
+using GetWIndowStyle.UtIl;
+
 using static GetWIndowStyle.UtIl.UWPHwndLoader;
 using static GetWIndowStyle.UtIl.WIndowFunctIon;
 
@@ -44,33 +48,72 @@ if (args.Length > 0)
         }
     }
 
-    else if (args.Length == 2)
+    else if (args.Length >= 2)
     {
         if (args[0] == "/GetWIndowHwnd")
         {
-            Process[] Processes = Process.GetProcessesByName(args[1].Replace(".exe", ""));
-
-            foreach (var Process in Processes)
+            if (args[1] == "/t")
             {
-                if (Process.MainWindowHandle == IntPtr.Zero == false)
+                if (args[2] == null == false)
                 {
-                    Console.WriteLine("JuHandle - " + Process.MainWindowHandle);
-                    Console.WriteLine("JuTItle - " + Process.MainWindowTitle);
-                }
+                    while (true)
+                    {
+                        HwndChecker.HwndLIst.Clear();
+                        Process[] Processes = Process.GetProcessesByName(args[2].Replace(".exe", ""));
 
-                foreach (ProcessThread Thread in Process.Threads)
-                {
-                    //Console.WriteLine("ThreadsId - " + Thread.Id);
-                    EnumThreadWindows(Thread.Id,
-                        (hwnd, lP) =>
+                        foreach (var process in Processes)
                         {
-                            //Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X"));
-                            if (GetWIndowStyle.UtIl.WIndowFunctIon.IsWindowVisible(hwnd))
-                                Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X") + "(WIndowStyle - WS_V)");
-                            else
-                                Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X") + "(WIndowStyle - WS_NV)");
-                            return true;
-                        }, IntPtr.Zero);
+                            foreach (ProcessThread Thread in process.Threads)
+                            {
+                                WIndowFunctIon.EnumThreadWindows(Thread.Id,
+                                    (hwnd, lP) =>
+                                    {
+                                        if (WIndowFunctIon.IsWindowVisible(hwnd))
+                                            HwndChecker.HwndLIst.Add(new(WIndowFunctIon.GetWindowText_(hwnd), hwnd));
+                                        return true;
+                                    }, IntPtr.Zero);
+                            }
+                        }
+
+                        Console.Clear();
+                        var table = new ConsoleTable("캡션", "IntPtr");
+                        foreach (HwndClass hwnd in HwndChecker.HwndLIst)
+                        {
+                            table.AddRow(hwnd.HwndCaptIon, hwnd.hwnd.ToString("X"));
+                        }
+                        table.Write();
+                        Console.WriteLine();
+
+                        Thread.Sleep(1245);
+                    }
+                }
+            }
+            else
+            {
+                Process[] Processes = Process.GetProcessesByName(args[1].Replace(".exe", ""));
+
+                foreach (var Process in Processes)
+                {
+                    if (Process.MainWindowHandle == IntPtr.Zero == false)
+                    {
+                        Console.WriteLine("JuHandle - " + Process.MainWindowHandle);
+                        Console.WriteLine("JuTItle - " + Process.MainWindowTitle);
+                    }
+
+                    foreach (ProcessThread Thread in Process.Threads)
+                    {
+                        //Console.WriteLine("ThreadsId - " + Thread.Id);
+                        EnumThreadWindows(Thread.Id,
+                            (hwnd, lP) =>
+                            {
+                                //Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X"));
+                                if (GetWIndowStyle.UtIl.WIndowFunctIon.IsWindowVisible(hwnd))
+                                    Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X") + "(WIndowStyle - WS_V)");
+                                else
+                                    Console.WriteLine("WIndowHwnd - " + hwnd.ToString("X") + "(WIndowStyle - WS_NV)");
+                                return true;
+                            }, IntPtr.Zero);
+                    }
                 }
             }
         }

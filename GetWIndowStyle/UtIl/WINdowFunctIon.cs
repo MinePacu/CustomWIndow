@@ -62,6 +62,14 @@ namespace GetWIndowStyle.UtIl
         [DllImport("User32.dll", EntryPoint = "GetClassName", CharSet = CharSet.Unicode)]
         public static extern int GetClassTItle(IntPtr hWnd, StringBuilder lpClassTItle, int nMaxCount);
 
+        public static string GetWindowText_(IntPtr hwnd)
+        {
+            StringBuilder string_ = new(260);
+            GetWindowText(hwnd, string_, string_.Capacity);
+
+            return string_.ToString();
+        }
+
         [DllImport("Kernel32.dll", EntryPoint = "GetPackageFullName", CharSet = CharSet.Unicode)]
         public static extern bool GetPackageFullTItle(IntPtr hProcess, ref uint packageFullTItleLength, StringBuilder packageFullTItle);
 
