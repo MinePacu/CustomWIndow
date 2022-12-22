@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 using CustomWIndow.UtIl;
+using CustomWIndow.Windows;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -68,6 +69,7 @@ namespace CustomWIndow
             m_window.Activate();
         }
 
-        private Window m_window;
+        public static Window m_window { get; set; }
+        public static TrayWindow t_window { get; set; }
     }
 }

@@ -11,6 +11,8 @@ using Microsoft.UI.Xaml;
 using WinRT.Interop;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
+using H.NotifyIcon;
+using CustomWIndow.Windows;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -101,6 +103,13 @@ namespace CustomWIndow
         private void Window_Closed(object sender, WindowEventArgs args)
         {
             ConfIg.Save();
+
+            App.t_window = new();
+            App.t_window.Activate();
+            App.t_window.Hide(false);
+
+            args.Handled = true;
+            WIndowFunctIon.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
         }
     }
 }

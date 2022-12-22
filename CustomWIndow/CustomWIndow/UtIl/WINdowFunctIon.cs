@@ -64,5 +64,8 @@ namespace CustomWIndow.UtIl
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool IsWindowEnabled(IntPtr hwnd);
+
+        [DllImport("user32")]
+        public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
     }
 }

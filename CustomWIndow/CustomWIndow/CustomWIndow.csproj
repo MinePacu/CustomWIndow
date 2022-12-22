@@ -13,11 +13,13 @@
 	<ApplicationIcon>asset\window-system.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Controls\TrayIconUser.xaml" />
     <None Remove="Pages\AdvancedSettings.xaml" />
     <None Remove="Pages\ConfIgPage.xaml" />
     <None Remove="Pages\SubPages\AddExceptPage.xaml" />
     <None Remove="WIndow.xaml" />
     <None Remove="Windows\ExceptProgramWindow.xaml" />
+    <None Remove="Windows\TrayWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="asset\window-system.ico" />
@@ -26,10 +28,17 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.9" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
+    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.74" />
     <PackageReference Include="Microsoft.VisualStudio.VsixColorCompiler" Version="17.0.31709.430" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25247-preview" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Windows\TrayWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 	
   <ItemGroup>
@@ -58,6 +67,12 @@
 	
   <ItemGroup>
     <Page Update="Pages\SubPages\AddExceptPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Controls\TrayIconUser.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

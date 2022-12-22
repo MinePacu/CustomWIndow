@@ -1,0 +1,54 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<UserControl
+    x:Class="CustomWIndow.Controls.TrayIconUser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="using:H.NotifyIcon"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <XamlUICommand
+            x:Key="ShowHideWindow"
+            ExecuteRequested="ShowHideWindow_Requested"
+            Label="창 열기 / 숨기기"
+            Description="창을 열거나 숨깁니다.">
+            <XamlUICommand.IconSource>
+                <SymbolIconSource Symbol="OpenPane" />
+            </XamlUICommand.IconSource>
+        </XamlUICommand>
+
+        <XamlUICommand
+            x:Key="ExitApplication"
+            ExecuteRequested="ExitApplication_Requested"
+            Label="프로그램 끄기"
+            Description="프로그램을 끕니다.">
+            <XamlUICommand.IconSource>
+                <SymbolIconSource Symbol="ClosePane" />
+            </XamlUICommand.IconSource>
+        </XamlUICommand>
+
+        <MenuFlyout
+            x:Key="TrayContext"
+            AreOpenCloseAnimationsEnabled="False">
+            <MenuFlyoutItem Command="{StaticResource ShowHideWindow}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Command="{StaticResource ExitApplication}" />
+        </MenuFlyout>
+    </UserControl.Resources>
+
+    <tb:TaskbarIcon 
+        x:Name="TrayIcon"
+        x:FieldModifier="public"
+        IconSource="../asset/window-system.png"
+        ToolTipText="툴팁"
+        ContextFlyout="{StaticResource TrayContext}"
+        LeftClickCommand="{StaticResource ShowHideWindow}"
+        NoLeftClickDelay="True"
+        ContextMenuMode="SecondWindow">
+    </tb:TaskbarIcon>
+</UserControl>
