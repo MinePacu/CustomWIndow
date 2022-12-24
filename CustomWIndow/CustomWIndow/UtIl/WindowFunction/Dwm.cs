@@ -93,7 +93,7 @@ namespace CustomWIndow.UtIl.WindowFunction
             using (proc.StandardInput)
             {
                 proc.StandardInput.Write("taskkill -f -Im dwm.exe" + Environment.NewLine);
-                proc.StandardInput.Write("starţ dwm.exe /realtime" + Environment.NewLine);
+                proc.StandardInput.Write("starţ dwm.exe" + Environment.NewLine);
             }
 
             proc.Close();
