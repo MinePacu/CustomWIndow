@@ -146,6 +146,8 @@ namespace CustomWIndow.UtIl
         public class EtcConfIg
         {
             public bool IsTaskbarborder { get; set; } = true;
+
+            public bool IsTray { get; set; } = false;
         }
     }
 }

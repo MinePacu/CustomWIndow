@@ -18,6 +18,8 @@ namespace CustomWIndow.Pages
     /// </summary>
     public sealed partial class ConfIgPage : Page
     {
+        public bool IsTray { get; set; }
+
         public ConfIgPage()
         {
             this.InitializeComponent();
@@ -26,6 +28,7 @@ namespace CustomWIndow.Pages
                 RestartWithAdminbutton.IsEnabled = false;
 
             AutoAdminToggle.IsOn = ConfIg.Instance.AutoAdmin;
+            IsTray = ConfIg.Instance.EtcConfIg.IsTray;
         }
 
         void AutoAdminToggle_Toggled(object sender, RoutedEventArgs e)
@@ -53,6 +56,11 @@ namespace CustomWIndow.Pages
             {
 
             }
+        }
+
+        private void IsTrayToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.EtcConfIg.IsTray = ((ToggleSwitch)sender).IsOn;
         }
     }
 }

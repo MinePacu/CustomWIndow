@@ -44,7 +44,7 @@
     <tb:TaskbarIcon 
         x:Name="TrayIcon"
         x:FieldModifier="public"
-        IconSource="../asset/window-system.png"
+        IconSource="/ControlAsset/window-system.png"
         ToolTipText="툴팁"
         ContextFlyout="{StaticResource TrayContext}"
         LeftClickCommand="{StaticResource ShowHideWindow}"

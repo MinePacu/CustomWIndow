@@ -10,7 +10,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel
-        Margin="0, 14, 0, 0">
+        Margin="0, 14, 0, 0"
+        MaxWidth="990">
+        <TextBlock
+            Text="권한" 
+            FontWeight="Bold"
+            Margin="0, 0, 0, 7"/>
         <labs:SettingsExpander
             Header="관리자 권한으로 실행">
             <labs:SettingsExpander.HeaderIcon>
@@ -35,6 +40,19 @@
                 </labs:SettingsCard>
             </labs:SettingsExpander.Items>
         </labs:SettingsExpander>
+
+        <TextBlock
+            Text="기타 설정"
+            FontWeight="Bold"
+            Margin="0, 14, 0, 7" />
+        <labs:SettingsCard
+            Header="최소화"
+            Description="창을 닫아도 트레이 아이콘으로 최소하하여 프로그램을 끄지 않습니다." >
+            <ToggleSwitch
+                x:Name="IsTrayToggle"
+                IsOn="{x:Bind IsTray, Mode=TwoWay}" 
+                Toggled="IsTrayToggle_Toggled"/>
+        </labs:SettingsCard>
     </StackPanel>
 </Page>
  

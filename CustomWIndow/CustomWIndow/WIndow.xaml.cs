@@ -104,12 +104,15 @@ namespace CustomWIndow
         {
             ConfIg.Save();
 
-            App.t_window = new();
-            App.t_window.Activate();
-            App.t_window.Hide(false);
+            if (ConfIg.Instance.EtcConfIg.IsTray)
+            {
+                App.t_window = new();
+                App.t_window.Activate();
+                App.t_window.Hide(false);
 
-            args.Handled = true;
-            WIndowFunctIon.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
+                args.Handled = true;
+                WIndowFunctIon.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
+            }
         }
     }
 }
