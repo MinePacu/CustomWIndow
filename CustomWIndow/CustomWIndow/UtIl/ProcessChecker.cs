@@ -348,7 +348,7 @@ namespace CustomWIndow.UtIl
 
             RefreshStack++;
 
-            Debug.WriteLine("Taskbar hwnd - " + Taskbar.Hwnd.ToString("X"));
+            //Debug.WriteLine("Taskbar hwnd - " + Taskbar.Hwnd.ToString("X"));
             //WrIteDebug("GetHwnd ", Process_WIndow_LIst);
             IsFIrstLoad = false;
             await Task.Delay(1140);
