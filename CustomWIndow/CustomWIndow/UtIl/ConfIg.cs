@@ -147,6 +147,8 @@ namespace CustomWIndow.UtIl
         {
             public bool IsTaskbarborder { get; set; } = true;
 
+            public Taskbar_Corner TaskbarBorderCornermode { get; set; } = 0;
+
             public bool IsTray { get; set; } = false;
         }
     }

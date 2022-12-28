@@ -29,6 +29,8 @@ namespace CustomWIndow.UtIl
 
         public static List<IntPtr> Process_tep { get; } = new();
 
+        public static ProcessHwnd Taskbar { get; set; }
+
         public static bool IsFIrstLoad { get; set; } = true;
         public static bool IsTaskWork { get; set; } = false;
         static bool SkIp { get; set; } = false;
@@ -116,7 +118,7 @@ namespace CustomWIndow.UtIl
                                             {
                                                 string classTItle = StringUtIl.GetClassTItle(hwnd);
                                                 if (classTItle == "Shell_TrayWnd")
-                                                    Process_WIndow_LIst.Add(new(process.ProcessName, thread.Id, hwnd, false, true, true, false, false));
+                                                    Taskbar = new(process.ProcessName, thread.Id, hwnd, false, true, true, false, false);
 
                                                 else if (classTItle == "TaskListThumbnailWnd")
                                                     Process_WIndow_LIst.Add(new(process.ProcessName, thread.Id, hwnd, false, true, true, false, false));
@@ -262,7 +264,7 @@ namespace CustomWIndow.UtIl
                                 {
                                     string classTItle = StringUtIl.GetClassTItle(hwnd);
                                     if (classTItle == "Shell_TrayWnd" && ConfIg.Instance.EtcConfIg.IsTaskbarborder)
-                                        Process_WIndow_LIst.Add(new(process.ProcessName, (int)ThreadId, hwnd, false, true, true, false, false));
+                                        Taskbar = new(process.ProcessName, (int) ThreadId, hwnd, false, true, true, false, false);
 
                                     if (IsWIndowPopup(hwnd))
                                         return true;
@@ -275,6 +277,7 @@ namespace CustomWIndow.UtIl
                             }
                         }
                         _ = ApplyBorderCaptIonColor(Bordercolor, CaptIonTextColor, CaptIonTextColor);
+                        ApplyTaskbarOptions(Bordercolor, ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode);
                         SkIp = false;
                     }
 
@@ -345,6 +348,7 @@ namespace CustomWIndow.UtIl
 
             RefreshStack++;
 
+            Debug.WriteLine("Taskbar hwnd - " + Taskbar.Hwnd.ToString("X"));
             //WrIteDebug("GetHwnd ", Process_WIndow_LIst);
             IsFIrstLoad = false;
             await Task.Delay(1140);
@@ -419,6 +423,16 @@ namespace CustomWIndow.UtIl
                 _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_WINDOW_CORNER_PREFERENCE, Corner_ConfIg);
 
                 hwnd.HwndApplyed = true;
+            }
+        }
+
+        static void ApplyTaskbarOptions(int bcolor, Taskbar_Corner TaskbarCorner)
+        {
+            if (Taskbar.HwndApplyed == false)
+            {
+                _ = Dwm.DwmSetWindowAttribute_(Taskbar.Hwnd, DwmWIndowAttrIbute.DWMWA_WINDOW_CORNER_PREFERENCE, (DWM_WINDOW_CORNER_PREFERENCE) System.Enum.ToObject(typeof(Taskbar_Corner), TaskbarCorner));
+                _ = Dwm.DwmSetWindowAttribute_(Taskbar.Hwnd, DwmWIndowAttrIbute.DWMWA_BORDER_COLOR, bcolor);
+                Taskbar.HwndApplyed = true;
             }
         }
 

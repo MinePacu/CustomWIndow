@@ -18,12 +18,25 @@
             FontWeight="Bold"
             Margin="0, 14, 0, 7" />
 
-        <labs:SettingsCard 
+        <labs:SettingsExpander
             Header="작업 표시줄 테두리 색 설정">
             <ToggleSwitch
                 x:Name="Extraborder1"
                 Toggled="ToggleSwitch_Toggled" />
-        </labs:SettingsCard>
+
+            <labs:SettingsExpander.Items>
+                <labs:SettingsCard
+                    Header="모서리 모드">
+                    <ComboBox
+                        x:Name="TaskbarCorner"
+                        SelectedIndex="{x:Bind TaskbarBorderCornermode, Mode=TwoWay}">
+                        <ComboBoxItem Content="기본" />
+                        <ComboBoxItem Content="둥글게" />
+                        <ComboBoxItem Content="덜 둥글게" />
+                    </ComboBox>
+                </labs:SettingsCard>
+            </labs:SettingsExpander.Items>
+        </labs:SettingsExpander>
 
         <labs:SettingsCard
             Header="창 관리자 다시 시작"
