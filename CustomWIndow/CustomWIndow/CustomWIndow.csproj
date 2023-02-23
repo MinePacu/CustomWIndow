@@ -9,6 +9,7 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
 	<WindowsPackageType>None</WindowsPackageType>
     <TieredPGO>true</TieredPGO>
+	<WindowsAppSdkSelfContained>true</WindowsAppSdkSelfContained>
 	<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
 	<ApplicationIcon>asset\window-system.ico</ApplicationIcon>
   </PropertyGroup>
