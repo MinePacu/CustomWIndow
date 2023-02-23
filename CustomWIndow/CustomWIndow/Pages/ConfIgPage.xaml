@@ -6,12 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:viewmodel="using:CustomWIndow.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel
         Margin="0, 14, 0, 0"
         MaxWidth="990">
+        <StackPanel.DataContext>
+            <viewmodel:ConfigPageViewModel x:Name="ConfigPageViewmodel" />
+        </StackPanel.DataContext>
         <TextBlock
             Text="권한" 
             FontWeight="Bold"
@@ -27,7 +31,8 @@
             <Button 
                 x:Name="RestartWithAdminbutton"
                 Content="관리자 권한으로 다시 시작"
-                Click="RestartWithAdminbutton_Click"/>
+                Command="{x:Bind ConfigPageViewmodel.RestartAppWithAdminCommand}"
+                IsEnabled="{x:Bind ConfigPageViewmodel.IsRestartWithAdminEnable, Mode=TwoWay}"/>
 
             <labs:SettingsExpander.Items>
                 <labs:SettingsCard
@@ -36,7 +41,7 @@
                     
                     <ToggleSwitch 
                         x:Name="AutoAdminToggle"
-                        Toggled="AutoAdminToggle_Toggled"/>
+                        IsOn="{x:Bind ConfigPageViewmodel.IsAutoAdmin, Mode=TwoWay}"/>
                 </labs:SettingsCard>
             </labs:SettingsExpander.Items>
         </labs:SettingsExpander>
@@ -47,11 +52,10 @@
             Margin="0, 14, 0, 7" />
         <labs:SettingsCard
             Header="최소화"
-            Description="창을 닫아도 트레이 아이콘으로 최소하하여 프로그램을 끄지 않습니다." >
+            Description="창을 닫아도 트레이 아이콘으로 최소화하여 프로그램을 끄지 않습니다." >
             <ToggleSwitch
                 x:Name="IsTrayToggle"
-                IsOn="{x:Bind IsTray, Mode=TwoWay}" 
-                Toggled="IsTrayToggle_Toggled"/>
+                IsOn="{x:Bind ConfigPageViewmodel.IsTray, Mode=TwoWay}" />
         </labs:SettingsCard>
     </StackPanel>
 </Page>
