@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.9" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230217.4">
       <IncludeAssets>build</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25247-preview">
