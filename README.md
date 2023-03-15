@@ -25,29 +25,144 @@
 
 
 ## 기능
-[사이트](https://minepacu.github.io/posts/CustomWIndow-%EA%B8%B0%EB%8A%A5/)를 참조하세요.
+[사이트](https://minepacu.github.io/posts/CustomWIndow-%EA%B8%B0%EB%8A%A5/)를 참조하세요.<br/>
 
 
 ## 로드맵
-### UI (유저 인터페이스)
-- [x] 기본 설정
-- 윈도우 설정
-  - [x] 창 모서리 설정
-  - [ ] 작업 표시줄 선택 창
-  - [ ] Context 메뉴 선택 창
-- [ ] 트레이 아이콘
-- [ ] 효율 모드
+### UI
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"> 윈도우 설정 </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th>기능</th>
+      <th>기타 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&check;</td>
+      <td>창 모서리 설정</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>작업 표시줄 설정</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>Context menu 설정</td>
+      <td></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="3"> 트레이 아이콘 </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th>기능</th>
+      <th>기타 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&check;</td>
+      <td>창 닫으면 트레이 아이콘 최소화 설정</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>트레이 Context menu 구성</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 로직
-- 창 커스터마이징
-  - [x] 색 커스터마이징
-  - [x] 프로그램 구분
-  - [ ] 창 구분 (작업 표시줄, 컨텍스트 매뉴 등)
-- 업데이트 기능
-  - [ ] 업데이트된 config 파일 정리
-- 초기 필요 프로그램 설치 기능
-  - [ ] .Net
-  - [ ] WindowsAppRuntime
-- 권한
-  - [x] 관리자 권한으로 다시 시작 추가
-  - [x] 자동으로 권한 부여 기능 추가 
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"> 창 커스터마이징 </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th>기능</th>
+      <th>기타 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&check;</td>
+      <td>색깔 커스텀마이징</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>프로그램 구분</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>창 구분 (작업 표시줄, Context menu 등)</td>
+      <td></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="3">내장 프로그램</th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th>기능</th>
+      <th>기타 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&check;</td>
+      <td>.Net</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>Windows App Sdk Runtime</td>
+      <td></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="3">권한</th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th>기능</th>
+      <th>기타 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&check;</td>
+      <td>관리자 권한으로 다시 시작</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&check;</td>
+      <td>프로그램 실행 시, 권한 자동 부여</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
