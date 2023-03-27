@@ -11,11 +11,25 @@ namespace CustomWIndow.UtIl.WindowFunction
         [DllImport("User32.dll", EntryPoint = "GetClassName", CharSet = CharSet.Unicode)]
         static extern int GetClassTItle_(IntPtr hWnd, StringBuilder lpClassTItle, int nMaxCount);
 
+
+        [DllImport("User32.dll", EntryPoint = "GetWindowText", CharSet = CharSet.Unicode)]
+        static extern int GetWindowTItle_(IntPtr hWnd, StringBuilder lpClassTItle, int nMaxCount);
+
         public static string GetClassTItle(IntPtr hwnd)
         {
             _ = GetClassTItle_(hwnd, _string, _string.Capacity);
 
             return _string.ToString();
         }
+
+        public static string GetWindowTItle(IntPtr hwnd)
+        {
+            _ = GetWindowTItle_(hwnd, _string, _string.Capacity);
+
+            return _string.ToString();
+        }
+
+        [DllImport("user32")]
+        public static extern int GetWindowTextLength(IntPtr hwnd);
     }
 }

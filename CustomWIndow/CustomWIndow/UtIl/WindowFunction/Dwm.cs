@@ -16,7 +16,8 @@ namespace CustomWIndow.UtIl.WindowFunction
         /// <br/>ㅤ창에 대한 dwm 비 클라이언트 렌더링 특성을 설정합니다. 특성은 attr과 attr_ref로 설정합니다.
         /// </summary>
         [DllImport("dwmapi.dll")]
-        private static extern int DwmSetWindowAttribute(IntPtr hwnd, DwmWIndowAttrIbute attr, ref int attr_ref, int attrSIze);
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, DwmWIndowAttrIbute attr, ref int attr_ref, int attrSIze);
+
 
         /// <summary>
         /// - 기능
@@ -75,6 +76,7 @@ namespace CustomWIndow.UtIl.WindowFunction
             else
                 return -1;
         }
+
 
         public static async void RestartDWMwithProgram()
         {

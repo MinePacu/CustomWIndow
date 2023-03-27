@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
 using CustomWIndow.UtIl.Enum;
-
 using CustomWIndow.UtIl.WindowFunction;
 using static CustomWIndow.UtIl.WIndowFunctIon;
 
@@ -42,6 +43,7 @@ namespace CustomWIndow.UtIl
         public static DWM_WINDOW_CORNER_PREFERENCE Corner_ConfIg { get; set; }
 
         public static IntPtr DesktopHwnd { get; } = HwndLoaderFunction.FindWindow(null, "Program Manager");
+
 
         /// <summary>
         /// - 기능 
@@ -200,7 +202,7 @@ namespace CustomWIndow.UtIl
                                         return true;
                                     }, IntPtr.Zero);
                             }
-                        }
+                        }       
                     }
                 }
 
@@ -271,13 +273,49 @@ namespace CustomWIndow.UtIl
                                 }
 
                                 if (Index == -1)
+                                {
+                                    var borderhwnd = IntPtr.Zero;
+                                    
+                                    /*
+                                    borderhwnd = CreateWindowEx((uint)(0x00080000 | 0x00000008L | 0x00000080L), "Border", "", (uint)(0x08000000L | 0x80000000L), x, y, width, Height, IntPtr.Zero, IntPtr.Zero, hwnd, IntPtr.Zero);
+                                    SetLayeredWindowAttributes(borderhwnd, (uint) ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()), 0, 0x00000001);
+                                    SetWindowPos(hwnd, borderhwnd, x, y, width, Height, 0x0002 | 0x0001);
+                                    Dwm.DwmSetWindowAttribute_(borderhwnd, DwmWIndowAttrIbute.DwmWA_EXCLUDED_FROM_PEEK, true);
+                                    
+                                    framedrawer = FrameDrawer.Create(borderhwnd);
+                                    if (framedrawer is null)
+                                        return false;
+
+                                    framedrawer.Show();
+                                    */
                                     Process_WIndow_LIst.Add(new(process.ProcessName, (int)ThreadId, hwnd, false, true));
+                                }
+
                                 else
+                                {/*
+                                    IntPtr borderhwnd = IntPtr.Zero;
+                                    if (ProcessColorChangeExceptLIst[Index].IsBorderChange)
+                                    {
+                                        borderhwnd = CreateWindowEx((uint)(0x00080000 | 0x00000008L | 0x00000080L), "Border", "", (uint)(0x08000000L | 0x80000000L), x, y, width, Height, IntPtr.Zero, IntPtr.Zero, hwnd, IntPtr.Zero);
+                                        SetLayeredWindowAttributes(borderhwnd, (uint)ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()), 0, 0x00000001);
+                                        SetWindowPos(hwnd, borderhwnd, x, y, width, Height, 0x0002 | 0x0001);
+                                        Dwm.DwmSetWindowAttribute_(borderhwnd, DwmWIndowAttrIbute.DwmWA_EXCLUDED_FROM_PEEK, true);
+
+                                        framedrawer = FrameDrawer.Create(borderhwnd);
+                                        if (framedrawer is null)
+                                            return false;
+
+                                        framedrawer.Show();
+                                    }
+                                    */
                                     Process_WIndow_LIst.Add(new(process.ProcessName, (int)ThreadId, hwnd, false, true, ProcessColorChangeExceptLIst[Index].IsBorderChange, ProcessColorChangeExceptLIst[Index].IsCaptIonChange, ProcessColorChangeExceptLIst[Index].IsCaptIonTextChange));
+                                }
                             }
                         }
                         _ = ApplyBorderCaptIonColor(Bordercolor, CaptIonTextColor, CaptIonTextColor);
-                        ApplyTaskbarOptions(Bordercolor, ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode);
+
+                        if (ConfIg.Instance.EtcConfIg.IsTaskbarborder)
+                            ApplyTaskbarOptions(Bordercolor, ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode);
                         SkIp = false;
                     }
 
@@ -438,6 +476,7 @@ namespace CustomWIndow.UtIl
 
         public static async Task ConsumeTask(CancellationToken cancel)
         {
+            Process_WIndow_LIst.Clear();
             foreach (var task in ProduceTask(cancel))
             {
                 //Debug.WriteLine("task - ");
@@ -451,6 +490,7 @@ namespace CustomWIndow.UtIl
             {
                 yield return GetAndApplyHwndWIthEnumWindow();
             }
+            Debug.WriteLine("DDebug - Redrawed");
         }
 
         public static void WrIteDebug<T>(string TItle, List<T> LIst) where T : ProcessHwnd
@@ -524,6 +564,7 @@ namespace CustomWIndow.UtIl
 
         public bool IsCaptIonTextChange { get; set; } = true;
 
+
         /// <summary>
         /// - 기능
         /// <br/>ㅤ새 인스턴스를 만듭니다. 캡션 텍스트 색상 변경 방식이 자동이면 <see cref="IsCaptIonTextChange"/>가 false로 강제됩니다.
@@ -538,6 +579,7 @@ namespace CustomWIndow.UtIl
             if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 0)
                 IsCaptIonTextChange = false;
         }
+
         /// <summary>
         /// - 기능
         /// <br/>ㅤ새 인스턴스를 만듭니다. 캡션 텍스트 색상 변경 방식이 자동이면 _IsCaptIonTextChange는 무시되어 <see cref="IsCaptIonTextChange"/>가 false로 강제됩니다.

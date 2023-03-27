@@ -2,28 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 using CustomWIndow.UtIl;
 using CustomWIndow.Windows;
 
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -56,6 +40,11 @@ namespace CustomWIndow
                 Process.Start(psi);
                 Environment.Exit(0);
             }
+
+            //uint color = 0x0;
+            //bool ColorizationOpaqueBlend = false;
+            //WIndowFunctIon.DwmGetColorizationColor(out color, out ColorizationOpaqueBlend);
+            //Debug.WriteLine("DwmGetColorizationColor - " + color.ToString("X"));
         }
 
         /// <summary>

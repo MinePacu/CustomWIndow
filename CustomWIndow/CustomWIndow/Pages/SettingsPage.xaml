@@ -55,105 +55,55 @@
                         Toggled="ToggleSwitch_Toggled"/>
                 </labs:SettingsCard>
 
-                <Expander 
-                    HorizontalAlignment="Stretch" 
-                    HorizontalContentAlignment="Stretch" Margin="0, 4, 0, 6"
-                    x:Name = "Program_Expander">
-                    <Expander.Header>
-                        <Grid Margin="5, 5, 5, 5" Height="57" VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="194"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+                <labs:SettingsExpander
+                    Header="프로그램"
+                    Description="설정할 프로그램 목록"
+                    x:Name="Program_Expander">
+                    <labs:SettingsExpander.HeaderIcon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xed35;"/>
+                    </labs:SettingsExpander.HeaderIcon>
+                    <labs:SettingsExpander.Items>
+                        <labs:SettingsCard
+                            ContentAlignment="Vertical"
+                            HorizontalContentAlignment="Stretch">
+                            <TextBox 
+                                Height="140" 
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True" 
+                                x:Name="Program_LIst"
+                                ScrollViewer.VerticalScrollMode="Enabled"/>
+                        </labs:SettingsCard>
+                    </labs:SettingsExpander.Items>
+                </labs:SettingsExpander>
 
-
-                            <Grid Grid.Column="0" Margin="-9, 0, 0, 0">
-                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xed35;"/>
-                            </Grid>
-
-                            <Grid Grid.Column="1" Margin="13, 0, 0, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="9"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition Height="9"></RowDefinition>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="1" Text="프로그램" FontSize="14" Margin="0, 2, 0, 0"/>
-                                <RichTextBlock Grid.Row="2" FontSize="12" IsTextSelectionEnabled="False" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                    <Paragraph>
-                                        설정할 프로그램 목록
-                                    </Paragraph>
-                                </RichTextBlock>
-                            </Grid>
-                        </Grid>
-                    </Expander.Header>
-
-                    <TextBox 
-                        Margin="40, 0, 25, 0" 
-                        Height="140" 
-                        TextWrapping="Wrap"
-                        AcceptsReturn="True" 
-                        x:Name="Program_LIst"
-                        ScrollViewer.VerticalScrollMode="Enabled"/>
-                </Expander>
-
-                <Expander 
-                    HorizontalAlignment="Stretch" 
-                    HorizontalContentAlignment="Stretch"
+                <labs:SettingsExpander
+                    Header="제외 프로그램"
+                    Description="제외할 프로그램 목록"
                     x:Name="NonProgram_Expander"
                     ToolTipService.ToolTip="색상을 적용하지 않을 프로그램을 설정합니다.&#10;&#10;각 프로그램에 대해서 어떤 기능을 제외할지를 수동으로 설정할 수 있습니다.&#10;/b - 모서리 색상을 적용하지 않습니다.&#10;/c - 캡션 색을 적용하지 않습니다.&#10;/t - 캡션 텍스트 색을 적용하지 않습니다.">
-                    <Expander.Header>
-                        <Grid Margin="5, 5, 5, 5" Height="57" VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="194"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0" Margin="-9, 0, 0, 0">
-                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xed35;"/>
-                            </Grid>
-
-                            <Grid Grid.Column="1" Margin="13, 0, 0, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="9"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition Height="9"></RowDefinition>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="1" Text="제외 프로그램" FontSize="14" Margin="0, 2, 0, 0"/>
-                                <RichTextBlock Grid.Row="2" FontSize="12" IsTextSelectionEnabled="False" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                    <Paragraph>
-                                        제외할 프로그램 목록
-                                    </Paragraph>
-                                </RichTextBlock>
-                            </Grid>
-
-                            <Button 
-                                Grid.Column="3"
-                                Content="목록 관리"
-                                x:Name="ExceptProgrammanage"
-                                HorizontalAlignment="Right"
-                                Click="ExceptProgrammanage_Click"/>
-                        </Grid>
-                    </Expander.Header>
-
-                    <StackPanel 
-                        HorizontalAlignment="Stretch">
-                        <TextBox Margin="40, 0, 25, 0" 
-                            TextWrapping="Wrap"
-                            AcceptsReturn="True" 
-                            x:Name="NonProgram_LIst"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            ScrollViewer.VerticalScrollMode="Auto"/>
-                    </StackPanel>
-                </Expander>
+                    <labs:SettingsExpander.HeaderIcon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xed35;"/>
+                    </labs:SettingsExpander.HeaderIcon>
+                    <Button 
+                        Grid.Column="3"
+                        Content="목록 관리"
+                        x:Name="ExceptProgrammanage"
+                        HorizontalAlignment="Right"
+                        Click="ExceptProgrammanage_Click"/>
+                    <labs:SettingsExpander.Items>
+                        <labs:SettingsCard
+                            ContentAlignment="Vertical"
+                            HorizontalContentAlignment="Stretch">
+                            <TextBox 
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True" 
+                                x:Name="NonProgram_LIst"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                ScrollViewer.VerticalScrollMode="Auto"/>
+                        </labs:SettingsCard>
+                    </labs:SettingsExpander.Items>
+                </labs:SettingsExpander>
 
                 <TextBlock Text="윈도우 설정" 
                    Margin="0, 14, 0, 4" 

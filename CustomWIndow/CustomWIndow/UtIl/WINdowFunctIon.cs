@@ -9,7 +9,7 @@ namespace CustomWIndow.UtIl
     public static partial class WIndowFunctIon
     {
         [DllImport("user32")]
-        static extern uint GetWindowLong(IntPtr hwnd, int nIndex); 
+        static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
 
         public const long SYNCHRONIZE = (0x00100000L);
         public const int STANDARD_RIGHTS_REQUIRED = (0x000F0000);
@@ -67,5 +67,52 @@ namespace CustomWIndow.UtIl
 
         [DllImport("user32")]
         public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        public static extern void DwmGetColorizationColor(out uint ColorizationColor, [MarshalAs(UnmanagedType.Bool)] out bool ColorizationOpaqueBlend);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, UInt32 uFlags);
+
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr CreateWindowEx(uint dwExStyle, string lpClassName, string lpWindowName, uint dwStyle, int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
+
+        public static IntPtr SetWindowLongPtr(HandleRef hWnd, int nIndex, IntPtr dwNewLong)
+        {
+            if (IntPtr.Size == 8)
+                return SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
+            else
+                return new IntPtr(SetWindowLong32(hWnd, nIndex, dwNewLong.ToInt32()));
+        }
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
+        private static extern int SetWindowLong32(HandleRef hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
+        private static extern IntPtr SetWindowLongPtr64(HandleRef hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
+        public static extern IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll", ExactSpelling = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool KillTimer(IntPtr hWnd, IntPtr uIDEvent);
+
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, TimerProc lpTimerFunc);
+        public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
+
+        // or alternatively
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, IntPtr lpTimerFunc);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        public static extern IntPtr SendMessage(HandleRef windowHandle, uint message, IntPtr wordParameter, IntPtr longParameter);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
     }
 }

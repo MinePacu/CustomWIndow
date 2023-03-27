@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CustomWIndow": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

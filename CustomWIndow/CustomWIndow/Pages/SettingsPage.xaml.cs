@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
+using CustomWIndow.Interfaces.Views;
 using CustomWIndow.UtIl;
 using CustomWIndow.UtIl.Enum;
 using CustomWIndow.Windows;
@@ -146,7 +147,10 @@ namespace CustomWIndow.Pages
                     else
                         UtIl.UtIl.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
 
-                    UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
+                    HwndCheckerWithWrapper.cts = new();
+
+                    //UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
+                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
                 }
                 else
                 {
@@ -202,7 +206,10 @@ namespace CustomWIndow.Pages
 
                         ProcessChecker.IsFIrstLoad = true;
                         ProcessChecker.IsTaskWork = true;
-                        ProcessChecker.task = UtIl.ProcessChecker.ConsumeTask(ProcessChecker.cts.Token);
+
+                        HwndCheckerWithWrapper.cts = new();
+                        //ProcessChecker.task = UtIl.ProcessChecker.ConsumeTask(ProcessChecker.cts.Token);
+                        HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
                     }
                 }
             }
@@ -210,6 +217,7 @@ namespace CustomWIndow.Pages
             else
             {
                 toggle.IsEnabled = false;
+                /*
                 if (ProcessChecker.IsTaskWork)
                 {
                     ProcessChecker.cts.Cancel();
@@ -231,6 +239,15 @@ namespace CustomWIndow.Pages
 
                     UtIl.UtIl.IsTaskWork = false;
                 }
+
+                */
+
+                ProcessChecker.IsTaskWork = false;
+                HwndCheckerWithWrapper.cts.Cancel();
+                await HwndCheckerWithWrapper.BackgroundTask;
+
+                // TaskOn 시키는 토글 UI (IView) 활성화
+                toggle.IsEnabled = true;
 
                 toggle.IsEnabled = true;
                 if (SelectOptIon.SelectedIndex == 0)
