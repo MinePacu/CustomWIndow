@@ -8,6 +8,7 @@
 #include "BorderWindow.h"
 #include "WinEventHook.h"
 #include "VirtualDesktopUtil.h"
+#include "CaptionColorUtil.h"
 
 
 class Windowmodule
@@ -48,6 +49,7 @@ private:
 	static inline Windowmodule* s_instance = nullptr;
 	std::vector<HWINEVENTHOOK> staticWinEventHooks{};
 	VirtualDesktopUtil virtualDesktopUtil;
+	CaptionColorUtil captionColorUtil{ RGB(107, 120, 138) };
 
 	HWND window{ nullptr };
 	HINSTANCE hinstance;

@@ -117,6 +117,8 @@ bool Windowmodule::AssignBorder(HWND hwnd)
 			{
 				const auto pre = static_cast<DWM_WINDOW_CORNER_PREFERENCE>(cornerPreference);
 				DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &pre, sizeof(pre));
+
+				captionColorUtil.SetCaptionColorToWindow(hwnd);
 			}
 		}
 	}
@@ -139,6 +141,8 @@ void Windowmodule::CleanupBorderWindows() noexcept
 		{
 			const auto pre = static_cast<DWM_WINDOW_CORNER_PREFERENCE>((UINT)0);
 			DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &pre, sizeof(pre));
+
+			captionColorUtil.ResetDwmNonClient(hwnd);
 		}
 	}
 

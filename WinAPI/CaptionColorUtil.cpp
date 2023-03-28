@@ -33,6 +33,7 @@ bool CaptionColorUtil::SetCaptionColorToWindow(HWND window)
 
 bool CaptionColorUtil::ResetDwmNonClient(HWND window)
 {
+	/*
 	BOOL isNonClientRenderEnabled{ FALSE };
 	auto hr = DwmGetWindowAttribute(window, DWMWA_NCRENDERING_ENABLED, &isNonClientRenderEnabled, sizeof(isNonClientRenderEnabled));
 
@@ -51,6 +52,13 @@ bool CaptionColorUtil::ResetDwmNonClient(HWND window)
 	renderingPolicy = DWMNCRP_ENABLED;
 	hr_ = DwmSetWindowAttribute(window, DWMWA_NCRENDERING_POLICY, &renderingPolicy, sizeof(renderingPolicy));
 	if (!SUCCEEDED(hr_))
+		return false;
+
+	return true;
+	*/
+	COLORREF color = 0xFFFFFFFF;
+
+	if (!SUCCEEDED(DwmSetWindowAttribute(window, DWMWA_CAPTION_COLOR, &color, sizeof(color))))
 		return false;
 
 	return true;
