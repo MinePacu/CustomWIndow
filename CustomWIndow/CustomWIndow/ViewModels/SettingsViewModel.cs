@@ -141,7 +141,7 @@ namespace CustomWIndow.ViewModels
             set
             {
                 SetProperty(ref _WindowCornermode, value);
-                ConfIg.Instance.WIndowCornermode = (DWM_WINDOW_CORNER_PREFERENCE) value;
+                ConfIg.Instance.WindowConfig.WindowCornerOption = (DWM_WINDOW_CORNER_PREFERENCE) value;
             }
         }
 
@@ -155,6 +155,7 @@ namespace CustomWIndow.ViewModels
             set
             {
                 SetProperty(ref _borderColor, value);
+                ConfIg.Instance.ColorConfIg.BorderColor = int.Parse(value.ToString());
                 ConfIg.Instance.ColorConfIg.BorderColor_ = value;
             }
         }
@@ -167,6 +168,7 @@ namespace CustomWIndow.ViewModels
             set
             {
                 SetProperty(ref _captionColor, value);
+                ConfIg.Instance.ColorConfIg.CaptIonColor = int.Parse(value.ToString());
                 ConfIg.Instance.ColorConfIg.CaptIonColor_ = value;
             }
         }
@@ -179,6 +181,7 @@ namespace CustomWIndow.ViewModels
             set
             {
                 SetProperty(ref _captionTextColor, value);
+                ConfIg.Instance.ColorConfIg.CaptIonTextColor = int.Parse(value.ToString());
                 ConfIg.Instance.ColorConfIg.CaptIonTextColor_ = value;
             }
         }
@@ -250,7 +253,7 @@ namespace CustomWIndow.ViewModels
             IsCaptionSystemColor = ConfIg.Instance.ColorConfIg.IsCaptIonSystemAccent;
             IsCaptionTextSystemColor = ConfIg.Instance.ColorConfIg.IsCaptIonTextSystemAccent;
 
-            WindowCornermode = (int) ConfIg.Instance.WIndowCornermode;
+            WindowCornermode = (int) ConfIg.Instance.WindowConfig.WindowCornerOption;
 
             BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
             CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
@@ -347,7 +350,8 @@ namespace CustomWIndow.ViewModels
                         UtIl.UtIl.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
 
                     //UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
-                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
+                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token,
+                        UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
                 }
 
                 else
@@ -401,12 +405,13 @@ namespace CustomWIndow.ViewModels
                     else
                         ProcessChecker.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
 
-                    ProcessChecker.Corner_ConfIg = (DWM_WINDOW_CORNER_PREFERENCE)Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), ConfIg.Instance.WIndowCornermode);
+                    ProcessChecker.Corner_ConfIg = (DWM_WINDOW_CORNER_PREFERENCE)Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), ConfIg.Instance.WindowConfig.WindowCornerOption);
 
                     ProcessChecker.IsFIrstLoad = true;
                     ProcessChecker.IsTaskWork = true;
                     //ProcessChecker.task = UtIl.ProcessChecker.ConsumeTask(ProcessChecker.cts.Token);
-                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
+                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token,
+                        UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
                 }
             }
             

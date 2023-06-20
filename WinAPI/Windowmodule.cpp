@@ -4,10 +4,13 @@
 #include <windows.h>
 #include <dwmapi.h>
 
-Windowmodule::Windowmodule() : hinstance(reinterpret_cast<HINSTANCE>(&__ImageBase))
+Windowmodule::Windowmodule(byte r, byte g, byte b, COLORREF captionColor) : hinstance(reinterpret_cast<HINSTANCE>(&__ImageBase))
 {
 	s_instance = this;
 	borderedWindows;
+
+	color = RGB(r, g, b);
+	CaptionColor = captionColor;
 	if (InitToolWindow())
 	{
 		SubToEvent();
@@ -107,7 +110,7 @@ bool Windowmodule::AssignBorder(HWND hwnd)
 {
 	if (virtualDesktopUtil.IsWindowsOnCurrentDesktop(hwnd))
 	{
-		auto border = BorderWindow::Create(hwnd, hinstance, 3);
+		auto border = BorderWindow::Create(hwnd, hinstance, 3, color);
 		if (border)
 			borderedWindows[hwnd] = std::move(border); 
 
@@ -142,7 +145,7 @@ void Windowmodule::CleanupBorderWindows() noexcept
 			const auto pre = static_cast<DWM_WINDOW_CORNER_PREFERENCE>((UINT)0);
 			DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &pre, sizeof(pre));
 
-			captionColorUtil.ResetDwmNonClient(hwnd);
+			captionColorUtil.ResetDwmNonClient(hwnd);	
 		}
 	}
 

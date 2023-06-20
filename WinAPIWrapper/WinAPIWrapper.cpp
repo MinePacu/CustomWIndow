@@ -32,10 +32,20 @@ HWND marshalasIntPtrToHWND(IntPtr^ hwnd)
 
 namespace WinAPIWrapper
 {
-	WindowmoduleWrapper::WindowmoduleWrapper() :
-		m_Windowmodule(new Windowmodule())
+	WindowmoduleWrapper::WindowmoduleWrapper(byte r, byte g, byte b, byte captionR, byte captionG, byte captionB, int cornerProperty, bool useDWM)
 	{
+		BorderColor_r = r;
+		BorderColor_g = g;
+		BorderColor_b = b;
 
+		CaptionColor_R = captionR;
+		CaptionColor_G = captionG;
+		CaptionColor_B = captionB;
+
+		CornerProperty = static_cast<DWM_WINDOW_CORNER_PREFERENCE>(cornerProperty);
+
+		if (!useDWM)
+			m_Windowmodule = new Windowmodule(r, g, b, RGB(captionR, captionG, captionB));
 	}
 
 	WindowmoduleWrapper::~WindowmoduleWrapper()
@@ -45,6 +55,9 @@ namespace WinAPIWrapper
 			delete m_Windowmodule;
 			m_Windowmodule = nullptr;
 		}
+
+		delete HwndList;
+		HwndList = nullptr;
 	}
 
 	bool WindowmoduleWrapper::RefreshHwnds(System::Collections::Generic::ICollection<IntPtr>^ hwndlist)
@@ -122,8 +135,39 @@ namespace WinAPIWrapper
 		m_Windowmodule->cornerPreference = cornerpre;
 	}
 
+	void WindowmoduleWrapper::SetCaptionColor(byte r, byte g, byte b)
+	{
+		m_Windowmodule->CaptionColor = RGB(r, g, b);
+	}
+
 	void WindowmoduleWrapper::SetBuildVer(int BuildVer)
 	{
 		m_Windowmodule->BuildVer = BuildVer;
+	}
+
+	void WindowmoduleWrapper::SetWindowOptionWithDwm(IntPtr hwnd)
+	{
+		auto Hwnd = marshalasIntPtrToHWND(hwnd);
+		const auto BorderColor = RGB(BorderColor_r, BorderColor_g, BorderColor_b);
+		const auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
+		const auto _CornerProperty = CornerProperty;
+
+		DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &BorderColor, sizeof(BorderColor));
+		DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &CaptionColor, sizeof(CaptionColor));
+		DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
+	}
+
+	void WindowmoduleWrapper::SetDefaultWindowOptionWithDWM()
+	{
+		const COLORREF DefaultColor = 0xFFFFFFFF;
+		const auto _CornerProperty = DWMWCP_ROUND;	
+
+		for each (IntPtr hwnd in HwndList)
+		{
+			auto Hwnd = marshalasIntPtrToHWND(hwnd);
+			DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &DefaultColor, sizeof(DefaultColor));
+			DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &DefaultColor, sizeof(DefaultColor));
+			DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
+		}
 	}
 }

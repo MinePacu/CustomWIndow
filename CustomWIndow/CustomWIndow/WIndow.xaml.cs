@@ -28,8 +28,10 @@ namespace CustomWIndow
 
         List<(string Tag, Type page)> _pages = new List<(string Tag, Type page)>(5)
         {
-            ("Primary", typeof(Pages.SettingsPage)),
+            ("Program", typeof(Pages.SettingsPage)),
+            ("Color", typeof(Pages.ColorConfigPage)),
             ("Advanced", typeof(Pages.AdvancedSettings)),
+            ("Developer", typeof(Pages.DeveloperPage)),
             ("Config", typeof(Pages.ConfIgPage)),
         };
 
@@ -43,7 +45,7 @@ namespace CustomWIndow
             if (AppthFunction.GetAppTh() == Appth.Dark)
                 Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(this), DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
 
-            app.Resize(new(ConfIg.Instance.ProgramWIndowCon.WIndowGaro, ConfIg.Instance.ProgramWIndowCon.WIndowSero));
+            app.Resize(new(ConfIg.Instance.WindowConfig.MainWindowGaro, ConfIg.Instance.WindowConfig.MainWindowSero));
 
             n.SelectedItem = n.MenuItems[0];
         }
@@ -95,8 +97,8 @@ namespace CustomWIndow
 
             if (wIndow.State == OverlappedPresenterState.Minimized == false)
             {
-                ConfIg.Instance.ProgramWIndowCon.WIndowGaro = app.Size.Width;
-                ConfIg.Instance.ProgramWIndowCon.WIndowSero = app.Size.Height;
+                ConfIg.Instance.WindowConfig.MainWindowGaro = app.Size.Width;
+                ConfIg.Instance.WindowConfig.MainWindowSero = app.Size.Height;
             }
         }
 

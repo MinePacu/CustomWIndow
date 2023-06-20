@@ -265,7 +265,7 @@ namespace CustomWIndow.UtIl
                                 if (process.ProcessName == "explorer")
                                 {
                                     string classTItle = StringUtIl.GetClassTItle(hwnd);
-                                    if (classTItle == "Shell_TrayWnd" && ConfIg.Instance.EtcConfIg.IsTaskbarborder)
+                                    if (classTItle == "Shell_TrayWnd" && ConfIg.Instance.TaskBarConfig.IsTaskbarborder)
                                         Taskbar = new(process.ProcessName, (int) ThreadId, hwnd, false, true, true, false, false);
 
                                     if (IsWIndowPopup(hwnd))
@@ -314,8 +314,8 @@ namespace CustomWIndow.UtIl
                         }
                         _ = ApplyBorderCaptIonColor(Bordercolor, CaptIonTextColor, CaptIonTextColor);
 
-                        if (ConfIg.Instance.EtcConfIg.IsTaskbarborder)
-                            ApplyTaskbarOptions(Bordercolor, ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode);
+                        if (ConfIg.Instance.TaskBarConfig.IsTaskbarborder)
+                            ApplyTaskbarOptions(Bordercolor, ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode);
                         SkIp = false;
                     }
 

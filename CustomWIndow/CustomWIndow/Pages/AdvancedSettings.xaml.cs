@@ -18,9 +18,9 @@ namespace CustomWIndow.Pages
         {
             get
             {
-                if (ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode == 0)
+                if (ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode == 0)
                     return 0;
-                else if (ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode == UtIl.Enum.Taskbar_Corner.Round)
+                else if (ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode == UtIl.Enum.Taskbar_Corner.Round)
                     return 1;
                 else
                     return 2;
@@ -28,20 +28,20 @@ namespace CustomWIndow.Pages
             set
             {
                 if (value == 0)
-                    ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode = 0;
+                    ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode = 0;
                 else if (value == 1)
-                    ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode = UtIl.Enum.Taskbar_Corner.Round;
+                    ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode = UtIl.Enum.Taskbar_Corner.Round;
                 else
-                    ConfIg.Instance.EtcConfIg.TaskbarBorderCornermode = UtIl.Enum.Taskbar_Corner.RoundSmall;
+                    ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode = UtIl.Enum.Taskbar_Corner.RoundSmall;
             }
         }
 
         public AdvancedSettings()
         {
             this.InitializeComponent();
-            Extraborder1.IsOn = ConfIg.Instance.EtcConfIg.IsTaskbarborder;
+            Extraborder1.IsOn = ConfIg.Instance.TaskBarConfig.IsTaskbarborder;
 
-            if (ConfIg.Instance.EtcConfIg.IsTaskbarborder == false)
+            if (ConfIg.Instance.TaskBarConfig.IsTaskbarborder == false)
             {
                 TaskbarBorderCornermode = 0;
                 TaskbarCorner.IsEnabled = false;
@@ -55,7 +55,7 @@ namespace CustomWIndow.Pages
 
         void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            ConfIg.Instance.EtcConfIg.IsTaskbarborder = ((ToggleSwitch) sender).IsOn;
+            ConfIg.Instance.TaskBarConfig.IsTaskbarborder = ((ToggleSwitch) sender).IsOn;
             TaskbarCorner.IsEnabled = true;
         }
     }

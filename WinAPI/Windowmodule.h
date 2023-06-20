@@ -14,10 +14,11 @@
 class Windowmodule
 {
 public:
-	Windowmodule();
+	Windowmodule(byte r, byte g, byte b, COLORREF captionColor);
 	~Windowmodule();
 
 	UINT cornerPreference = 0;
+	COLORREF CaptionColor;
 	int BuildVer = 0;
 
 	bool RefreshHwnds(std::vector<HWND> hwndlist);
@@ -49,7 +50,7 @@ private:
 	static inline Windowmodule* s_instance = nullptr;
 	std::vector<HWINEVENTHOOK> staticWinEventHooks{};
 	VirtualDesktopUtil virtualDesktopUtil;
-	CaptionColorUtil captionColorUtil{ RGB(107, 120, 138) };
+	CaptionColorUtil captionColorUtil{ CaptionColor };
 
 	HWND window{ nullptr };
 	HINSTANCE hinstance;
@@ -61,6 +62,8 @@ private:
 	std::vector<HWND> hwnds{};
 
 	bool running = true;
+
+	COLORREF color;
 
 	LRESULT WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 

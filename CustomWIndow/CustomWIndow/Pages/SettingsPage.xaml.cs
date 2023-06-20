@@ -80,14 +80,8 @@ namespace CustomWIndow.Pages
             }
 
             SelectOptIon.SelectedIndex = ConfIg.Instance.ProcessCheckermode;
-            IsBorderSystemColor.IsChecked = ConfIg.Instance.ColorConfIg.IsBorderSystemAccent;
-            IsCaptIonSystemColor.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptIonSystemAccent;
 
-            CaptIonTextColormodebox.SelectedIndex = ConfIg.Instance.ColorConfIg.CaptIonTextColormode;
-
-            IsCaptIonTextSystemColor.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptIonTextSystemAccent;
-
-            WIndowCornermodeCombo.SelectedIndex = (int) ConfIg.Instance.WIndowCornermode;
+            WIndowCornermodeCombo.SelectedIndex = (int) ConfIg.Instance.WindowConfig.WindowCornerOption;
 
             TaskToggle.IsOn = ProcessChecker.IsTaskWork;
 
@@ -132,25 +126,10 @@ namespace CustomWIndow.Pages
                         }
                     }
 
-                    if (IsBorderSystemColor.IsChecked == false)
-                        UtIl.UtIl.Bordercolor = ConfIg.Instance.ColorConfIg.BorderColor;
-                    else
-                        UtIl.UtIl.Bordercolor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
-                    if (IsCaptIonSystemColor.IsChecked == false)
-                        UtIl.UtIl.CaptIonColor = ConfIg.Instance.ColorConfIg.CaptIonColor;
-                    else
-                        UtIl.UtIl.CaptIonColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
-                    if (IsCaptIonTextSystemColor.IsChecked == false)
-                        UtIl.UtIl.CaptIonTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor;
-                    else
-                        UtIl.UtIl.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
                     HwndCheckerWithWrapper.cts = new();
 
                     //UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
-                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
+                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
                 }
                 else
                 {
@@ -187,29 +166,15 @@ namespace CustomWIndow.Pages
                             }
                         }
 
-                        if (IsBorderSystemColor.IsChecked == false)
-                            ProcessChecker.Bordercolor = ConfIg.Instance.ColorConfIg.BorderColor;
-                        else
-                            ProcessChecker.Bordercolor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
-                        if (IsCaptIonSystemColor.IsChecked == false)
-                            ProcessChecker.CaptIonColor = ConfIg.Instance.ColorConfIg.CaptIonColor;
-                        else
-                            ProcessChecker.CaptIonColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
-                        if (IsCaptIonTextSystemColor.IsChecked == false)
-                            ProcessChecker.CaptIonTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor;
-                        else
-                            ProcessChecker.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-
-                        ProcessChecker.Corner_ConfIg = (DWM_WINDOW_CORNER_PREFERENCE)Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), ConfIg.Instance.WIndowCornermode);
+                        ProcessChecker.Corner_ConfIg = (DWM_WINDOW_CORNER_PREFERENCE)Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), ConfIg.Instance.WindowConfig.WindowCornerOption);
 
                         ProcessChecker.IsFIrstLoad = true;
                         ProcessChecker.IsTaskWork = true;
 
                         HwndCheckerWithWrapper.cts = new();
                         //ProcessChecker.task = UtIl.ProcessChecker.ConsumeTask(ProcessChecker.cts.Token);
-                        HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token);
+                        HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token,
+                        UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
                     }
                 }
             }
@@ -283,63 +248,6 @@ namespace CustomWIndow.Pages
 
                 ConfIg.Instance.ProcessCheckermode = 0;
             }
-        }
-
-        void IsBorderSystemColor_Checked(object sender, RoutedEventArgs e)
-        {
-            var Checkbox = (CheckBox)sender;
-
-            if (Checkbox.IsChecked == true)
-            {
-                borderColorbutton.IsEnabled = false;
-                ConfIg.Instance.ColorConfIg.BorderColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-                ConfIg.Instance.ColorConfIg.BorderColor_ = ColorConverter.GetAccentColor();
-            }
-            else
-                borderColorbutton.IsEnabled = true;
-
-            ConfIg.Instance.ColorConfIg.IsBorderSystemAccent = (bool)Checkbox.IsChecked;
-
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
-        }
-
-        void IsCaptIonSystemColor_Checked(object sender, RoutedEventArgs e)
-        {
-            var Checkbox = (CheckBox)sender;
-
-            if (Checkbox.IsChecked == true)
-            {
-                captIonColorbutton.IsEnabled = false;
-                ConfIg.Instance.ColorConfIg.CaptIonColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-                ConfIg.Instance.ColorConfIg.CaptIonColor_ = ColorConverter.GetAccentColor();
-            }
-            else
-                captIonColorbutton.IsEnabled = true;
-
-            ConfIg.Instance.ColorConfIg.IsCaptIonSystemAccent = (bool)Checkbox.IsChecked;
-
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
-        }
-
-        void IsCaptIonTextSystemColor_Checked(object sender, RoutedEventArgs e)
-        {
-            var Checkbox = (CheckBox)sender;
-
-            if (Checkbox.IsChecked == true)
-            {
-                captIonTextColorbutton.IsEnabled = false;
-                ConfIg.Instance.ColorConfIg.CaptIonTextColor = ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor());
-                ConfIg.Instance.ColorConfIg.CaptIonTextColor_ = ColorConverter.GetAccentColor();
-            }
-            else
-                captIonTextColorbutton.IsEnabled = true;
-
-            ConfIg.Instance.ColorConfIg.IsCaptIonTextSystemAccent = (bool)Checkbox.IsChecked;
-
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
 
         async void borderColorbutton_Click(object sender, RoutedEventArgs e)
@@ -465,35 +373,11 @@ namespace CustomWIndow.Pages
             }
         }
 
-        void CaptIonTextColormodebox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var combobox = (ComboBox)sender;
-
-            ConfIg.Instance.ColorConfIg.CaptIonTextColormode = combobox.SelectedIndex;
-
-            if (combobox.SelectedIndex == 0)
-            {
-                CaptIonTextColormode.Text = "자동 - 윈도우 기본 설정입니다.";
-                IsCaptIonTextSystemColor.IsEnabled = false;
-                captIonTextColorbutton.IsEnabled = false;
-            }
-            else
-            {
-                CaptIonTextColormode.Text = "수동 - 사용자가 지정한 색상으로 캡션 텍스트 색상을 적용합니다.";
-                IsCaptIonTextSystemColor.IsEnabled = true;
-
-                if (IsCaptIonTextSystemColor.IsChecked == true)
-                    captIonTextColorbutton.IsEnabled = false;
-                else
-                    captIonTextColorbutton.IsEnabled = true;
-            }
-        }
-
         void WIndowCornermodeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var Combo = (ComboBox)sender;
 
-            ConfIg.Instance.WIndowCornermode = (DWM_WINDOW_CORNER_PREFERENCE) Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), Combo.SelectedIndex);
+            ConfIg.Instance.WindowConfig.WindowCornerOption = (DWM_WINDOW_CORNER_PREFERENCE) Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), Combo.SelectedIndex);
         }
 
         private async void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)

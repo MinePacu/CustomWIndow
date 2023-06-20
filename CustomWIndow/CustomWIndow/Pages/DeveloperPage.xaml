@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CustomWIndow.Pages.DeveloperPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel
+        HorizontalAlignment="Stretch"
+        MaxWidth="990">
+        <ScrollViewer
+            HorizontalAlignment="Stretch"
+            IsDeferredScrollingEnabled="True"
+            VerticalScrollBarVisibility="Visible"
+            MaxWidth="990"
+            Margin="0, 20, 0, 20">
+            
+            <labs:SettingsCard 
+                    Header="구동 방식 설정"
+                    Description="구동 방식을 강제로 설정합니다.">
+                <ComboBox
+                        x:Name="FrameDrawerMode"
+                        SelectionChanged="FrameDrawerMode_SelectionChanged">
+                    <ComboBoxItem Content="DWM 사용"/>
+                    <ComboBoxItem Content="DWM 사용 안함"/>
+                </ComboBox>
+            </labs:SettingsCard>
+        </ScrollViewer>
+    </StackPanel>
+</Page>

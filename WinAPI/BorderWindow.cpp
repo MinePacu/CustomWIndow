@@ -24,7 +24,7 @@ std::optional<RECT> GetFrameRect(HWND window, int borderlength)
 	return rect;
 }
 
-BorderWindow::BorderWindow(HWND window, int borderlength) : window(nullptr), trackingwindow(window), borderlength(borderlength) { } // 프레임 그리기 
+BorderWindow::BorderWindow(HWND window, int borderlength, COLORREF color) : window(nullptr), trackingwindow(window), borderlength(borderlength), bordercolor(color) { } // 프레임 그리기 
 
 BorderWindow::~BorderWindow()
 {
@@ -41,9 +41,9 @@ BorderWindow::~BorderWindow()
 	}
 }
 
-std::unique_ptr<BorderWindow> BorderWindow::Create(HWND targetwindow, HINSTANCE hInstance, int borderlength)
+std::unique_ptr<BorderWindow> BorderWindow::Create(HWND targetwindow, HINSTANCE hInstance, int borderlength, COLORREF color)
 {
-	auto self = std::unique_ptr<BorderWindow>(new BorderWindow(targetwindow, borderlength));
+	auto self = std::unique_ptr<BorderWindow>(new BorderWindow(targetwindow, borderlength, color));
 	if (self->Init(hInstance))
 		return self;
 

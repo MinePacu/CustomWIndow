@@ -29,11 +29,23 @@ namespace CustomWIndow.UtIl
                 int WindowTitleLength = wrapper.GetWindowTitleLength(hwnd);
                 if (WindowTitleLength > 0)
                 {
-                    if (wrapper.FindHwnd(hwnd))
-                        return true;
+                    if (!ConfIg.Instance.DeveloperConfig.UseDwm)
+                    {
+                        if (wrapper.FindHwnd(hwnd))
+                            return true;
+
+                        else
+                            wrapper.AddHwnd(hwnd);
+                    }
 
                     else
-                        wrapper.AddHwnd(hwnd);
+                    {
+                        if (wrapper.HwndList != null && !wrapper.HwndList.Contains(hwnd))
+                        {
+                            wrapper.SetWindowOptionWithDwm(hwnd);
+                            wrapper.HwndList.Add(hwnd);
+                        }
+                    }
 
                     //Debug.Write("HWND Window Title - " + WindowFunction.StringUtIl.GetWindowTItle(hwnd) + "/ HWND Address - " + hwnd.ToString("X"));
                     //Debug.WriteLine(" / HWND Class Title - " + WindowFunction.StringUtIl.GetClassTItle(hwnd));
@@ -44,12 +56,16 @@ namespace CustomWIndow.UtIl
             await Task.Delay(1000);
         }
 
-        public static async Task StartBackgroundTask(CancellationToken cancel)
+        public static async Task StartBackgroundTask(CancellationToken cancel, byte r, byte g, byte b)
         {
-            wrapper = new();
+            wrapper = new(r, g, b, ConfIg.Instance.ColorConfIg.CaptIonColor_.R, ConfIg.Instance.ColorConfIg.CaptIonColor_.G, ConfIg.Instance.ColorConfIg.CaptIonColor_.B, (int)ConfIg.Instance.WindowConfig.WindowCornerOption ,ConfIg.Instance.DeveloperConfig.UseDwm);
 
-            wrapper.SetBuildVer((int) SysFunction.WinBuildVersion);
-            wrapper.SetCornerPre((uint)ConfIg.Instance.WIndowCornermode);
+            if (!ConfIg.Instance.DeveloperConfig.UseDwm)
+            {
+                wrapper.SetBuildVer((int)SysFunction.WinBuildVersion);
+                //wrapper.SetCaptionColor(ConfIg.Instance.ColorConfIg.CaptIonColor_.R, ConfIg.Instance.ColorConfIg.CaptIonColor_.G, ConfIg.Instance.ColorConfIg.CaptIonColor_.B);
+                wrapper.SetCornerPre((uint)ConfIg.Instance.WindowConfig.WindowCornerOption);
+            }
 
             //gc = GCHandle.Alloc(wrapper, GCHandleType.Pinned);
 
@@ -68,7 +84,8 @@ namespace CustomWIndow.UtIl
 
             if (cancel.IsCancellationRequested)
             {
-                wrapper.RestoreDwmMica((int) SysFunction.WinBuildVersion);
+                //wrapper.RestoreDwmMica((int) SysFunction.WinBuildVersion);
+                wrapper.SetDefaultWindowOptionWithDWM();
                 wrapper.Dispose();
                 //gc.Free();
                 GC.Collect();

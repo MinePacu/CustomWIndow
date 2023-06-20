@@ -12,8 +12,10 @@
     <Grid>
         <NavigationView x:Name="n" SelectionChanged="n_SelectionChanged" IsBackButtonVisible="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Setting" Content="기본 설정" Tag="Primary" />
-                <NavigationViewItem Icon="Setting" Content="추가 설정" Tag="Advanced" />
+                <NavigationViewItem Icon="Setting" Content="프로그램 설정" Tag="Program" />
+                <NavigationViewItem Icon="Setting" Content="색 설정" Tag="Color" />
+                <NavigationViewItem Icon="Setting" Content="기타 설정" Tag="Advanced" />
+                <NavigationViewItem Icon="Setting" Content="개발자 설정" Tag="Developer" />
             </NavigationView.MenuItems>
 
             <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

@@ -17,7 +17,10 @@
   <ItemGroup>
     <None Remove="Controls\TrayIconUser.xaml" />
     <None Remove="Pages\AdvancedSettings.xaml" />
+    <None Remove="Pages\ColorConfigPage.xaml" />
     <None Remove="Pages\ConfIgPage.xaml" />
+    <None Remove="Pages\Controls\ColorPickerControl.xaml" />
+    <None Remove="Pages\DeveloperPage.xaml" />
     <None Remove="Pages\SubPages\AddExceptPage.xaml" />
     <None Remove="WIndow.xaml" />
     <None Remove="Windows\ExceptProgramWindow.xaml" />
@@ -34,7 +37,7 @@
     <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.74" />
     <PackageReference Include="JeremyAnsel.DirectX.D2D1" Version="3.0.27" />
     <PackageReference Include="Microsoft.VisualStudio.VsixColorCompiler" Version="17.0.31709.430" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230217.4" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25247-preview" />
     <PackageReference Include="PInvoke.User32" Version="0.7.124" />
     <Manifest Include="$(ApplicationManifest)" />
@@ -90,5 +93,27 @@
 	
   <ItemGroup>
     <Folder Include="UtIl\Structure\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\WinAPIWrapper\WinAPIWrapper.vcxproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Pages\DeveloperPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Pages\Controls\ColorPickerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Pages\ColorConfigPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
