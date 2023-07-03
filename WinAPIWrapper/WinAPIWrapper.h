@@ -55,6 +55,10 @@ namespace WinAPIWrapper {
 		/// </summary>
 		void SetDefaultWindowOptionWithDWM();
 
+		void SetTaskbarRoundedCornerandBorderColor(int Cornermode, byte r, byte g, byte b);
+
+		void SetTaskbarDefaultSetting();
+
 		System::Collections::Generic::ICollection<IntPtr>^ HwndList = gcnew System::Collections::Generic::List<IntPtr>();
 
 		DWM_WINDOW_CORNER_PREFERENCE CornerProperty;
@@ -66,5 +70,8 @@ namespace WinAPIWrapper {
 		byte CaptionColor_R;
 		byte CaptionColor_G;
 		byte CaptionColor_B;
+
+		int GetDisplayCount();
+
 	};
 }

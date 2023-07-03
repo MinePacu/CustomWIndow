@@ -67,6 +67,8 @@ namespace CustomWIndow.UtIl
                 wrapper.SetCornerPre((uint)ConfIg.Instance.WindowConfig.WindowCornerOption);
             }
 
+            if (ConfIg.Instance.TaskBarConfig.IsTaskbarborder)
+                wrapper.SetTaskbarRoundedCornerandBorderColor((int)ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode, r, g, b);
             //gc = GCHandle.Alloc(wrapper, GCHandleType.Pinned);
 
             foreach (var task in ProduceTask(cancel))
@@ -86,6 +88,7 @@ namespace CustomWIndow.UtIl
             {
                 //wrapper.RestoreDwmMica((int) SysFunction.WinBuildVersion);
                 wrapper.SetDefaultWindowOptionWithDWM();
+                wrapper.SetTaskbarDefaultSetting();
                 wrapper.Dispose();
                 //gc.Free();
                 GC.Collect();

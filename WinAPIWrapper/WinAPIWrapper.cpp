@@ -29,6 +29,12 @@ HWND marshalasIntPtrToHWND(IntPtr^ hwnd)
 	return (HWND)hwnd->ToPointer();
 }
 
+BOOL CALLBACK DisplayEnumProc(HMONITOR hDisplay, HDC hdcDisplay, LPRECT lprcDisplay, LPARAM dwData)
+{
+	int* Count = (int*)dwData;
+	(*Count)++;
+	return TRUE;
+}
 
 namespace WinAPIWrapper
 {
@@ -169,5 +175,81 @@ namespace WinAPIWrapper
 			DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
 		}
+	}
+
+	void WindowmoduleWrapper::SetTaskbarRoundedCornerandBorderColor(int Cornermode, byte r, byte g, byte b)
+	{
+		const auto cornermode = static_cast<DWM_WINDOW_CORNER_PREFERENCE>(Cornermode);
+		const COLORREF color = RGB(r, g, b);
+
+		const int DisplayCount = GetDisplayCount();
+		if (DisplayCount < 2)
+		{
+			if (cornermode != DWMWCP_DONOTROUND)
+			{
+				const auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);
+				DwmSetWindowAttribute(TaskbarHWND, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+				DwmSetWindowAttribute(TaskbarHWND, DWMWA_BORDER_COLOR, &color, sizeof(color));
+			}
+			return;
+		}
+
+		if (cornermode != DWMWCP_DONOTROUND)
+		{
+			for (int i = 0; i < DisplayCount; i++)
+			{
+				LPWSTR string;
+				switch (i)
+				{
+				case 0:
+					string = L"Shell_TrayWnd";
+					break;
+				case 1:
+					string = L"Shell_SecondaryTrayWnd";
+				}
+				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
+			}
+		}
+	}
+
+	void WindowmoduleWrapper::SetTaskbarDefaultSetting()
+	{
+		const COLORREF color = 0xFFFFFFFF;
+		const auto cornermode = DWMWCP_DONOTROUND;
+		const int DisplayCount = GetDisplayCount();
+
+		auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);
+		if (DisplayCount < 2)
+		{
+			const auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);
+			DwmSetWindowAttribute(TaskbarHWND, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+			DwmSetWindowAttribute(TaskbarHWND, DWMWA_BORDER_COLOR, &color, sizeof(color));
+
+			return;
+		}
+
+		for (int i = 0; i < DisplayCount; i++)
+		{
+			LPWSTR string;
+			switch (i)
+			{
+			case 0:
+				string = L"Shell_TrayWnd";
+				break;
+			case 1:
+				string = L"Shell_SecondaryTrayWnd";
+			}
+			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
+		}
+	}
+
+	int WindowmoduleWrapper::GetDisplayCount()
+	{
+		int Count = 0;
+		if (EnumDisplayMonitors(NULL, NULL, DisplayEnumProc, (LPARAM)&Count))
+			return Count;
+		return -1;
 	}
 }
