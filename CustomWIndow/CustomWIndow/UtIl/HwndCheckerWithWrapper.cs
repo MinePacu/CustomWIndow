@@ -42,7 +42,13 @@ namespace CustomWIndow.UtIl
                     {
                         if (wrapper.HwndList != null && !wrapper.HwndList.Contains(hwnd))
                         {
-                            wrapper.SetWindowOptionWithDwm(hwnd);
+                            if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow)
+                                wrapper.SetWindowBorderColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                            if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow)
+                                wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency);
+                            if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 1)
+                                wrapper.SetWindowCaptionTextColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency);
+                            wrapper.SetWindowCornerPropertyWithDwm(hwnd);
                             wrapper.HwndList.Add(hwnd);
                         }
                     }

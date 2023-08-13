@@ -48,7 +48,12 @@ namespace WinAPIWrapper {
 		void SetCaptionColor(byte r, byte g, byte b);
 		void SetBuildVer(int BuildVer);
 
-		void SetWindowOptionWithDwm(IntPtr hwnd);
+		void SetWindowBorderColorWithDwm(IntPtr hwnd, bool IsTransparency);
+		void SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency);
+		void SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency);
+		//void SetWindowCaptionTextColorWithDwm(IntPtr hwnd);
+
+		void SetWindowCornerPropertyWithDwm(IntPtr hwnd);
 
 		/// <summary>
 		/// DWM를 이용하여 윈도우 설정을 기본값으로 초기화합니다.

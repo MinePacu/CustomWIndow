@@ -51,6 +51,13 @@ namespace CustomWIndow.Pages
 
             IsCaptIonTextSystemColor.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptIonTextSystemAccent;
 
+            BorderColorMasterToggle.IsOn = ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow;
+            CaptionColorMasterToggle.IsOn = ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow;
+
+            IsBorderColorTransparency.IsChecked = ConfIg.Instance.ColorConfIg.IsBorderColorTransparency;
+            IsCaptionColorTransparency.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency;
+            IsCaptionTextColorTransparency.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency;
+
             BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
             CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
             CaptionTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor_;
@@ -241,6 +248,7 @@ namespace CustomWIndow.Pages
             {
                 CaptIonTextColormode.Text = "자동 - 윈도우 기본 설정입니다.";
                 IsCaptIonTextSystemColor.IsEnabled = false;
+                IsCaptionTextColorTransparency.IsEnabled = false;
                 captIonTextColorbutton.IsEnabled = false;
             }
             else
@@ -249,10 +257,38 @@ namespace CustomWIndow.Pages
                 IsCaptIonTextSystemColor.IsEnabled = true;
 
                 if (IsCaptIonTextSystemColor.IsChecked == true)
+                {
                     captIonTextColorbutton.IsEnabled = false;
+                    IsCaptionTextColorTransparency.IsEnabled = false;
+                }
                 else
+                {
                     captIonTextColorbutton.IsEnabled = true;
+                    IsCaptionTextColorTransparency.IsEnabled = true;
+                }
             }
+        }
+
+        private void BorderColorMasterToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow = ((ToggleSwitch)sender).IsOn;
+        }
+        private void CaptionColorMasterToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow = ((ToggleSwitch)sender).IsOn;
+        }
+
+        private void IsBorderColorTransparency_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.ColorConfIg.IsBorderColorTransparency = (bool) ((CheckBox)sender).IsChecked;
+        }
+        private void IsCaptionColorTransparency_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency = (bool)((CheckBox)sender).IsChecked;
+        }
+        private void IsCaptionTextColorTransparency_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency = (bool)((CheckBox)sender).IsChecked;
         }
     }
 }

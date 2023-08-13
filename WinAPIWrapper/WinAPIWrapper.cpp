@@ -151,21 +151,47 @@ namespace WinAPIWrapper
 		m_Windowmodule->BuildVer = BuildVer;
 	}
 
-	void WindowmoduleWrapper::SetWindowOptionWithDwm(IntPtr hwnd)
+	void WindowmoduleWrapper::SetWindowBorderColorWithDwm(IntPtr hwnd, bool IsTransparency)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
-		const auto BorderColor = RGB(BorderColor_r, BorderColor_g, BorderColor_b);
-		const auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
-		const auto _CornerProperty = CornerProperty;
+		auto BorderColor = RGB(BorderColor_r, BorderColor_g, BorderColor_b);
+		if (IsTransparency)
+			BorderColor = DWMWA_COLOR_NONE;
 
 		DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &BorderColor, sizeof(BorderColor));
+	}
+
+	void WindowmoduleWrapper::SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency)
+	{
+		auto Hwnd = marshalasIntPtrToHWND(hwnd);
+		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
+		if (IsTransparency)
+			CaptionColor = DWMWA_COLOR_NONE;
+
 		DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &CaptionColor, sizeof(CaptionColor));
+	}
+
+	void WindowmoduleWrapper::SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency)
+	{
+		auto Hwnd = marshalasIntPtrToHWND(hwnd);
+		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
+		if (IsTransparency)
+			CaptionColor = DWMWA_COLOR_NONE;
+
+		DwmSetWindowAttribute(Hwnd, DWMWA_TEXT_COLOR, &CaptionColor, sizeof(CaptionColor));
+	}
+
+	void WindowmoduleWrapper::SetWindowCornerPropertyWithDwm(IntPtr hwnd)
+	{
+		auto Hwnd = marshalasIntPtrToHWND(hwnd);
+		const auto _CornerProperty = CornerProperty;
+
 		DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
 	}
 
 	void WindowmoduleWrapper::SetDefaultWindowOptionWithDWM()
 	{
-		const COLORREF DefaultColor = 0xFFFFFFFF;
+		const COLORREF DefaultColor = DWMWA_COLOR_DEFAULT;
 		const auto _CornerProperty = DWMWCP_ROUND;	
 
 		for each (IntPtr hwnd in HwndList)
@@ -173,6 +199,7 @@ namespace WinAPIWrapper
 			auto Hwnd = marshalasIntPtrToHWND(hwnd);
 			DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &DefaultColor, sizeof(DefaultColor));
+			DwmSetWindowAttribute(Hwnd, DWMWA_TEXT_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
 		}
 	}
@@ -215,11 +242,11 @@ namespace WinAPIWrapper
 
 	void WindowmoduleWrapper::SetTaskbarDefaultSetting()
 	{
-		const COLORREF color = 0xFFFFFFFF;
+		const COLORREF color = DWMWA_COLOR_DEFAULT;
 		const auto cornermode = DWMWCP_DONOTROUND;
 		const int DisplayCount = GetDisplayCount();
 
-		auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);
+		//auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);
 		if (DisplayCount < 2)
 		{
 			const auto TaskbarHWND = FindWindow(L"Shell_TrayWnd", NULL);

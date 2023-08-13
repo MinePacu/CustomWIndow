@@ -33,6 +33,11 @@
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
 
+                    <ToggleSwitch
+                        x:Name="BorderColorMasterToggle"
+                        Toggled="BorderColorMasterToggle_Toggled"
+                        />
+
                     <labs:SettingsExpander.Items>
                         <labs:SettingsCard>
                             <labs:SettingsCard.Header>
@@ -41,6 +46,15 @@
                                     x:Name="IsBorderSystemColor"
                                     Checked="IsBorderSystemColor_Checked"
                                     Unchecked="IsBorderSystemColor_Checked"/>
+                            </labs:SettingsCard.Header>
+                        </labs:SettingsCard>
+                        <labs:SettingsCard>
+                            <labs:SettingsCard.Header>
+                                <CheckBox
+                                    Content="투명 사용하기" 
+                                    x:Name="IsBorderColorTransparency"
+                                    Checked="IsBorderColorTransparency_Checked"
+                                    Unchecked="IsBorderColorTransparency_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
                         <labs:SettingsCard Header="색 설정">
@@ -69,6 +83,11 @@
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
 
+                    <ToggleSwitch
+                        x:Name="CaptionColorMasterToggle"
+                        Toggled="CaptionColorMasterToggle_Toggled"
+                        />
+                    
                     <labs:SettingsExpander.Items>
                         <labs:SettingsCard>
                             <labs:SettingsCard.Header>
@@ -77,6 +96,15 @@
                                 x:Name="IsCaptIonSystemColor"
                                 Checked="IsCaptIonSystemColor_Checked"
                                 Unchecked="IsCaptIonSystemColor_Checked"/>
+                            </labs:SettingsCard.Header>
+                        </labs:SettingsCard>
+                        <labs:SettingsCard>
+                            <labs:SettingsCard.Header>
+                                <CheckBox
+                                    Content="투명 사용하기" 
+                                    x:Name="IsCaptionColorTransparency"
+                                    Checked="IsCaptionColorTransparency_Checked"
+                                    Unchecked="IsCaptionColorTransparency_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
                         <labs:SettingsCard 
@@ -127,6 +155,15 @@
                                     x:Name="IsCaptIonTextSystemColor"
                                     Checked="IsCaptIonTextSystemColor_Checked"
                                     Unchecked="IsCaptIonTextSystemColor_Checked"/>
+                            </labs:SettingsCard.Header>
+                        </labs:SettingsCard>
+                        <labs:SettingsCard>
+                            <labs:SettingsCard.Header>
+                                <CheckBox
+                                    Content="투명 사용하기" 
+                                    x:Name="IsCaptionTextColorTransparency"
+                                    Checked="IsCaptionTextColorTransparency_Checked"
+                                    Unchecked="IsCaptionTextColorTransparency_Checked"/>
                             </labs:SettingsCard.Header>
                         </labs:SettingsCard>
                         <labs:SettingsCard Header="색 설정">
