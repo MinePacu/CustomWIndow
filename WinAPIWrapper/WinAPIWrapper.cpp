@@ -244,11 +244,12 @@ namespace WinAPIWrapper
 					string = L"Shell_SecondaryTrayWnd";
 				}
 
-				if (FindWindow(string, NULL) == NULL)
+				auto Taskbar = FindWindow(string, NULL);
+				if (Taskbar == NULL)
 					return;
 
-				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
-				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
+				DwmSetWindowAttribute(Taskbar, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+				DwmSetWindowAttribute(Taskbar, DWMWA_BORDER_COLOR, &color, sizeof(color));
 			}
 		}
 	}
@@ -281,11 +282,12 @@ namespace WinAPIWrapper
 				string = L"Shell_SecondaryTrayWnd";
 			}
 
-			if (FindWindow(string, NULL) == NULL)
+			auto Taskbar = FindWindow(string, NULL);
+			if (Taskbar == NULL)
 				return;
 
-			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
-			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
+			DwmSetWindowAttribute(Taskbar, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+			DwmSetWindowAttribute(Taskbar, DWMWA_BORDER_COLOR, &color, sizeof(color));
 		}
 	}
 
