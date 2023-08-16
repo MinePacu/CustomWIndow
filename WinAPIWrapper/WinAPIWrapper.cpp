@@ -174,11 +174,17 @@ namespace WinAPIWrapper
 	void WindowmoduleWrapper::SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
-		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
+		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B); 
 		if (IsTransparency)
 			CaptionColor = DWMWA_COLOR_NONE;
 
 		DwmSetWindowAttribute(Hwnd, DWMWA_TEXT_COLOR, &CaptionColor, sizeof(CaptionColor));
+	}
+
+	void WindowmoduleWrapper::SetWindowCaptionColormode(IntPtr hwnd, bool ismode)
+	{
+		auto Hwnd = marshalasIntPtrToHWND(hwnd);
+		DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &ismode, sizeof(ismode));
 	}
 
 	void WindowmoduleWrapper::SetWindowCornerPropertyWithDwm(IntPtr hwnd)
@@ -201,6 +207,9 @@ namespace WinAPIWrapper
 			DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_TEXT_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
+
+			bool temp = false;
+			DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &temp, sizeof(temp));
 		}
 	}
 
@@ -234,6 +243,10 @@ namespace WinAPIWrapper
 				case 1:
 					string = L"Shell_SecondaryTrayWnd";
 				}
+
+				if (FindWindow(string, NULL) == NULL)
+					return;
+
 				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
 				DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
 			}
@@ -267,6 +280,10 @@ namespace WinAPIWrapper
 			case 1:
 				string = L"Shell_SecondaryTrayWnd";
 			}
+
+			if (FindWindow(string, NULL) == NULL)
+				return;
+
 			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
 			DwmSetWindowAttribute(FindWindow(string, NULL), DWMWA_BORDER_COLOR, &color, sizeof(color));
 		}

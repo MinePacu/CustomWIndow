@@ -53,6 +53,8 @@ namespace WinAPIWrapper {
 		void SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency);
 		//void SetWindowCaptionTextColorWithDwm(IntPtr hwnd);
 
+		void SetWindowCaptionColormode(IntPtr hwnd, bool ismode);
+
 		void SetWindowCornerPropertyWithDwm(IntPtr hwnd);
 
 		/// <summary>

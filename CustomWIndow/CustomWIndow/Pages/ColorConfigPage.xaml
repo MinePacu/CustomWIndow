@@ -186,6 +186,23 @@
                         </labs:SettingsCard>
                     </labs:SettingsExpander.Items>
                 </labs:SettingsExpander>
+
+                <TextBlock Text="기타 설정" 
+                   Margin="0, 14, 0, 4" 
+                   FontSize="14" 
+                   FontWeight="Bold" />
+                <labs:SettingsCard Header="색상 모드">
+                    <labs:SettingsCard.HeaderIcon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
+                    </labs:SettingsCard.HeaderIcon>
+                    <labs:SettingsCard.Content>
+                        <ComboBox x:Name="CaptionColormodeCombo"
+                                      SelectionChanged="CaptionColormodeCombo_SelectionChanged">
+                            <ComboBoxItem Content="밝게"></ComboBoxItem>
+                            <ComboBoxItem Content="어둡게"></ComboBoxItem>
+                        </ComboBox>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
             </StackPanel>
         </ScrollViewer>
     </Grid>

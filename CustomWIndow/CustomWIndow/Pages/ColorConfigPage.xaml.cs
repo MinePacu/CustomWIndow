@@ -58,6 +58,8 @@ namespace CustomWIndow.Pages
             IsCaptionColorTransparency.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency;
             IsCaptionTextColorTransparency.IsChecked = ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency;
 
+            CaptionColormodeCombo.SelectedIndex = ConfIg.Instance.ColorConfIg.CaptionColormode;
+
             BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
             CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
             CaptionTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor_;
@@ -269,6 +271,12 @@ namespace CustomWIndow.Pages
             }
         }
 
+        void CaptionColormodeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ComboBox = (ComboBox)sender;
+            ConfIg.Instance.ColorConfIg.CaptionColormode = ComboBox.SelectedIndex;
+        }
+
         private void BorderColorMasterToggle_Toggled(object sender, RoutedEventArgs e)
         {
             ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow = ((ToggleSwitch)sender).IsOn;
@@ -276,6 +284,7 @@ namespace CustomWIndow.Pages
         private void CaptionColorMasterToggle_Toggled(object sender, RoutedEventArgs e)
         {
             ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow = ((ToggleSwitch)sender).IsOn;
+            CaptionColormodeCombo.IsEnabled = !((ToggleSwitch)sender).IsOn;
         }
 
         private void IsBorderColorTransparency_Checked(object sender, RoutedEventArgs e)

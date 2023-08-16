@@ -34,6 +34,11 @@ namespace CustomWIndow.UtIl.Config
         /// <br/>ㅤ창 캡션 텍스트 색상의 변경 방법을 로드하거나 설정합니다. 0은 자동, 1은 수동입니다.
         /// </summary>
         public int CaptIonTextColormode { get; set; } = 0;
+        /// <summary>
+        /// - 멤버 
+        /// <br/>ㅤ창 캡션 색상 모드을 로드하거나 설정합니다. 0은 밝게, 1은 어둡게입니다.
+        /// </summary>
+        public int CaptionColormode { get; set; } = 0;
 
         public bool IsOnMasterToggleOfBorderWindow { get; set; } = true;
         public bool IsOnMasterToggleOfCaptionWindow { get; set; } = true;
