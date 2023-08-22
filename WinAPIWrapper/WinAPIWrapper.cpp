@@ -230,7 +230,7 @@ namespace WinAPIWrapper
 			return;
 		}
 
-		if (cornermode != DWMWCP_DONOTROUND)
+		else if (DisplayCount >= 2 && cornermode != DWMWCP_DONOTROUND)
 		{
 			for (int i = 0; i < DisplayCount; i++)
 			{
@@ -270,24 +270,27 @@ namespace WinAPIWrapper
 			return;
 		}
 
-		for (int i = 0; i < DisplayCount; i++)
+		else
 		{
-			LPWSTR string;
-			switch (i)
+			for (int i = 0; i < DisplayCount; i++)
 			{
-			case 0:
-				string = L"Shell_TrayWnd";
-				break;
-			case 1:
-				string = L"Shell_SecondaryTrayWnd";
+				LPWSTR string;
+				switch (i)
+				{
+				case 0:
+					string = L"Shell_TrayWnd";
+					break;
+				case 1:
+					string = L"Shell_SecondaryTrayWnd";
+				}
+
+				auto Taskbar = FindWindow(string, NULL);
+				if (Taskbar == NULL)
+					return;
+
+				DwmSetWindowAttribute(Taskbar, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
+				DwmSetWindowAttribute(Taskbar, DWMWA_BORDER_COLOR, &color, sizeof(color));
 			}
-
-			auto Taskbar = FindWindow(string, NULL);
-			if (Taskbar == NULL)
-				return;
-
-			DwmSetWindowAttribute(Taskbar, DWMWA_WINDOW_CORNER_PREFERENCE, &cornermode, sizeof(cornermode));
-			DwmSetWindowAttribute(Taskbar, DWMWA_BORDER_COLOR, &color, sizeof(color));
 		}
 	}
 

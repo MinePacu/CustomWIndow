@@ -44,14 +44,19 @@ namespace CustomWIndow.UtIl
                         {
                             if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow)
                                 wrapper.SetWindowBorderColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+
                             if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow)
                                 wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency);
+
                             if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 1)
                                 wrapper.SetWindowCaptionTextColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency);
+
                             if (ConfIg.Instance.ColorConfIg.CaptionColormode == 1)
                                 wrapper.SetWindowCaptionColormode(hwnd, true);
+
                             else if (ConfIg.Instance.ColorConfIg.CaptionColormode == 0)
                                 wrapper.SetWindowCaptionColormode(hwnd, false);
+
                             wrapper.SetWindowCornerPropertyWithDwm(hwnd);
                             wrapper.HwndList.Add(hwnd);
                         }
