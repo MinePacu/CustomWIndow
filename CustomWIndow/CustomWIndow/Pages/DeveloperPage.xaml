@@ -7,8 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <StackPanel
         HorizontalAlignment="Stretch"
@@ -22,7 +21,8 @@
             
             <labs:SettingsCard 
                     Header="구동 방식 설정"
-                    Description="구동 방식을 강제로 설정합니다.">
+                    Description="구동 방식을 강제로 설정합니다."
+                    Margin="0, 0, 0, 3">
                 <ComboBox
                         x:Name="FrameDrawerMode"
                         SelectionChanged="FrameDrawerMode_SelectionChanged">

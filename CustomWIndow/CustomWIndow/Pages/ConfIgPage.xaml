@@ -7,8 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:viewmodel="using:CustomWIndow.ViewModels"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <StackPanel
         Margin="0, 14, 0, 0"
@@ -21,7 +20,8 @@
             FontWeight="Bold"
             Margin="0, 0, 0, 7"/>
         <labs:SettingsExpander
-            Header="관리자 권한으로 실행">
+            Header="관리자 권한으로 실행"
+            Margin="0, 0, 0, 3">
             <labs:SettingsExpander.HeaderIcon>
                 <FontIcon 
                     FontFamily="Segoe Fluent Icons"
@@ -52,10 +52,28 @@
             Margin="0, 14, 0, 7" />
         <labs:SettingsCard
             Header="최소화"
-            Description="창을 닫아도 트레이 아이콘으로 최소화하여 프로그램을 끄지 않습니다." >
+            Description="창을 닫아도 트레이 아이콘으로 최소화하여 프로그램을 끄지 않습니다."
+            Margin="0, 0, 0, 3">
             <ToggleSwitch
                 x:Name="IsTrayToggle"
                 IsOn="{x:Bind ConfigPageViewmodel.IsTray, Mode=TwoWay}" />
+        </labs:SettingsCard>
+        <labs:SettingsCard
+            Header="기본값으로 복원"
+            Description="프로그램을 끌 때, 작업 표시줄을 포함한 모든 윈도우의 설정을 기본값으로 복원합니다."
+            Margin="0, 0, 0, 3" >
+            <ToggleSwitch
+                x:Name="IsRestoreDefaultWindowSettingToggle"
+                IsOn="{x:Bind ConfigPageViewmodel.IsRestoreDefaultWindowSetting, Mode=TwoWay}" />
+        </labs:SettingsCard>
+        <labs:SettingsCard
+            Header="부팅 시 자동으로 프로그램 켜기"
+            Description="윈도우를 부팅할 때, 이 프로그램을 자동으로 켭니다." 
+            Margin="0, 0, 0, 3">
+            <ToggleSwitch
+                x:Name="IsTurnOnProgramOnBoot_Toggle"
+                IsOn="{x:Bind ConfigPageViewmodel.IsTurnOnProgramOnboot, Mode=TwoWay}"
+                Toggled="IsTurnOnProgramOnBoot_Toggle_Toggled"/>
         </labs:SettingsCard>
     </StackPanel>
 </Page>

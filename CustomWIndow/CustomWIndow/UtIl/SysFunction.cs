@@ -18,8 +18,7 @@ namespace CustomWIndow.UtIl
         {
             get
             {
-                dynamic build;
-                if (!TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuild", out build))
+                if (!TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuild", out dynamic build))
                     return 0;
 
                 return uint.Parse(build);

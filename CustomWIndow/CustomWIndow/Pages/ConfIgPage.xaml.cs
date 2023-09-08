@@ -21,12 +21,20 @@ namespace CustomWIndow.Pages
     {
         public bool IsTray { get; set; }
 
+        public bool IsRestoreDefaultWindowSetting { get; set; }
+
         public ConfIgPage()
         {
             this.InitializeComponent();
 
             if (SysFunction.IsAdmin())
                 ConfigPageViewmodel.IsRestartWithAdminEnable = false;
+        }
+
+        private void IsTurnOnProgramOnBoot_Toggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            var toggleSwitch = sender as ToggleSwitch;
+            ConfigPageViewmodel.SetStartUp(toggleSwitch.IsOn);
         }
     }
 }

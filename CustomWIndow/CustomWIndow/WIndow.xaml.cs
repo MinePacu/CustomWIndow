@@ -13,6 +13,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 using H.NotifyIcon;
 using CustomWIndow.Windows;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,8 +26,9 @@ namespace CustomWIndow
     public sealed partial class WIndow : Window
     {
         AppWindow app;
+        MicaHelper micaHelper;
 
-        List<(string Tag, Type page)> _pages = new List<(string Tag, Type page)>(5)
+        List<(string Tag, Type page)> _pages = new(5)
         {
             ("Program", typeof(Pages.SettingsPage)),
             ("Color", typeof(Pages.ColorConfigPage)),
@@ -48,6 +50,9 @@ namespace CustomWIndow
             app.Resize(new(ConfIg.Instance.WindowConfig.MainWindowGaro, ConfIg.Instance.WindowConfig.MainWindowSero));
 
             n.SelectedItem = n.MenuItems[0];
+
+            micaHelper = new(this);
+            Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false));
         }
 
         void N_NavIgate(string navIteTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo tranInfo)
@@ -102,7 +107,7 @@ namespace CustomWIndow
             }
         }
 
-        private void Window_Closed(object sender, WindowEventArgs args)
+        private async void Window_Closed(object sender, WindowEventArgs args)
         {
             ConfIg.Save();
 
@@ -115,6 +120,32 @@ namespace CustomWIndow
                 args.Handled = true;
                 WIndowFunctIon.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
             }
+
+            else
+            {
+                if (ConfIg.Instance.EtcConfIg.IsRestoreDefaultWindowSetting)
+                {
+                    if (ConfIg.Instance.ProcessCheckermode == 1)
+                    {
+                        if (HwndCheckerWithWrapper.BackgroundTask == null == false && HwndCheckerWithWrapper.BackgroundTask.Status == System.Threading.Tasks.TaskStatus.WaitingForActivation == false)
+                        {
+                            HwndCheckerWithWrapper.cts.Cancel();
+                            await HwndCheckerWithWrapper.BackgroundTask;
+                        }
+                    }
+
+                    else
+                    {
+                        if (SpecificHwndCheckerWithWrapper.BackgroundTask == null == false && SpecificHwndCheckerWithWrapper.BackgroundTask.Status == System.Threading.Tasks.TaskStatus.WaitingForActivation == false)
+                        {
+                            SpecificHwndCheckerWithWrapper.cts.Cancel();
+                            await SpecificHwndCheckerWithWrapper.BackgroundTask;
+                        }
+                    }
+                }
+            }
+
+            micaHelper.DisposeMicaController();
         }
     }
 }

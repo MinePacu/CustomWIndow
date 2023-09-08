@@ -31,5 +31,8 @@ namespace CustomWIndow.UtIl.WindowFunction
 
         [DllImport("user32")]
         public static extern int GetWindowTextLength(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowModuleFileName(IntPtr hwnd, StringBuilder lpszFileName, uint cchFileNameMax);
     }
 }

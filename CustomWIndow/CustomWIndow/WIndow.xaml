@@ -10,7 +10,7 @@
     Closed="Window_Closed">
 
     <Grid>
-        <NavigationView x:Name="n" SelectionChanged="n_SelectionChanged" IsBackButtonVisible="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <NavigationView x:Name="n" SelectionChanged="n_SelectionChanged" IsBackButtonVisible="Collapsed">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Setting" Content="프로그램 설정" Tag="Program" />
                 <NavigationViewItem Icon="Setting" Content="색 설정" Tag="Color" />
@@ -18,8 +18,8 @@
                 <NavigationViewItem Icon="Setting" Content="개발자 설정" Tag="Developer" />
             </NavigationView.MenuItems>
 
-            <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Frame x:Name="content" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+            <ScrollViewer>
+                <Frame x:Name="content"/>
             </ScrollViewer>
         </NavigationView>
     </Grid>

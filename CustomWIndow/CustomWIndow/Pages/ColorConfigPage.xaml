@@ -7,8 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid
         HorizontalAlignment="Stretch"
@@ -28,7 +27,8 @@
                    FontWeight="Bold" />
 
                 <labs:SettingsExpander
-                    Header="창 테두리 색">
+                    Header="창 테두리 색"
+                    Margin="0, 0, 0, 3">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -78,7 +78,8 @@
 
                 <labs:SettingsExpander
                     Header="창 캡션 색"
-                    Description="기본은 윈도우 색상 및 설정에 따릅니다.">
+                    Description="기본은 윈도우 색상 및 설정에 따릅니다."
+                    Margin="0, 0, 0, 3">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -128,7 +129,8 @@
                 </labs:SettingsExpander>
 
                 <labs:SettingsExpander
-                    Header="창 캡션 텍스트 색">
+                    Header="창 캡션 텍스트 색"
+                    Margin="0, 0, 0, 3">
                     <labs:SettingsExpander.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsExpander.HeaderIcon>
@@ -191,7 +193,7 @@
                    Margin="0, 14, 0, 4" 
                    FontSize="14" 
                    FontWeight="Bold" />
-                <labs:SettingsCard Header="색상 모드">
+                <labs:SettingsCard Header="색상 모드" Margin="0, 0, 0, 3">
                     <labs:SettingsCard.HeaderIcon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xf354;" />
                     </labs:SettingsCard.HeaderIcon>

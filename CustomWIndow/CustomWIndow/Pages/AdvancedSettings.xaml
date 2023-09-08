@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <StackPanel
         Margin="0, 7, 0, 0"
@@ -19,7 +18,8 @@
             Margin="0, 14, 0, 7" />
 
         <labs:SettingsExpander
-            Header="작업 표시줄 테두리 색 설정">
+            Header="작업 표시줄 테두리 색 설정"
+            Margin="0, 0, 0, 3">
             <ToggleSwitch
                 x:Name="Extraborder1"
                 Toggled="ToggleSwitch_Toggled" />
@@ -42,7 +42,8 @@
             Header="창 관리자 다시 시작"
             Description="창 관리자를 다시 시작합니다. 다시 시작한 후, 이 프로그램도 다시 시작됩니다."
             IsClickEnabled="True"
-            Click="SettingsCard_Click">
+            Click="SettingsCard_Click"
+            Margin="0, 0, 0, 3">
             <labs:SettingsCard.HeaderIcon>
                 <FontIcon 
                     FontFamily="Segoe Fluent Icons" 

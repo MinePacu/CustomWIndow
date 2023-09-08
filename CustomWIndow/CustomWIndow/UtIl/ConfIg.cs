@@ -45,6 +45,10 @@ namespace CustomWIndow.UtIl
             /// </summary>
             public List<string> NonappLIst { get; set; } = new();
 
+            /// <summary>
+            /// 프로세스의 창 주소를 찾는 모드 설정<br/>
+            /// 0은 특정 윈도우만 찾는 모드, 1은 일부 윈도우를 뺀 나머지 대부분의 윈도우를 찾는 모드입니다.
+            /// </summary>
             public int ProcessCheckermode { get; set; } = 0;
 
             /// <summary>
@@ -118,6 +122,18 @@ namespace CustomWIndow.UtIl
         public class EtcConfIg
         {
             public bool IsTray { get; set; } = false;
+
+            /// <summary>
+            /// 프로그램을 끌 때, 작업 표시줄을 포함한 모든 윈도우의 설정을 기본값으로 복원할지를 저장하는 인스턴스
+            /// <br/><c>true</c>이면, 프로그램을 끌 떄, 모든 윈도우의 설정을 기본값으로 복원하며, <c>false</c>이면 윈도우 설정을 기본값으로 복원하지 않습니다.
+            /// </summary>
+            public bool IsRestoreDefaultWindowSetting { get; set; } = true;
+
+            /// <summary>
+            /// 윈도우가 부팅된 후에, 자동으로 프로그램을 실행할지 여부를 저장하는 인스턴스
+            /// <br/><c>true</c>이면, 윈도우가 켜진 후에, 자동으로 이 프로그램을 실행합니다. 기본값은 <c>false</c>입니다.
+            /// </summary>
+            public bool IsTurnOninBoot { get; set; } = false;
         }
     }
 }
