@@ -10,16 +10,16 @@
     Closed="Window_Closed">
 
     <Grid>
-        <NavigationView x:Name="n" SelectionChanged="n_SelectionChanged" IsBackButtonVisible="Collapsed">
+        <NavigationView x:Name="Navigation" Loaded="Navigation_Loaded" SelectionChanged="Navigation_SelectionChanged" ItemInvoked="Navigation_ItemInvoked" IsBackButtonVisible="Auto" BackRequested="n_BackRequested">
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Setting" Content="프로그램 설정" Tag="Program" />
-                <NavigationViewItem Icon="Setting" Content="색 설정" Tag="Color" />
-                <NavigationViewItem Icon="Setting" Content="기타 설정" Tag="Advanced" />
-                <NavigationViewItem Icon="Setting" Content="개발자 설정" Tag="Developer" />
+                <NavigationViewItem Icon="Setting" Content="프로그램 설정" Tag="CustomWIndow.Pages.SettingsPage" />
+                <NavigationViewItem Icon="Setting" Content="색 설정" Tag="CustomWIndow.Pages.ColorConfigPage" />
+                <NavigationViewItem Icon="Setting" Content="기타 설정" Tag="CustomWIndow.Pages.AdvancedSettings" />
+                <NavigationViewItem Icon="Setting" Content="개발자 설정" Tag="CustomWIndow.Pages.DeveloperPage" />
             </NavigationView.MenuItems>
 
             <ScrollViewer>
-                <Frame x:Name="content"/>
+                <Frame x:Name="ContentFrame"/>
             </ScrollViewer>
         </NavigationView>
     </Grid>

@@ -14,6 +14,9 @@ using Microsoft.UI.Xaml.Controls;
 using H.NotifyIcon;
 using CustomWIndow.Windows;
 using System.Diagnostics;
+using Microsoft.UI.Xaml.Media.Animation;
+using CustomWIndow.Pages;
+using Microsoft.UI.Xaml.Navigation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -49,51 +52,86 @@ namespace CustomWIndow
 
             app.Resize(new(ConfIg.Instance.WindowConfig.MainWindowGaro, ConfIg.Instance.WindowConfig.MainWindowSero));
 
-            n.SelectedItem = n.MenuItems[0];
+            Navigation.SelectedItem = Navigation.MenuItems[0];
 
             micaHelper = new(this);
             Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false));
         }
 
-        void N_NavIgate(string navIteTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo tranInfo)
+        private void Navigation_Loaded(object sender, RoutedEventArgs e)
         {
-            Type _page = null;
+            ContentFrame.Navigated += On_Navigated;
+            Navigation.SelectedItem = Navigation.MenuItems[0];
 
-            if (navIteTag == "Config")
+            Navigation_Navigate(typeof(SettingsPage), new EntranceNavigationTransitionInfo());
+        }
+
+        private void On_Navigated(object sender, NavigationEventArgs e)
+        {
+            Navigation.IsBackEnabled = ContentFrame.CanGoBack;
+
+            if (ContentFrame.SourcePageType == typeof(ConfIgPage))
             {
-                _page = typeof(Pages.ConfIgPage);
+                  Navigation.SelectedItem = (NavigationViewItem) Navigation.SettingsItem;
+                  Navigation.Header = "설정";
             }
 
-            else
+            else if (ContentFrame.SourcePageType == null == false)
             {
-                var Ite = _pages.FirstOrDefault(p => p.Tag.Equals(navIteTag));
-                _page = Ite.page;
-            }
+                Navigation.SelectedItem = Navigation.MenuItems
+                                            .OfType<NavigationViewItem>()
+                                            .First(i => i.Tag.Equals(ContentFrame.SourcePageType.FullName.ToString()));
 
-            var NaPageType = content.CurrentSourcePageType;
-
-            if (_page == null == false)
-            {
-                if (Type.Equals(NaPageType, _page) == false)
-                {
-                    content.Navigate(_page, null, tranInfo);
-                }
+                Navigation.Header = ((NavigationViewItem)Navigation.SelectedItem)?.Content?.ToString();
             }
         }
 
-        void n_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void Navigation_Navigate(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
-            if (args.IsSettingsSelected == true)
-            {
-                N_NavIgate("Config", args.RecommendedNavigationTransitionInfo);
-            }
+            var preNavPageType = ContentFrame.CurrentSourcePageType;
 
+            if (navPageType is not null && Type.Equals(preNavPageType, navPageType) == false)
+                ContentFrame.Navigate(navPageType, null, transitionInfo);
+        }
+
+        private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+            {
+                Navigation_Navigate(typeof(ConfIgPage), args.RecommendedNavigationTransitionInfo);
+            }
             else if (args.SelectedItemContainer == null == false)
             {
-                var IteTag = args.SelectedItemContainer.Tag.ToString();
-
-                N_NavIgate(IteTag, args.RecommendedNavigationTransitionInfo);
+                var navPageType = Type.GetType(args.SelectedItemContainer.Tag.ToString());
+                Navigation_Navigate(navPageType, args.RecommendedNavigationTransitionInfo);
             }
+        }
+
+        private void Navigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked == true)
+            {
+                Navigation_Navigate(typeof(ConfIgPage), args.RecommendedNavigationTransitionInfo);
+            }
+            else if (args.InvokedItemContainer == null == false)
+            {
+                Type navPageType = Type.GetType(args.InvokedItemContainer.Tag.ToString());
+                Navigation_Navigate(navPageType, args.RecommendedNavigationTransitionInfo);
+            }
+        }
+
+        private void n_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => TryMoveBackPage();
+
+        private bool TryMoveBackPage()
+        {
+            if (ContentFrame.CanGoBack == false)
+                return false;
+
+            if (Navigation.IsPaneOpen && (Navigation.DisplayMode == NavigationViewDisplayMode.Compact || Navigation.DisplayMode == NavigationViewDisplayMode.Minimal))
+                return false;
+
+            ContentFrame.GoBack();
+            return true;
         }
 
         void Window_SizeChanged(object sender, WindowSizeChangedEventArgs args)

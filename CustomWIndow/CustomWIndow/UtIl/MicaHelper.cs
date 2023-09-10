@@ -37,7 +37,8 @@ namespace CustomWIndow.UtIl
         /// 인스턴스를 만들 때 지정한 창에 미카 효과를 적용합니다.
         /// </summary>
         /// <param name="ReplaceWindowActivatedEvent">창이 켜졌을 때, 이벤트 메소드를 이 클래스에 미리 정의된 메소드로 대체할지 여부입니다. 
-        /// <br/>따로 정의한 이벤트 메소드가 있으면 <c>false</c>로 지정하세요. 이 매개 변수를 <c>false</c>로 지정하면 따로 정의한 이벤트 메소드에 <see cref="SetIsInputActive(WindowActivatedEventArgs)"/> 메소드를 호출하세요.</param>
+        /// <br/>따로 정의한 이벤트 메소드가 있으면 <c>false</c>로 지정하세요. 이 매개 변수를 <c>false</c>로 지정하면 따로 정의한 이벤트 메소드에 <see cref="SetIsInputActive(WindowActivatedEventArgs)"/> 메소드를 호출하세요.
+        /// <br/><see cref="SetIsInputActive(WindowActivatedEventArgs)"/> 메소드에서 <see cref="WindowActivatedEventArgs"/> 매개 변수는 이벤트 메소드에서 전달받은 args 입니다.</param>
         /// <param name="ReplaceWindowClosedEvent">창을 닫을 때, 이벤트 메소드를 이 클래스에 미리 정의된 메소드로 대체할지 여부입니다.
         /// <br/>따로 정의한 이벤트 메소드가 있으면 <c>false</c>로 지정하세요. 이 매개 변수를 <c>false</c>로 지정하면, <see cref="MicaController"/> 인스턴스가 자동으로 Dispose되지 않습니다. 따로 지정한 이벤트 메소드에서 <see cref="DisposeMicaController"/> 메소드를 호출하세요.</param>
         /// <returns>미카 효과가 적용되면 <c>true</c>, 적용되지 못하면 <c>false</c>를 반환합니다.</returns>
