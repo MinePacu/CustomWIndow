@@ -21,6 +21,7 @@ namespace CustomWIndow.UtIl
 
         private bool IsReplacedWindowActivatedEvent { get; set; }
         private bool IsReplacedWindowClosedEvent { get; set; }
+        private bool IsReplacedThemeChangedEvent { get; set; }
 
         readonly Window window;
 
@@ -41,8 +42,10 @@ namespace CustomWIndow.UtIl
         /// <br/><see cref="SetIsInputActive(WindowActivatedEventArgs)"/> 메소드에서 <see cref="WindowActivatedEventArgs"/> 매개 변수는 이벤트 메소드에서 전달받은 args 입니다.</param>
         /// <param name="ReplaceWindowClosedEvent">창을 닫을 때, 이벤트 메소드를 이 클래스에 미리 정의된 메소드로 대체할지 여부입니다.
         /// <br/>따로 정의한 이벤트 메소드가 있으면 <c>false</c>로 지정하세요. 이 매개 변수를 <c>false</c>로 지정하면, <see cref="MicaController"/> 인스턴스가 자동으로 Dispose되지 않습니다. 따로 지정한 이벤트 메소드에서 <see cref="DisposeMicaController"/> 메소드를 호출하세요.</param>
+        /// <param name="ReplaceThemeChangedEvent"><see cref="FrameworkElement"/> 요소의 Theme이 변경되었을 때 호출되는 이벤트 메소드를 이 클래스에 정의된 메소드로 대체할지 여부입니다.
+        /// <br/>따로 정의한 이벤트 메소드가 있으면 <c>false</c>로 지정하세요. 이 매개 변수를 <c>false</c>로 지정하면 따로 정의한 이벤트 메소드에 <see cref="CheckSetConfigurationSourceTheme"/> 메소드를 호출하세요.</param>
         /// <returns>미카 효과가 적용되면 <c>true</c>, 적용되지 못하면 <c>false</c>를 반환합니다.</returns>
-        public bool TrySetMica(bool ReplaceWindowActivatedEvent, bool ReplaceWindowClosedEvent)
+        public bool TrySetMica(bool ReplaceWindowActivatedEvent, bool ReplaceWindowClosedEvent, bool ReplaceThemeChangedEvent)
         {
             if (MicaController.IsSupported())
             {
@@ -63,7 +66,11 @@ namespace CustomWIndow.UtIl
                     window.Closed += Window_Closed;
                 }
 
-                ((FrameworkElement)window.Content).ActualThemeChanged += Window_ThemeChanged;
+                if (ReplaceThemeChangedEvent)
+                {
+                    IsReplacedThemeChangedEvent = ReplaceThemeChangedEvent;
+                    ((FrameworkElement)window.Content).ActualThemeChanged += Window_ThemeChanged;
+                }
 
                 configurationSource.IsInputActive = true;
                 SetConfigurationSourceTheme();
@@ -88,6 +95,12 @@ namespace CustomWIndow.UtIl
         /// </summary>
         /// <param name="args">설정을 변경할 창의 상태를 포함하는 클래스</param>
         public void SetIsInputActive(WindowActivatedEventArgs args) => configurationSource.IsInputActive = args.WindowActivationState == WindowActivationState.Deactivated == false;
+
+        public void CheckSetConfigurationSourceTheme()
+        {
+            if (configurationSource == null == false)
+                SetConfigurationSourceTheme();
+        }
 
         /// <summary>
         /// 미카 컨트롤러가 사용 중인 메모리를 해제합니다.

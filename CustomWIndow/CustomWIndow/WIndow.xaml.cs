@@ -55,7 +55,7 @@ namespace CustomWIndow
             Navigation.SelectedItem = Navigation.MenuItems[0];
 
             micaHelper = new(this);
-            Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false));
+            Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false, true));
         }
 
         private void Navigation_Loaded(object sender, RoutedEventArgs e)

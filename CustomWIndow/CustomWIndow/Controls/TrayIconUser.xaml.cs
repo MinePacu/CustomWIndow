@@ -32,6 +32,7 @@ namespace CustomWIndow.Controls
             this.InitializeComponent();
         }
 
+#nullable enable
         public void ShowHideWindow_Requested(object? _, ExecuteRequestedEventArgs args)
         {
             var window = App.m_window;
