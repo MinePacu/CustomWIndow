@@ -96,6 +96,9 @@ namespace CustomWIndow.UtIl
         /// <param name="args">설정을 변경할 창의 상태를 포함하는 클래스</param>
         public void SetIsInputActive(WindowActivatedEventArgs args) => configurationSource.IsInputActive = args.WindowActivationState == WindowActivationState.Deactivated == false;
 
+        /// <summary>
+        /// <see cref="FrameworkElement.ActualTheme"/>에 따라 미카 효과의 테마를 변경합니다.
+        /// </summary>
         public void CheckSetConfigurationSourceTheme()
         {
             if (configurationSource == null == false)
