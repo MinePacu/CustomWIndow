@@ -175,7 +175,7 @@ namespace CustomWIndow.UtIl
                             _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_BORDER_COLOR, bcolor);
                         else
                         {
-                            if (AppthFunction.GetAppTh() == Enum.Appth.Dark)
+                            if (AppColorFunction.GetAppColor() == Enum.AppColor.Dark)
                                 _ = Dwm.DwmSetWindowAttribute_(subhwnd, Enum.DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
                         }
 

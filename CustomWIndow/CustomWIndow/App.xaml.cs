@@ -31,7 +31,7 @@ namespace CustomWIndow
 
             if (ConfIg.Instance.AutoAdmin && (SysFunction.IsAdmin() == false))
             {
-                ProcessStartInfo psi = new(Environment.CurrentDirectory + "\\CustomWIndow.exe")
+                ProcessStartInfo psi = new(AppDomain.CurrentDomain.BaseDirectory + "\\CustomWIndow.exe")
                 {
                     Verb = "Runas",
                     UseShellExecute = true,

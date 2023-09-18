@@ -9,6 +9,8 @@ using Microsoft.Win32;
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace CustomWIndow.ViewModels
@@ -89,7 +91,7 @@ namespace CustomWIndow.ViewModels
         public void RestartAppWithAdmin()
         {
             ConfIg.Save();
-            ProcessStartInfo psi = new(Environment.CurrentDirectory + "\\CustomWIndow.exe")
+            ProcessStartInfo psi = new(AppDomain.CurrentDomain.BaseDirectory + "\\CustomWIndow.exe")
             {
                 Verb = "Runas",
                 UseShellExecute = true,
@@ -109,18 +111,26 @@ namespace CustomWIndow.ViewModels
 
         public void SetStartUp(bool IsSet)
         {
-            var rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var rk2 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-            if (IsSet)
+            if (SysFunction.IsAdmin())
             {
-                rk.SetValue("CustomWIndow", Environment.ProcessPath);
-                rk2.SetValue("CustomWIndow", Environment.ProcessPath);
+                var rk2 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (IsSet)
+                    rk2.SetValue("CustomWIndow", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Process.GetCurrentProcess().ProcessName + ".exe"));
+                else
+                    rk2.DeleteValue("CustomWIndow", false);
+
+                rk2.Close();
             }
+
             else
             {
-                rk.DeleteValue("CustomWIndow", false);
-                rk2.DeleteValue("CustomWIndow", false);
+                var rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (IsSet)
+                    rk.SetValue("CustomWIndow", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Process.GetCurrentProcess().ProcessName + ".exe"));
+                else
+                    rk.DeleteValue("CustomWIndow", false);
+
+                rk.Close();
             }
         }
 

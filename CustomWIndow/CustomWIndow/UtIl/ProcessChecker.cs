@@ -414,7 +414,7 @@ namespace CustomWIndow.UtIl
                         _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_CAPTION_COLOR, ccolor);
                     else
                     {
-                        if (AppthFunction.GetAppTh() == Appth.Dark)
+                        if (AppColorFunction.GetAppColor() == AppColor.Dark)
                             _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
                         else
                             _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, false);
@@ -449,7 +449,7 @@ namespace CustomWIndow.UtIl
                     _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_CAPTION_COLOR, ccolor);
                 else
                 {
-                    if (AppthFunction.GetAppTh() == Appth.Dark)
+                    if (AppColorFunction.GetAppColor() == AppColor.Dark)
                         _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
                     else
                         _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, false);

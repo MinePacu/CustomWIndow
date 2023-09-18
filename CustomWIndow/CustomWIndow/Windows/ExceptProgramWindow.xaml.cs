@@ -36,7 +36,7 @@ namespace CustomWIndow.Windows
             WIndow.Resize(new(750, 400));
             WIndow.SetIcon(Path.Combine(Environment.CurrentDirectory, "asset/window-system.ico"));
 
-            if (AppthFunction.GetAppTh() == Appth.Dark)
+            if (AppColorFunction.GetAppColor() == AppColor.Dark)
                 Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(this), DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
 
             var apppresenter = (OverlappedPresenter) WIndow.Presenter;

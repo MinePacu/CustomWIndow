@@ -47,7 +47,7 @@ namespace CustomWIndow
             app.Title = "커스텀 윈도우";
             app.SetIcon(Path.Combine(Environment.CurrentDirectory, "asset/window-system.ico"));
 
-            if (AppthFunction.GetAppTh() == Appth.Dark)
+            if (AppColorFunction.GetAppColor() == AppColor.Dark)
                 Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(this), DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
 
             app.Resize(new(ConfIg.Instance.WindowConfig.MainWindowGaro, ConfIg.Instance.WindowConfig.MainWindowSero));
