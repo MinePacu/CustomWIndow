@@ -12,7 +12,6 @@ using WinRT.Interop;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 using H.NotifyIcon;
-using CustomWIndow.Windows;
 using System.Diagnostics;
 using Microsoft.UI.Xaml.Media.Animation;
 using CustomWIndow.Pages;
@@ -52,7 +51,7 @@ namespace CustomWIndow
 
             app.Resize(new(ConfIg.Instance.WindowConfig.MainWindowGaro, ConfIg.Instance.WindowConfig.MainWindowSero));
 
-            Navigation.SelectedItem = Navigation.MenuItems[0];
+            //Navigation.SelectedItem = Navigation.MenuItems[0];
 
             micaHelper = new(this);
             Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false, true));
