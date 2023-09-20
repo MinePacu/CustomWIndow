@@ -430,7 +430,7 @@ namespace CustomWIndow.Pages
                 int tep = 0;
                 foreach (var Nonapp in ConfIg.Instance.NonappLIst)
                 {
-                    if (tep == ConfIg.Instance.NonappLIst.Count)
+                    if (tep == ConfIg.Instance.NonappLIst.Count - 1)
                         NonProgram_LIst.Text += Nonapp;
                     else
                         NonProgram_LIst.Text += Nonapp + "\r";

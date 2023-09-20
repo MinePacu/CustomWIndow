@@ -637,7 +637,7 @@ namespace CustomWIndow.ViewModels
                     int tep = 0;
                     foreach (var Nonapp in ConfIg.Instance.NonappLIst)
                     {
-                        if (tep == ConfIg.Instance.NonappLIst.Count)
+                        if (tep == ConfIg.Instance.NonappLIst.Count - 1)
                             NonProgramListText += Nonapp;
                         else
                             NonProgramListText += Nonapp + "\r";

@@ -214,7 +214,7 @@ namespace WinAPIWrapper
 			DwmSetWindowAttribute(Hwnd, DWMWA_TEXT_COLOR, &DefaultColor, sizeof(DefaultColor));
 			DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
 
-			bool temp = false;
+			BOOL temp = FALSE;
 			DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &temp, sizeof(temp));
 		}
 	}
