@@ -284,7 +284,7 @@ namespace CustomWIndow.Pages
         private void CaptionColorMasterToggle_Toggled(object sender, RoutedEventArgs e)
         {
             ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow = ((ToggleSwitch)sender).IsOn;
-            CaptionColormodeCombo.IsEnabled = !((ToggleSwitch)sender).IsOn;
+            //CaptionColormodeCombo.IsEnabled = !((ToggleSwitch)sender).IsOn;
         }
 
         private void IsBorderColorTransparency_Checked(object sender, RoutedEventArgs e)

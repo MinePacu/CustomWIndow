@@ -202,6 +202,7 @@
                                       SelectionChanged="CaptionColormodeCombo_SelectionChanged">
                             <ComboBoxItem Content="밝게"></ComboBoxItem>
                             <ComboBoxItem Content="어둡게"></ComboBoxItem>
+                            <ComboBoxItem Content="커스텀"></ComboBoxItem>
                         </ComboBox>
                     </labs:SettingsCard.Content>
                 </labs:SettingsCard>

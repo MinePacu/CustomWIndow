@@ -161,12 +161,18 @@ namespace WinAPIWrapper
 		DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &BorderColor, sizeof(BorderColor));
 	}
 
-	void WindowmoduleWrapper::SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency)
+	void WindowmoduleWrapper::SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency, int Colormode)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
 		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
 		if (IsTransparency)
 			CaptionColor = DWMWA_COLOR_NONE;
+		else if (Colormode == 1)
+		{
+			BOOL isDark = TRUE;
+			DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &isDark, sizeof(isDark));
+			return;
+		}
 
 		DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &CaptionColor, sizeof(CaptionColor));
 	}

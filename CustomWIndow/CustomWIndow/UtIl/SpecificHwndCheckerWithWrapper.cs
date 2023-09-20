@@ -45,10 +45,10 @@ namespace CustomWIndow.UtIl
                                 wrapper.SetWindowBorderColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
 
                             if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow)
-                                wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency);
+                                wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency, ConfIg.Instance.ColorConfIg.CaptionColormode);
 
                             if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 1)
-                                wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency);
+                                wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency, ConfIg.Instance.ColorConfIg.CaptionColormode);
 
                             if (ConfIg.Instance.ColorConfIg.CaptionColormode == 1)
                                 wrapper.SetWindowCaptionColormode(hwnd, true);

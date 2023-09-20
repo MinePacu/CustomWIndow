@@ -49,7 +49,7 @@ namespace WinAPIWrapper {
 		void SetBuildVer(int BuildVer);
 
 		void SetWindowBorderColorWithDwm(IntPtr hwnd, bool IsTransparency);
-		void SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency);
+		void SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency, int Colormode);
 		void SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency);
 
 		void SetWindowCaptionColormode(IntPtr hwnd, bool ismode);
