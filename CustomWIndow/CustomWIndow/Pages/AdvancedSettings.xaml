@@ -39,6 +39,20 @@
         </labs:SettingsExpander>
 
         <labs:SettingsCard
+            Header="제목 표시줄 텍스트를 모두 공백 문자로 바꾸기"
+            Description="모든 창의 제목 표시줄의 글자를 공백 문자로 바꿉니다. 기능을 꺼도 텍스트는 빈 문자입니다."
+            Margin="0, 0, 0, 3">
+            <labs:SettingsCard.HeaderIcon>
+                <FontIcon 
+                    FontFamily="Segoe Fluent Icons" 
+                    Glyph="&#xe943;"/>
+            </labs:SettingsCard.HeaderIcon>
+            <ToggleSwitch 
+                Toggled="IsSetEmptyTitle_Toggled"
+                IsOn="{x:Bind IsSetEmptyTitleToCaptionTitle, Mode=TwoWay}"/>
+        </labs:SettingsCard>
+        
+        <labs:SettingsCard
             Header="창 관리자 다시 시작"
             Description="창 관리자를 다시 시작합니다. 다시 시작한 후, 이 프로그램도 다시 시작됩니다."
             IsClickEnabled="True"

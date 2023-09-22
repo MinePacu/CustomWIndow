@@ -126,10 +126,10 @@ namespace CustomWIndow.Pages
                         }
                     }
 
-                    HwndCheckerWithWrapper.cts = new();
+                    SpecificHwndCheckerWithWrapper.cts = new();
 
                     //UtIl.UtIl.task = UtIl.UtIl.ConsumeTask(UtIl.UtIl.cts.Token);
-                    HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
+                    SpecificHwndCheckerWithWrapper.BackgroundTask = SpecificHwndCheckerWithWrapper.StartBackgroundtask(UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B, SpecificHwndCheckerWithWrapper.cts.Token);
                 }
                 else
                 {
@@ -173,8 +173,7 @@ namespace CustomWIndow.Pages
 
                         HwndCheckerWithWrapper.cts = new();
                         //ProcessChecker.task = UtIl.ProcessChecker.ConsumeTask(ProcessChecker.cts.Token);
-                        HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token,
-                        UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
+                        HwndCheckerWithWrapper.BackgroundTask = HwndCheckerWithWrapper.StartBackgroundTask(HwndCheckerWithWrapper.cts.Token, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.R, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.G, UtIl.ConfIg.Instance.ColorConfIg.BorderColor_.B);
                     }
                 }
             }
@@ -436,6 +435,8 @@ namespace CustomWIndow.Pages
                         NonProgram_LIst.Text += Nonapp + "\r";
                     tep++;
                 }
+
+                ExceptProgramWindow.mica_helper.DisposeMicaController();
 
                 ExceptProgramWindow.Content = null;
                 ExceptProgramWindow = null;

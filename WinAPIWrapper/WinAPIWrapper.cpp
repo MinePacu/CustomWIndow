@@ -260,6 +260,11 @@ namespace WinAPIWrapper
 		}
 	}
 
+	void WindowmoduleWrapper::SetWindowTitleToEmptyText(IntPtr hwnd)
+	{
+		SendMessageW(marshalasIntPtrToHWND(hwnd), WM_SETTEXT, 0, (LPARAM) L" ");
+	}
+
 	void WindowmoduleWrapper::SetTaskbarDefaultSetting()
 	{
 		const COLORREF color = DWMWA_COLOR_DEFAULT;

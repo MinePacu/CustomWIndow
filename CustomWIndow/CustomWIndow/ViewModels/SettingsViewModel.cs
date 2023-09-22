@@ -586,7 +586,7 @@ namespace CustomWIndow.ViewModels
             }
         }
 
-        async void OpenExceptProgramManage()
+        private void OpenExceptProgramManage()
         {
             if (ProcessChecker.IsTaskWork == false || UtIl.UtIl.IsTaskWork == false)
             {
@@ -643,6 +643,8 @@ namespace CustomWIndow.ViewModels
                             NonProgramListText += Nonapp + "\r";
                         tep++;
                     }
+
+                    ExceptProgramWindow.mica_helper.DisposeMicaController();
 
                     ExceptProgramWindow.Content = null;
                     ExceptProgramWindow = null;

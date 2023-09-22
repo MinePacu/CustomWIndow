@@ -61,6 +61,10 @@ namespace CustomWIndow.UtIl
                                 wrapper.SetWindowCaptionColormode(hwnd, false);
 
                             wrapper.SetWindowCornerPropertyWithDwm(hwnd);
+
+                            if (ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle)
+                                wrapper.SetWindowTitleToEmptyText(hwnd);
+
                             wrapper.HwndList.Add(hwnd);
                         }
                     }

@@ -134,6 +134,8 @@ namespace CustomWIndow.UtIl
             /// <br/><c>true</c>이면, 윈도우가 켜진 후에, 자동으로 이 프로그램을 실행합니다. 기본값은 <c>false</c>입니다.
             /// </summary>
             public bool IsTurnOninBoot { get; set; } = false;
+
+            public bool IsSetEmptyTextToCaptionTitle { get; set; } = false;
         }
     }
 }

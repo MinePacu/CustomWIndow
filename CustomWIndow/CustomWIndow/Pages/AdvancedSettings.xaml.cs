@@ -36,6 +36,18 @@ namespace CustomWIndow.Pages
             }
         }
 
+        public bool IsSetEmptyTitleToCaptionTitle
+        {
+            get
+            {
+                return ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle;
+            }
+            set
+            {
+                ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle = value;
+            }
+        }
+
         public AdvancedSettings()
         {
             this.InitializeComponent();
@@ -57,6 +69,11 @@ namespace CustomWIndow.Pages
         {
             ConfIg.Instance.TaskBarConfig.IsTaskbarborder = ((ToggleSwitch) sender).IsOn;
             TaskbarCorner.IsEnabled = true;
+        }
+
+        void IsSetEmptyTitle_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle = ((ToggleSwitch)sender).IsOn;
         }
     }
 }

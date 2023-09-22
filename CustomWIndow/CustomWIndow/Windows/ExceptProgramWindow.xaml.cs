@@ -24,6 +24,8 @@ namespace CustomWIndow.Windows
     public sealed partial class ExceptProgramWindow : Window
     {
         AppWindow WIndow;
+        public MicaHelper mica_helper { get; }
+
         public List<ProcessColorChangeExcept> tempExceptLIst { get; set; } = new();
 
         public ExceptProgramWindow()
@@ -43,6 +45,9 @@ namespace CustomWIndow.Windows
 
             apppresenter.IsMaximizable = false;
             //apppresenter.IsResizable = false;
+
+            mica_helper = new(this);
+            mica_helper.TrySetMica(true, false, true);
         }
 
         private async void AddExceptProgram_Click(object sender, RoutedEventArgs e)

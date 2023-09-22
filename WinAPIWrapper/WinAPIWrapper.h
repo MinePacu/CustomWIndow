@@ -71,6 +71,12 @@ namespace WinAPIWrapper {
 		void SetTaskbarRoundedCornerandBorderColor(int Cornermode, byte r, byte g, byte b);
 
 		/// <summary>
+		/// 창의 제목 표시줄의 글자를 공백 문자로 변경합니다.
+		/// </summary>
+		/// <param name="hwnd">제목 표시줄의 글자를 변경할 창</param>
+		void SetWindowTitleToEmptyText(IntPtr hwnd);
+
+		/// <summary>
 		/// DWM를 이용하여 작업 표시줄의 설정을 기본값으로 복원합니다.
 		/// </summary>
 		void SetTaskbarDefaultSetting();
