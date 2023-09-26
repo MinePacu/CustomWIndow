@@ -2,7 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 
 using CustomWIndow.UtIl;
+using CustomWIndow.UtIl.WindowFunction;
 
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
@@ -10,8 +12,14 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
+
+using Windows.Graphics;
+using Windows.UI;
+
+using WinRT.Interop;
 
 namespace CustomWIndow.ViewModels
 {
@@ -76,6 +84,20 @@ namespace CustomWIndow.ViewModels
             }
         }
 
+        private bool isUseCustomTitleBar;
+
+        public bool IsUseCustomTitleBar
+        {
+            get => isUseCustomTitleBar;
+            set
+            {
+                SetProperty(ref isUseCustomTitleBar, value);
+                ConfIg.Instance.EtcConfIg.IsUseCustomTitleBar = value;
+
+                SetCustomTitleBar(value);
+            }
+        }
+
         public ICommand RestartAppWithAdminCommand { get; }
 
         public ConfigPageViewModel()
@@ -84,6 +106,7 @@ namespace CustomWIndow.ViewModels
             IsTray = ConfIg.Instance.EtcConfIg.IsTray;
             IsRestoreDefaultWindowSetting = ConfIg.Instance.EtcConfIg.IsRestoreDefaultWindowSetting;
             IsTurnOnProgramOnboot = ConfIg.Instance.EtcConfIg.IsTurnOninBoot;
+            IsUseCustomTitleBar = ConfIg.Instance.EtcConfIg.IsUseCustomTitleBar;
 
             RestartAppWithAdminCommand = new RelayCommand(RestartAppWithAdmin);
         }
@@ -134,6 +157,47 @@ namespace CustomWIndow.ViewModels
             }
         }
 
+        private void SetCustomTitleBar(bool IsOn)
+        {
+            Debug.WriteLine("ExtendsCotentIntoTitleBar : " + SysFunction.FirstWindow.app.TitleBar.ExtendsContentIntoTitleBar);
 
+            if (IsOn == true)
+            {
+                SysFunction.FirstWindow.app.TitleBar.ExtendsContentIntoTitleBar = true;
+                SysFunction.FirstWindow.AppTitleBar.Visibility = Visibility.Visible;
+                SysFunction.FirstWindow.SetTitleBar(SysFunction.FirstWindow.AppTitleBar);
+                ((Grid)SysFunction.FirstWindow.Content).RowDefinitions[0].Height = new GridLength(30);
+
+                //SysFunction.FirstWindow.AppWindow.SetIcon(null);
+                //SysFunction.FirstWindow.AppWindow.Title = "";
+
+                //SetDragRegionForCustomtitleBar(SysFunction.FirstWindow.AppWindow);
+
+                var TransclcentColor = new Color()
+                {
+                    A = 0,
+                    R = 0,
+                    G = 0,
+                    B = 0
+                };
+
+                SysFunction.FirstWindow.app.TitleBar.ButtonBackgroundColor = TransclcentColor;
+
+                Debug.WriteLine("true - ExtendsCotentIntoTitleBar : " + SysFunction.FirstWindow.ExtendsContentIntoTitleBar);
+            }
+
+            else
+            {
+                SysFunction.FirstWindow.app.TitleBar.ExtendsContentIntoTitleBar = false;
+                SysFunction.FirstWindow.AppTitleBar.Visibility = Visibility.Collapsed;
+                ((Grid)SysFunction.FirstWindow.Content).RowDefinitions[0].Height = new GridLength(0);
+                SysFunction.FirstWindow.SetTitleBar(null);
+
+                Dwm.DwmSetWindowAttribute_(WindowNative.GetWindowHandle(SysFunction.FirstWindow), UtIl.Enum.DwmWIndowAttrIbute.DWMWA_USE_IMMERSIVE_DARK_MODE, true);
+
+                Debug.WriteLine("false - ExtendsCotentIntoTitleBar : " + SysFunction.FirstWindow.ExtendsContentIntoTitleBar);
+            }
+
+        }
     }
 }

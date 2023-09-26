@@ -75,6 +75,14 @@
                 IsOn="{x:Bind ConfigPageViewmodel.IsTurnOnProgramOnboot, Mode=TwoWay}"
                 Toggled="IsTurnOnProgramOnBoot_Toggle_Toggled"/>
         </labs:SettingsCard>
+        <labs:SettingsCard
+            Header="커스텀 타이틀 바"
+            Description="UWP용 타이틀 바를 이 프로그램에 적용합니다."
+            Margin="0, 0, 0, 3" >
+            <ToggleSwitch
+                x:Name="IsUseCustomTitleBarToggle"
+                IsOn="{x:Bind ConfigPageViewmodel.IsUseCustomTitleBar, Mode=TwoWay}" />
+        </labs:SettingsCard>
     </StackPanel>
 </Page>
  

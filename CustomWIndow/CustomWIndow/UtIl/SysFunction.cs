@@ -6,6 +6,8 @@ namespace CustomWIndow.UtIl
 {
     public static class SysFunction
     {
+        public static WIndow FirstWindow { get; set; }
+
         public static bool IsAdmin()
         {
             WindowsIdentity Identity = WindowsIdentity.GetCurrent();

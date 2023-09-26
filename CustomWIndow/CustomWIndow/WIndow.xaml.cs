@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Microsoft.UI.Xaml.Media.Animation;
 using CustomWIndow.Pages;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,7 +28,7 @@ namespace CustomWIndow
     /// </summary>
     public sealed partial class WIndow : Window
     {
-        AppWindow app;
+        public AppWindow app { get; set; }
         MicaHelper micaHelper;
 
         List<(string Tag, Type page)> _pages = new(5)
@@ -55,6 +56,15 @@ namespace CustomWIndow
 
             micaHelper = new(this);
             Debug.WriteLine("micaHelper : " + micaHelper.TrySetMica(true, false, true));
+
+            app.Changed += App_Changed;
+            SysFunction.FirstWindow = this;
+        }
+
+        private void App_Changed(AppWindow sender, AppWindowChangedEventArgs args)
+        {
+            if (args.DidSizeChange && sender.TitleBar.ExtendsContentIntoTitleBar)
+                SetDragRegionForCustomtitleBar(sender);
         }
 
         private void Navigation_Loaded(object sender, RoutedEventArgs e)
@@ -143,7 +153,26 @@ namespace CustomWIndow
                 ConfIg.Instance.WindowConfig.MainWindowSero = app.Size.Height;
             }
         }
+        private void SetDragRegionForCustomtitleBar(AppWindow appWindow)
+        {
+            int titleBarHeight = appWindow.TitleBar.Height;
+            AppTitleBar.Height = titleBarHeight;
 
+            int CaptionButtonOcclusionWidth = appWindow.TitleBar.RightInset;
+
+            // int windowIconWidthAndPadding = (int) AppWindowIcon.ActualWidth + (int) AppWindowIcon.Margin.Right;
+            int dragRegionWidth = appWindow.Size.Width - CaptionButtonOcclusionWidth; // + windowIconWidthAndPadding
+
+            RectInt32[] dragRects = Array.Empty<RectInt32>();
+            RectInt32 dragRect;
+
+            dragRect.X = 0; // windowIconWidthAndPadding;
+            dragRect.Y = 0;
+            dragRect.Width = dragRegionWidth;
+            dragRect.Height = titleBarHeight;
+
+            appWindow.TitleBar.SetDragRectangles(dragRects.Append(dragRect).ToArray());
+        }
         private async void Window_Closed(object sender, WindowEventArgs args)
         {
             ConfIg.Save();

@@ -8,7 +8,7 @@
 
 #include "WinAPIWrapper.h"
 
-std::vector<HWND> marshalasIntPtrTovectorHwnd(System::Collections::Generic::ICollection<IntPtr>^ list)
+static std::vector<HWND> marshalasIntPtrTovectorHwnd(System::Collections::Generic::ICollection<IntPtr>^ list)
 {
 	if (list == nullptr)
 		throw gcnew ArgumentNullException(L"List is null");
@@ -24,12 +24,12 @@ std::vector<HWND> marshalasIntPtrTovectorHwnd(System::Collections::Generic::ICol
 	return result;
 }
 
-HWND marshalasIntPtrToHWND(IntPtr^ hwnd)
+static HWND marshalasIntPtrToHWND(IntPtr^ hwnd)
 {
 	return (HWND)hwnd->ToPointer();
 }
 
-BOOL CALLBACK DisplayEnumProc(HMONITOR hDisplay, HDC hdcDisplay, LPRECT lprcDisplay, LPARAM dwData)
+static BOOL CALLBACK DisplayEnumProc(HMONITOR hDisplay, HDC hdcDisplay, LPRECT lprcDisplay, LPARAM dwData)
 {
 	int* Count = (int*)dwData;
 	(*Count)++;
