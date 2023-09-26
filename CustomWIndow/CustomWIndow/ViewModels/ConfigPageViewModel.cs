@@ -107,6 +107,7 @@ namespace CustomWIndow.ViewModels
             IsRestoreDefaultWindowSetting = ConfIg.Instance.EtcConfIg.IsRestoreDefaultWindowSetting;
             IsTurnOnProgramOnboot = ConfIg.Instance.EtcConfIg.IsTurnOninBoot;
             IsUseCustomTitleBar = ConfIg.Instance.EtcConfIg.IsUseCustomTitleBar;
+            IsRestartWithAdminEnable = !SysFunction.IsAdmin();
 
             RestartAppWithAdminCommand = new RelayCommand(RestartAppWithAdmin);
         }
@@ -114,15 +115,19 @@ namespace CustomWIndow.ViewModels
         public void RestartAppWithAdmin()
         {
             ConfIg.Save();
-            ProcessStartInfo psi = new(AppDomain.CurrentDomain.BaseDirectory + "\\CustomWIndow.exe")
+            Process psi = new()
             {
-                Verb = "Runas",
-                UseShellExecute = true,
+                StartInfo =
+                    {
+                        FileName = AppDomain.CurrentDomain.BaseDirectory + @"\CustomWIndow.exe",
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    }
             };
 
             try
             {
-                Process.Start(psi);
+                psi.Start();
                 Environment.Exit(0);
             }
 
@@ -182,6 +187,7 @@ namespace CustomWIndow.ViewModels
                 };
 
                 SysFunction.FirstWindow.app.TitleBar.ButtonBackgroundColor = TransclcentColor;
+                SysFunction.FirstWindow.app.TitleBar.ButtonInactiveBackgroundColor = TransclcentColor;
 
                 Debug.WriteLine("true - ExtendsCotentIntoTitleBar : " + SysFunction.FirstWindow.ExtendsContentIntoTitleBar);
             }

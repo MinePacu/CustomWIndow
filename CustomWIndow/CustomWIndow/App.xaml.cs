@@ -31,13 +31,17 @@ namespace CustomWIndow
 
             if (ConfIg.Instance.AutoAdmin && (SysFunction.IsAdmin() == false))
             {
-                ProcessStartInfo psi = new(AppDomain.CurrentDomain.BaseDirectory + "\\CustomWIndow.exe")
+                Process psi = new()
                 {
-                    Verb = "Runas",
-                    UseShellExecute = true,
+                    StartInfo =
+                    {
+                        FileName = AppDomain.CurrentDomain.BaseDirectory + @"\CustomWIndow.exe",
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    }
                 };
 
-                Process.Start(psi);
+                psi.Start();
                 Environment.Exit(0);
             }
 
