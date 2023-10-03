@@ -161,7 +161,7 @@ namespace WinAPIWrapper
 		DwmSetWindowAttribute(Hwnd, DWMWA_BORDER_COLOR, &BorderColor, sizeof(BorderColor));
 	}
 
-	void WindowmoduleWrapper::SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency, int Colormode)
+	void WindowmoduleWrapper::SetWindowCaptionColorWithDwm(IntPtr hwnd, bool IsTransparency, int Colormode) 
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
 		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B);
@@ -262,7 +262,7 @@ namespace WinAPIWrapper
 
 	void WindowmoduleWrapper::SetWindowTitleToEmptyText(IntPtr hwnd)
 	{
-		SendMessageW(marshalasIntPtrToHWND(hwnd), WM_SETTEXT, 0, (LPARAM) L" ");
+		SendMessageW(marshalasIntPtrToHWND(hwnd), WM_SETTEXT, 0, (LPARAM) L"");
 	}
 
 	void WindowmoduleWrapper::SetTaskbarDefaultSetting()

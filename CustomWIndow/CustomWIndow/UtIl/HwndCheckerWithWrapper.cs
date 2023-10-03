@@ -75,6 +75,16 @@ namespace CustomWIndow.UtIl
                 return true;
             }, IntPtr.Zero);
 
+            if (ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly)
+            {
+                var HwndCount = wrapper.HwndList.Count;
+                foreach (var Hwnd in wrapper.HwndList)
+                {
+                    if (wrapper.GetWindowTitleLength(Hwnd) > 1)
+                        wrapper.SetWindowTitleToEmptyText(Hwnd);
+                }
+            }
+
             await Task.Delay(1000);
         }
 

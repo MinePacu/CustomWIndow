@@ -138,6 +138,8 @@ namespace CustomWIndow.UtIl
             public bool IsSetEmptyTextToCaptionTitle { get; set; } = false;
 
             public bool IsUseCustomTitleBar { get; set; } = false;
+
+            public bool IsSetEmptyTextToCaptionTitleConstantly { get; set; } = false;
         }
     }
 }

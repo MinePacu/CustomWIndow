@@ -48,6 +48,18 @@ namespace CustomWIndow.Pages
             }
         }
 
+        public bool IsSetEmptyTitleToCaptionTitleConstantly
+        {
+            get
+            {
+                return ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly;
+            }
+            set
+            {
+                ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly = value;
+            }
+        }
+
         public AdvancedSettings()
         {
             this.InitializeComponent();
@@ -74,6 +86,11 @@ namespace CustomWIndow.Pages
         void IsSetEmptyTitle_Toggled(object sender, RoutedEventArgs e)
         {
             ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle = ((ToggleSwitch)sender).IsOn;
+        }
+
+        void IsSetEmptyTitleConstantly_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly = ((ToggleSwitch)sender).IsOn;
         }
     }
 }
