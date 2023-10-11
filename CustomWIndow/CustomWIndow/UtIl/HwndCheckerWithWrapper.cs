@@ -17,7 +17,8 @@ namespace CustomWIndow.UtIl
     public static class HwndCheckerWithWrapper
     {
         static WinAPIWrapper.WindowmoduleWrapper wrapper;
-        static GCHandle gc;
+        //static GCHandle gc;
+        public static bool IsSettingChanged { get; set; } = false;
 
         public static CancellationTokenSource cts { get; set; }
         public static Task BackgroundTask { get; set; }
@@ -29,8 +30,7 @@ namespace CustomWIndow.UtIl
                 if (!WIndowFunctIon.IsWindowVisible(hwnd))
                     return true;
 
-                int WindowTitleLength = wrapper.GetWindowTitleLength(hwnd);
-                if (WindowTitleLength > 0)
+                else
                 {
                     if (!ConfIg.Instance.DeveloperConfig.UseDwm)
                     {
@@ -60,7 +60,7 @@ namespace CustomWIndow.UtIl
                             else if (ConfIg.Instance.ColorConfIg.CaptionColormode == 0)
                                 wrapper.SetWindowCaptionColormode(hwnd, false);
 
-                            wrapper.SetWindowCornerPropertyWithDwm(hwnd);
+                            wrapper.SetWindowCornerPropertyWithDwm(hwnd, (int) ConfIg.Instance.WindowConfig.WindowCornerOption);
 
                             if (ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitle)
                                 wrapper.SetWindowTitleToEmptyText(hwnd);
@@ -83,6 +83,30 @@ namespace CustomWIndow.UtIl
                     if (wrapper.GetWindowTitleLength(Hwnd) > 1)
                         wrapper.SetWindowTitleToEmptyText(Hwnd);
                 }
+            }
+
+            if (IsSettingChanged)
+            {
+                foreach (var hwnd in wrapper.HwndList)
+                {
+                    if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfBorderWindow)
+                        wrapper.SetWindowBorderColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+
+                    if (ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow)
+                        wrapper.SetWindowCaptionColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionColorTransparency, ConfIg.Instance.ColorConfIg.CaptionColormode);
+
+                    if (ConfIg.Instance.ColorConfIg.CaptIonTextColormode == 1)
+                        wrapper.SetWindowCaptionTextColorWithDwm(hwnd, ConfIg.Instance.ColorConfIg.IsCaptionTextColorTransparency);
+
+                    if (ConfIg.Instance.ColorConfIg.CaptionColormode == 1)
+                        wrapper.SetWindowCaptionColormode(hwnd, true);
+
+                    else if (ConfIg.Instance.ColorConfIg.CaptionColormode == 0)
+                        wrapper.SetWindowCaptionColormode(hwnd, false);
+
+                    wrapper.SetWindowCornerPropertyWithDwm(hwnd, (int)ConfIg.Instance.WindowConfig.WindowCornerOption);
+                }
+                IsSettingChanged = false;
             }
 
             await Task.Delay(1000);
@@ -124,6 +148,8 @@ namespace CustomWIndow.UtIl
                 wrapper.Dispose();
                 //gc.Free();
                 GC.Collect();
+
+                IsSettingChanged = false;
             }
         }
     }

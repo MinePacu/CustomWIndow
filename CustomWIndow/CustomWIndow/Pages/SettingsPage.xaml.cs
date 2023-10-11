@@ -207,8 +207,24 @@ namespace CustomWIndow.Pages
                 */
 
                 ProcessChecker.IsTaskWork = false;
-                HwndCheckerWithWrapper.cts.Cancel();
-                await HwndCheckerWithWrapper.BackgroundTask;
+
+                if (ConfIg.Instance.ProcessCheckermode == 0)
+                {
+                    SpecificHwndCheckerWithWrapper.cts.Cancel();
+                    SpecificHwndCheckerWithWrapper.cts.Dispose();
+                    await SpecificHwndCheckerWithWrapper.BackgroundTask;
+
+                    SpecificHwndCheckerWithWrapper.BackgroundTask.Dispose();
+                }
+
+                else
+                {
+                    HwndCheckerWithWrapper.cts.Cancel();
+                    HwndCheckerWithWrapper.cts.Dispose();
+                    await HwndCheckerWithWrapper.BackgroundTask;
+
+                    HwndCheckerWithWrapper.BackgroundTask.Dispose();
+                }
 
                 // TaskOn 시키는 토글 UI (IView) 활성화
                 toggle.IsEnabled = true;

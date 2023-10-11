@@ -54,7 +54,7 @@ namespace WinAPIWrapper {
 
 		void SetWindowCaptionColormode(IntPtr hwnd, bool ismode);
 
-		void SetWindowCornerPropertyWithDwm(IntPtr hwnd);
+		void SetWindowCornerPropertyWithDwm(IntPtr hwnd, int Cornerproperty);
 
 		/// <summary>
 		/// DWM를 이용하여 윈도우 설정을 기본값으로 초기화합니다.

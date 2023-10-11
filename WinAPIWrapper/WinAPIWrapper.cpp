@@ -193,10 +193,10 @@ namespace WinAPIWrapper
 		DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &ismode, sizeof(ismode));
 	}
 
-	void WindowmoduleWrapper::SetWindowCornerPropertyWithDwm(IntPtr hwnd)
+	void WindowmoduleWrapper::SetWindowCornerPropertyWithDwm(IntPtr hwnd, int CornerProperty)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
-		const auto _CornerProperty = CornerProperty;
+		const auto _CornerProperty = static_cast<DWM_WINDOW_CORNER_PREFERENCE>(CornerProperty);
 
 		DwmSetWindowAttribute(Hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &_CornerProperty, sizeof(_CornerProperty));
 	}

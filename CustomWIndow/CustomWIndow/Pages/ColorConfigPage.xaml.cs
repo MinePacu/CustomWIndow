@@ -80,6 +80,11 @@ namespace CustomWIndow.Pages
 
             ConfIg.Instance.ColorConfIg.IsBorderSystemAccent = (bool)Checkbox.IsChecked;
 
+            if (ConfIg.Instance.ProcessCheckermode == 1)
+                HwndCheckerWithWrapper.IsSettingChanged = true;
+            else
+                SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+
             Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
             Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
@@ -99,6 +104,11 @@ namespace CustomWIndow.Pages
 
             ConfIg.Instance.ColorConfIg.IsCaptIonSystemAccent = (bool)Checkbox.IsChecked;
 
+            if (ConfIg.Instance.ProcessCheckermode == 1)
+                HwndCheckerWithWrapper.IsSettingChanged = true;
+            else
+                SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+
             Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
             Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
@@ -117,6 +127,11 @@ namespace CustomWIndow.Pages
                 captIonTextColorbutton.IsEnabled = true;
 
             ConfIg.Instance.ColorConfIg.IsCaptIonTextSystemAccent = (bool)Checkbox.IsChecked;
+
+            if (ConfIg.Instance.ProcessCheckermode == 1)
+                HwndCheckerWithWrapper.IsSettingChanged = true;
+            else
+                SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
 
             Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
             Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
@@ -147,6 +162,11 @@ namespace CustomWIndow.Pages
                 ConfIg.Instance.ColorConfIg.BorderColor_ = ColorPickerControler.ColorData;
                 BorderColor = ConfIg.Instance.ColorConfIg.BorderColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(ColorPickerControler.ColorData));
+
+                if (ConfIg.Instance.ProcessCheckermode == 1)
+                    HwndCheckerWithWrapper.IsSettingChanged = true;
+                else
+                    SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
             }
 
             //GC.Collect();
@@ -191,6 +211,11 @@ namespace CustomWIndow.Pages
                 CaptionColor = ConfIg.Instance.ColorConfIg.CaptIonColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(((ColorPicker)((ScrollViewer)ColorwIndow.Content).Content).Color));
                 Debug.WriteLine("Debug Color - " + ((ColorPicker)((ScrollViewer)ColorwIndow.Content).Content).Color);
+
+                if (ConfIg.Instance.ProcessCheckermode == 1)
+                    HwndCheckerWithWrapper.IsSettingChanged = true;
+                else
+                    SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
             }
 
             GC.Collect();
@@ -235,6 +260,11 @@ namespace CustomWIndow.Pages
                 CaptionTextColor = ConfIg.Instance.ColorConfIg.CaptIonTextColor_;
                 Debug.WriteLine("Debug Color - " + ColorConverter.ConvertToColorREF(((ColorPicker)((ScrollViewer)ColorwIndow.Content).Content).Color));
                 Debug.WriteLine("Debug Color - " + ((ColorPicker)((ScrollViewer)ColorwIndow.Content).Content).Color);
+
+                if (ConfIg.Instance.ProcessCheckermode == 1)
+                    HwndCheckerWithWrapper.IsSettingChanged = true;
+                else
+                    SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
             }
 
             GC.Collect();
