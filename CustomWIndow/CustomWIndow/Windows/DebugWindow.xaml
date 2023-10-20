@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="CustomWIndow.Windows.DebugWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomWIndow.Windows"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d"
+    Closed="Window_Closed">
+
+    <Grid>
+        <controls:DataGrid
+            x:Name="DebugGrid"
+            AutoGenerateColumns="False"
+            SelectionMode="Single"
+            IsTapEnabled="False"
+            IsDoubleTapEnabled="False"
+            ItemsSource="{x:Bind DataGridCollections}">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn
+                    Header="윈도우 Address"
+                    Binding="{Binding HWNDAddressString}"
+                    CanUserResize="True"/>
+                <controls:DataGridTextColumn
+                    Header="클래스" 
+                    Binding="{Binding ClassString}"/>
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+    </Grid>
+</Window>

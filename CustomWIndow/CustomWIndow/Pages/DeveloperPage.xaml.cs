@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 
 using CustomWIndow.UtIl;
+using CustomWIndow.Windows;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -18,11 +19,27 @@ namespace CustomWIndow.Pages
 
             FrameDrawerMode.SelectedIndex = (ConfIg.Instance.DeveloperConfig.UseDwm == true) ? 0 : 1;
             //FrameDrawerMode.SelectionChanged += FrameDrawerMode_SelectionChanged;
+            if (HwndCheckerWithWrapper.wrapper != null || SpecificHwndCheckerWithWrapper.wrapper != null)
+                HWND_Debug.IsEnabled = true;
+            else
+                HWND_Debug.IsEnabled = false;
         }
 
         private void FrameDrawerMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ConfIg.Instance.DeveloperConfig.UseDwm = (((ComboBox)sender).SelectedIndex == 0) ? true : false;
+        }
+
+        private void HWND_Debug_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            if (ConfIg.Instance.ProcessCheckermode == 1)
+            {
+                if (HwndCheckerWithWrapper.wrapper != null)
+                {
+                    DebugWindow debugWindow = new(HwndCheckerWithWrapper.wrapper.HwndList);
+                    debugWindow.Activate();
+                }
+            }
         }
     }
 }

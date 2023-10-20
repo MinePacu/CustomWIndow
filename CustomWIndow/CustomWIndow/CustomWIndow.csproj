@@ -23,6 +23,7 @@
     <None Remove="Pages\DeveloperPage.xaml" />
     <None Remove="Pages\SubPages\AddExceptPage.xaml" />
     <None Remove="WIndow.xaml" />
+    <None Remove="Windows\DebugWindow.xaml" />
     <None Remove="Windows\ExceptProgramWindow.xaml" />
     <None Remove="Windows\TrayWindow.xaml" />
   </ItemGroup>
@@ -92,11 +93,18 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Folder Include="UtIl\Debugger\" />
     <Folder Include="UtIl\Structure\" />
   </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\..\WinAPIWrapper\WinAPIWrapper.vcxproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Page Update="Windows\DebugWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 	
   <ItemGroup>

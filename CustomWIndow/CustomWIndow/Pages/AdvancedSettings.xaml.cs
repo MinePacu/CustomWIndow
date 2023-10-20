@@ -60,6 +60,19 @@ namespace CustomWIndow.Pages
             }
         }
 
+        public bool IsSetWindowBorderColorConstantly
+        {
+            get
+            {
+                return ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly;
+            }
+
+            set
+            {
+                ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly = value;
+            }
+        }
+
         public AdvancedSettings()
         {
             this.InitializeComponent();

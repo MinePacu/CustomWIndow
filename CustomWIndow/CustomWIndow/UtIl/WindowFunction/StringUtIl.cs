@@ -34,5 +34,8 @@ namespace CustomWIndow.UtIl.WindowFunction
 
         [DllImport("user32.dll")]
         public static extern int GetWindowModuleFileName(IntPtr hwnd, StringBuilder lpszFileName, uint cchFileNameMax);
+
+        [DllImport("user32.dll")]
+        public static extern int GetClassName(IntPtr hwnd, StringBuilder lpClass, int nMaxCount);
     }
 }

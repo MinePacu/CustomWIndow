@@ -13,7 +13,8 @@ namespace CustomWIndow.UtIl
     /// </summary>
     public static class SpecificHwndCheckerWithWrapper
     {
-        static WinAPIWrapper.WindowmoduleWrapper wrapper;
+        public static WinAPIWrapper.WindowmoduleWrapper wrapper;
+        private static List<IntPtr> tmpIntptrList = new(10);
         static StringBuilder fileString { get; set; } = new(1000);
 
         public static bool IsSettingChanged { get; set; } = false;
@@ -104,6 +105,17 @@ namespace CustomWIndow.UtIl
                     wrapper.SetWindowCornerPropertyWithDwm(hwnd, (int)ConfIg.Instance.WindowConfig.WindowCornerOption);
                 }
                 IsSettingChanged = false;
+            }
+
+            foreach (var HWND in wrapper.HwndList)
+            {
+                if (!WIndowFunctIon.IsWindowVisible(HWND) || !WIndowFunctIon.IsWindowEnabled(HWND))
+                    tmpIntptrList.Add(HWND);
+            }
+
+            foreach (var HWND in tmpIntptrList)
+            {
+                wrapper.HwndList.Remove(HWND);
             }
 
             await Task.Delay(1000);
