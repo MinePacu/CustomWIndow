@@ -85,8 +85,8 @@ namespace CustomWIndow.Pages
             else
                 SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
 
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
+            //Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
+            //Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
 
         void IsCaptIonSystemColor_Checked(object sender, RoutedEventArgs e)
@@ -109,8 +109,8 @@ namespace CustomWIndow.Pages
             else
                 SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
 
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
+            //Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
+            //Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
 
         void IsCaptIonTextSystemColor_Checked(object sender, RoutedEventArgs e)
@@ -133,8 +133,8 @@ namespace CustomWIndow.Pages
             else
                 SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
 
-            Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
-            Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
+            //Debug.WriteLine("Debug Accent Color - " + ColorConverter.GetAccentColor().ToString());
+            //Debug.WriteLine("Debug Accent ColorRef - " + ColorConverter.ConvertToColorREF(ColorConverter.GetAccentColor()).ToString());
         }
 
         async void borderColorbutton_Click(object sender, RoutedEventArgs e)
@@ -299,12 +299,29 @@ namespace CustomWIndow.Pages
                     IsCaptionTextColorTransparency.IsEnabled = true;
                 }
             }
+
+            if (ConfIg.Instance.ProcessCheckermode == 0)
+                SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+            else if (ConfIg.Instance.ProcessCheckermode == 1)
+                HwndCheckerWithWrapper.IsSettingChanged = true;
         }
 
         void CaptionColormodeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var ComboBox = (ComboBox)sender;
             ConfIg.Instance.ColorConfIg.CaptionColormode = ComboBox.SelectedIndex;
+
+            if (ConfIg.Instance.ProcessCheckermode == 0)
+            {
+                if (SpecificHwndCheckerWithWrapper.wrapper != null)
+                    SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+            }
+
+            else
+            {
+                if (HwndCheckerWithWrapper.wrapper != null)
+                    HwndCheckerWithWrapper.IsSettingChanged = true;
+            }
         }
 
         private void BorderColorMasterToggle_Toggled(object sender, RoutedEventArgs e)

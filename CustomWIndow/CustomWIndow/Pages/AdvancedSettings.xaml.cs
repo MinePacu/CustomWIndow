@@ -105,6 +105,11 @@ namespace CustomWIndow.Pages
         {
             ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly = ((ToggleSwitch)sender).IsOn;
         }
+
+        void IsSetWindowBorderColorConstantly_Toggled(object sender, RoutedEventArgs e)
+        {
+            ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly = ((ToggleSwitch)sender).IsOn;
+        }
     }
 }
  

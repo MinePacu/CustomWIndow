@@ -40,6 +40,14 @@ namespace CustomWIndow.Pages
                     debugWindow.Activate();
                 }
             }
+            else
+            {
+                if (SpecificHwndCheckerWithWrapper.wrapper != null)
+                {
+                    DebugWindow debugWindow = new(SpecificHwndCheckerWithWrapper.wrapper.HwndList);
+                    debugWindow.Activate();
+                }
+            }
         }
     }
 }

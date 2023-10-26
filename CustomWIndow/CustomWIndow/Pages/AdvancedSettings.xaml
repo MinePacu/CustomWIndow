@@ -37,24 +37,10 @@
                 </labs:SettingsCard>
             </labs:SettingsExpander.Items>
         </labs:SettingsExpander>
-
+        
         <labs:SettingsCard
-            Header="제목 표시줄 텍스트를 모두 공백 문자로 바꾸기"
-            Description="모든 창의 제목 표시줄의 글자를 공백 문자로 바꿉니다. 기능을 꺼도 텍스트는 빈 문자입니다."
-            Margin="0, 0, 0, 3">
-            <labs:SettingsCard.HeaderIcon>
-                <FontIcon 
-                    FontFamily="Segoe Fluent Icons" 
-                    Glyph="&#xe943;"/>
-            </labs:SettingsCard.HeaderIcon>
-            <ToggleSwitch 
-                Toggled="IsSetEmptyTitle_Toggled"
-                IsOn="{x:Bind IsSetEmptyTitleToCaptionTitle, Mode=TwoWay}"/>
-        </labs:SettingsCard>
-
-        <labs:SettingsCard
-            Header="지속적으로 제목 표시줄 텍스트를 모두 공백 문자로 바꾸기"
-            Description="빈 문자로 바꾼 후에 새 제목으로 바뀐 경우, 다시 빈 문자로 변환합니다. 창이 많을수록 성능이 느려질 수 있습니다."
+            Header="공백 문자로 바꾸기"
+            Description="모든 창의 제목을 빈 문자로 변경합니다. 창이 많을수록 성능이 느려질 수 있습니다.&#10;기능이 꺼진 후에, 프로그램에서 제목을 변경할 때까지 창의 제목이 변경되지 않습니다."
             Margin="0, 0, 0, 3">
             <labs:SettingsCard.HeaderIcon>
                 <FontIcon 
@@ -64,6 +50,20 @@
             <ToggleSwitch 
                 Toggled="IsSetEmptyTitleConstantly_Toggled"
                 IsOn="{x:Bind IsSetEmptyTitleToCaptionTitleConstantly, Mode=TwoWay}"/>
+        </labs:SettingsCard>
+
+        <labs:SettingsCard
+            Header="모서리 색상 강제 설정"
+            Description="프로그램 내에서 설정된 모서리 색상을 강제로 사용자가 설정한 색상으로 변경합니다. 이 기능은 실험적으로 Visual Studio에만 적용됩니다.&#10;이 기능은 프로그램에서 모서리 색상을 자주 변경할 때 유용합니다."
+            Margin="0, 0, 0, 3">
+            <labs:SettingsCard.HeaderIcon>
+                <FontIcon 
+                    FontFamily="Segoe Fluent Icons" 
+                    Glyph="&#xe943;"/>
+            </labs:SettingsCard.HeaderIcon>
+            <ToggleSwitch 
+                Toggled="IsSetWindowBorderColorConstantly_Toggled"
+                IsOn="{x:Bind IsSetWindowBorderColorConstantly, Mode=TwoWay}"/>
         </labs:SettingsCard>
         
         <labs:SettingsCard

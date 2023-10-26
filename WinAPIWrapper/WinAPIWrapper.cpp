@@ -24,6 +24,11 @@ static std::vector<HWND> marshalasIntPtrTovectorHwnd(System::Collections::Generi
 	return result;
 }
 
+/// <summary>
+/// IntPtr 객체를 HWND 객체로 변환합니다.
+/// </summary>
+/// <param name="hwnd">HWND 객체로 변환할 IntPtr 타입의 객체</param>
+/// <returns>HWND 타입으로 변환된 객체</returns>
 static HWND marshalasIntPtrToHWND(IntPtr^ hwnd)
 {
 	return (HWND)hwnd->ToPointer();
@@ -173,7 +178,7 @@ namespace WinAPIWrapper
 			DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &isDark, sizeof(isDark));
 			return;
 		}
-
+		 
 		DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &CaptionColor, sizeof(CaptionColor));
 	}
 
@@ -190,7 +195,15 @@ namespace WinAPIWrapper
 	void WindowmoduleWrapper::SetWindowCaptionColormode(IntPtr hwnd, bool ismode)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
-		DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &ismode, sizeof(ismode));
+		const auto DefaultColor = DWMWA_COLOR_DEFAULT;
+		BOOL tempbool;
+		if (ismode == true)
+			tempbool = TRUE;
+		else
+			tempbool = FALSE;
+
+		DwmSetWindowAttribute(Hwnd, DWMWA_CAPTION_COLOR, &DefaultColor, sizeof(DefaultColor));
+		DwmSetWindowAttribute(Hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &tempbool, sizeof(tempbool));
 	}
 
 	void WindowmoduleWrapper::SetWindowCornerPropertyWithDwm(IntPtr hwnd, int CornerProperty)

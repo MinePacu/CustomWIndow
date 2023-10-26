@@ -2,12 +2,6 @@
 using Microsoft.UI.Xaml.Controls;
 
 using CustomWIndow.UtIl;
-using Microsoft.Windows.AppLifecycle;
-using System.Diagnostics;
-using Windows.ApplicationModel.Activation;
-using WinRT;
-using System;
-using CustomWIndow.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

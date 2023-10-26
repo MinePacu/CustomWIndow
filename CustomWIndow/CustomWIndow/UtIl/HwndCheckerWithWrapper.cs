@@ -20,6 +20,7 @@ namespace CustomWIndow.UtIl
         private static List<IntPtr> tmpIntptrList = new(10);
         //static GCHandle gc;
         public static bool IsSettingChanged { get; set; } = false;
+        private static IntPtr VisualStudio_HWND { get; set; } = IntPtr.Zero;
 
         public static CancellationTokenSource cts { get; set; }
         public static Task BackgroundTask { get; set; }
@@ -69,22 +70,11 @@ namespace CustomWIndow.UtIl
                             wrapper.HwndList.Add(hwnd);
                         }
                     }
-
                     //Debug.Write("HWND Window Title - " + WindowFunction.StringUtIl.GetWindowTItle(hwnd) + "/ HWND Address - " + hwnd.ToString("X"));
                     //Debug.WriteLine(" / HWND Class Title - " + WindowFunction.StringUtIl.GetClassTItle(hwnd));
                 }
                 return true;
             }, IntPtr.Zero);
-
-            if (ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly)
-            {
-                var HwndCount = wrapper.HwndList.Count;
-                foreach (var Hwnd in wrapper.HwndList)
-                {
-                    if (wrapper.GetWindowTitleLength(Hwnd) > 1)
-                        wrapper.SetWindowTitleToEmptyText(Hwnd);
-                }
-            }
 
             if (IsSettingChanged)
             {
@@ -110,15 +100,50 @@ namespace CustomWIndow.UtIl
                 IsSettingChanged = false;
             }
 
-            foreach(var HWND in wrapper.HwndList)
+            foreach (var HWND in wrapper.HwndList)
             {
-                if (!WIndowFunctIon.IsWindowVisible(HWND) || !WIndowFunctIon.IsWindowEnabled(HWND))
+                if (ConfIg.Instance.EtcConfIg.IsSetEmptyTextToCaptionTitleConstantly)
+                {
+                    if (wrapper.GetWindowTitleLength(HWND) > 1)
+                        wrapper.SetWindowTitleToEmptyText(HWND);
+                }
+
+                /*
+                if (ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly)
+                {
+                    if (wrapper.CheckDevEnvFromHWND(HWND))
+                        wrapper.SetWindowBorderColorWithDwm(HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                }
+                */
+                if (!WIndowFunctIon.IsWindowEnabled(HWND) || !WIndowFunctIon.IsWindowVisible(HWND))
                     tmpIntptrList.Add(HWND);
             }
 
             foreach (var HWND in tmpIntptrList)
             {
                 wrapper.HwndList.Remove(HWND);
+            }
+
+
+            if (ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly)
+            {
+                if (VisualStudio_HWND != IntPtr.Zero && wrapper.HwndList.Contains(VisualStudio_HWND))
+                    wrapper.SetWindowBorderColorWithDwm(VisualStudio_HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+
+                else if (VisualStudio_HWND != IntPtr.Zero && wrapper.HwndList.Contains(VisualStudio_HWND) == false)
+                    VisualStudio_HWND = IntPtr.Zero;
+
+                else
+                {
+                    var array = Process.GetProcessesByName("devenv");
+                    if (array.Count() > 0)
+                    {
+                        VisualStudio_HWND = array[0].MainWindowHandle;
+                        wrapper.SetWindowBorderColorWithDwm(VisualStudio_HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                    }
+                }
+
+                //Debug.WriteLine("VisualStudio_HWND : " + VisualStudio_HWND.ToString("X"));
             }
 
             tmpIntptrList.Clear();
