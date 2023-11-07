@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -50,6 +48,7 @@ namespace CustomWIndow.UtIl
         /// <br/>ㅤ각 프로세스에 대한 창 핸들러를 저장하고 창 모서리, 캡션, 캡션 텍스트 색을 지정합니다. 이 함수는 <see cref="ConsumeTask(CancellationToken)"/>에 의해 취소 토큰이 true가 아니면 반복합니다.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         static async Task GetAndApplyHwnd()
         {
             // 프로세스 로드
@@ -232,6 +231,7 @@ namespace CustomWIndow.UtIl
             await Task.Delay(1770);
         }
 
+        [Obsolete]
         static async Task GetAndApplyHwndWIthEnumWindow()
         {
             _ = EnumHwndFunction.EnumWindows(
@@ -400,6 +400,7 @@ namespace CustomWIndow.UtIl
         /// <param name="ccolor">지정할 캡션 색상</param>
         /// <param name="ctcolor">지정할 캡션 텍스트 색상</param>
 #pragma warning disable CS1998 // 이 비동기 메서드에는 'await' 연산자가 없으며 메서드가 동시에 실행됩니다.
+        [Obsolete]
         static async Task ApplyBorderCaptIonColor(int bcolor, int ccolor, int ctcolor)
 #pragma warning restore CS1998 // 이 비동기 메서드에는 'await' 연산자가 없으며 메서드가 동시에 실행됩니다.
         {
@@ -438,6 +439,7 @@ namespace CustomWIndow.UtIl
         /// <param name="bcolor">지정할 창 모서리 색상</param>
         /// <param name="ccolor">지정할 캡션 색상</param>
         /// <param name="ctcolor">지정할 캡션 텍스트 색상</param>
+        [Obsolete]
         static void ApplyBorderCaptIonColor(ProcessHwnd hwnd, int bcolor, int ccolor, int ctcolor)
         {
             if (hwnd.HwndApplyed == false)
@@ -458,12 +460,13 @@ namespace CustomWIndow.UtIl
                 if (hwnd.IsCaptIonTextChange)
                     _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_TEXT_COLOR, ctcolor);
 
-                _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_WINDOW_CORNER_PREFERENCE, Corner_ConfIg);
+                _ = Dwm.DwmSetWindowAttribute_(hwnd.Hwnd, DwmWIndowAttrIbute.DWMWA_WINDOW_CORNER_PREFERENCE, Corner_ConfIg); 
 
                 hwnd.HwndApplyed = true;
             }
         }
 
+        [Obsolete]
         static void ApplyTaskbarOptions(int bcolor, Taskbar_Corner TaskbarCorner)
         {
             if (Taskbar.HwndApplyed == false)
@@ -474,6 +477,7 @@ namespace CustomWIndow.UtIl
             }
         }
 
+        [Obsolete]
         public static async Task ConsumeTask(CancellationToken cancel)
         {
             Process_WIndow_LIst.Clear();
@@ -484,6 +488,7 @@ namespace CustomWIndow.UtIl
             }
         }
 
+        [Obsolete]
         static IEnumerable<Task> ProduceTask(CancellationToken cancel)
         {
             while (cancel.IsCancellationRequested == false)
@@ -493,6 +498,7 @@ namespace CustomWIndow.UtIl
             Debug.WriteLine("DDebug - Redrawed");
         }
 
+        [Obsolete]
         public static void WrIteDebug<T>(string TItle, List<T> LIst) where T : ProcessHwnd
         {
             Debug.WriteLine("===========================================================================");

@@ -395,7 +395,7 @@ namespace CustomWIndow.Pages
             ConfIg.Instance.WindowConfig.WindowCornerOption = (DWM_WINDOW_CORNER_PREFERENCE) Enum.ToObject(typeof(DWM_WINDOW_CORNER_PREFERENCE), Combo.SelectedIndex);
         }
 
-        private async void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
+        private void ExceptProgrammanage_Click(object sender, RoutedEventArgs e)
         {
             if (ProcessChecker.IsTaskWork == false || UtIl.UtIl.IsTaskWork == false)
             {

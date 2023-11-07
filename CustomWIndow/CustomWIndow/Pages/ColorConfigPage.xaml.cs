@@ -332,6 +332,17 @@ namespace CustomWIndow.Pages
         {
             ConfIg.Instance.ColorConfIg.IsOnMasterToggleOfCaptionWindow = ((ToggleSwitch)sender).IsOn;
             //CaptionColormodeCombo.IsEnabled = !((ToggleSwitch)sender).IsOn;
+            if (ConfIg.Instance.ProcessCheckermode == 0)
+            {
+                if (SpecificHwndCheckerWithWrapper.wrapper != null)
+                    SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+            }
+
+            else
+            {
+                if (HwndCheckerWithWrapper.wrapper != null)
+                    HwndCheckerWithWrapper.IsSettingChanged = true;
+            }
         }
 
         private void IsBorderColorTransparency_Checked(object sender, RoutedEventArgs e)
