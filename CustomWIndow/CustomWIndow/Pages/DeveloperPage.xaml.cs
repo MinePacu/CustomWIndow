@@ -2,6 +2,8 @@ using Microsoft.UI.Xaml.Controls;
 
 using CustomWIndow.UtIl;
 using CustomWIndow.Windows;
+using CustomWIndow.UtIl.WindowFunction;
+using Microsoft.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -13,6 +15,8 @@ namespace CustomWIndow.Pages
     /// </summary>
     public sealed partial class DeveloperPage : Page
     {
+        DebugWindow debugWindow { get; set; }
+
         public DeveloperPage()
         {
             this.InitializeComponent();
@@ -20,9 +24,9 @@ namespace CustomWIndow.Pages
             FrameDrawerMode.SelectedIndex = (ConfIg.Instance.DeveloperConfig.UseDwm == true) ? 0 : 1;
             //FrameDrawerMode.SelectionChanged += FrameDrawerMode_SelectionChanged;
             if (HwndCheckerWithWrapper.wrapper != null || SpecificHwndCheckerWithWrapper.wrapper != null)
-                HWND_Debug.IsEnabled = true;
+                HWND_Debug.IsClickEnabled = true;
             else
-                HWND_Debug.IsEnabled = false;
+                HWND_Debug.IsClickEnabled = false;
         }
 
         private void FrameDrawerMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,7 +40,22 @@ namespace CustomWIndow.Pages
             {
                 if (HwndCheckerWithWrapper.wrapper != null)
                 {
-                    DebugWindow debugWindow = new(HwndCheckerWithWrapper.wrapper.HwndList);
+                    if (debugWindow != null)
+                    {
+                        if (debugWindow.AppWindow != null)
+                        {
+                            HwndControl.SetForegroundWindow(Win32Interop.GetWindowFromWindowId(debugWindow.AppWindow.Id));
+                            return;
+                        }
+                        
+                        debugWindow = null;
+                        debugWindow = new(HwndCheckerWithWrapper.wrapper.HwndList);
+                    }
+
+                    else
+                    {
+                        debugWindow = new(HwndCheckerWithWrapper.wrapper.HwndList);
+                    }
                     debugWindow.Activate();
                 }
             }
@@ -44,7 +63,22 @@ namespace CustomWIndow.Pages
             {
                 if (SpecificHwndCheckerWithWrapper.wrapper != null)
                 {
-                    DebugWindow debugWindow = new(SpecificHwndCheckerWithWrapper.wrapper.HwndList);
+                    if (debugWindow != null)
+                    {
+                        if (debugWindow.AppWindow != null)
+                        {
+                            HwndControl.SetForegroundWindow(Win32Interop.GetWindowFromWindowId(debugWindow.AppWindow.Id));
+                            return;
+                        }
+
+                        debugWindow = null;
+                        debugWindow = new(SpecificHwndCheckerWithWrapper.wrapper.HwndList);
+                    }
+
+                    else
+                    {
+                        debugWindow = new(SpecificHwndCheckerWithWrapper.wrapper.HwndList);
+                    }
                     debugWindow.Activate();
                 }
             }

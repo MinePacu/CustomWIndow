@@ -47,7 +47,7 @@ namespace CustomWIndow.UtIl
 
             /// <summary>
             /// 프로세스의 창 주소를 찾는 모드 설정<br/>
-            /// 0은 일부 윈도우를 뺀 나머지 대부분의 윈도우를 찾는 모드, 1은 특정 윈도우만 찾는 모드입니다.
+            /// 0은 특정 윈도우만 찾는 모드, 1은 일부 윈도우를 뺀 나머지 대부분의 윈도우를 찾는 모드입니다.
             /// </summary>
             public int ProcessCheckermode { get; set; } = 0;
 
