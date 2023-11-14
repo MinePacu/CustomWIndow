@@ -184,7 +184,7 @@ namespace CustomWIndow
                 App.t_window.Hide(false);
 
                 args.Handled = true;
-                WIndowFunctIon.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
+                UtIl.WindowFunction.HwndControl.ShowWindow(WinRT.Interop.WindowNative.GetWindowHandle(this), 0);
             }
 
             else

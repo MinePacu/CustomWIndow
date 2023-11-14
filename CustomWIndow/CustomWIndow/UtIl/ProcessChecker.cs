@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using CustomWIndow.UtIl.Enum;
 using CustomWIndow.UtIl.WindowFunction;
-using static CustomWIndow.UtIl.WIndowFunctIon;
 
 namespace CustomWIndow.UtIl
 {
@@ -113,7 +112,7 @@ namespace CustomWIndow.UtIl
 
                                         int Index = ProcessColorChangeExceptLIst.FindIndex(x => x.ProcessStrIng == process.ProcessName);
 
-                                        if (IsWindowVisible(hwnd) == true)
+                                        if (HwndControl.IsWindowVisible(hwnd) == true)
                                         {
                                             if (process.ProcessName == "explorer")
                                             {
@@ -124,7 +123,7 @@ namespace CustomWIndow.UtIl
                                                 else if (classTItle == "TaskListThumbnailWnd")
                                                     Process_WIndow_LIst.Add(new(process.ProcessName, thread.Id, hwnd, false, true, true, false, false));
 
-                                                if (IsWIndowPopup(hwnd))
+                                                if (HwndControl.IsWIndowPopup(hwnd))
                                                     return true;
                                             }
 
@@ -169,9 +168,9 @@ namespace CustomWIndow.UtIl
                                         if (hwnd == DesktopHwnd)
                                             return true;
 
-                                        if (IsWindowVisible(hwnd) == true)
+                                        if (HwndControl.IsWindowVisible(hwnd) == true)
                                         {
-                                            if (process.ProcessName == "explorer" && IsWIndowPopup(hwnd))
+                                            if (process.ProcessName == "explorer" && HwndControl.IsWIndowPopup(hwnd))
                                                 return true;
 
                                             else
@@ -209,7 +208,7 @@ namespace CustomWIndow.UtIl
                 {
                     foreach (var hwnd in Process_WIndow_LIst)
                     {
-                        if (IsWindowEnabled(hwnd.Hwnd) == false)
+                        if (HwndControl.IsWindowEnabled(hwnd.Hwnd) == false)
                             hwnd.used = false;
                     }
 
@@ -237,10 +236,10 @@ namespace CustomWIndow.UtIl
             _ = EnumHwndFunction.EnumWindows(
                 (hwnd, lp) =>
                 {
-                    if (IsWindowVisible(hwnd) == false)
+                    if (HwndControl.IsWindowVisible(hwnd) == false)
                         return true;
 
-                    uint ThreadId = GetWindowThreadProcessId(hwnd, out int ProcessID);
+                    uint ThreadId = ProcessFunction.GetWindowThreadProcessId(hwnd, out int ProcessID);
 
                     if (IsFIrstLoad)
                     {
@@ -268,7 +267,7 @@ namespace CustomWIndow.UtIl
                                     if (classTItle == "Shell_TrayWnd" && ConfIg.Instance.TaskBarConfig.IsTaskbarborder)
                                         Taskbar = new(process.ProcessName, (int) ThreadId, hwnd, false, true, true, false, false);
 
-                                    if (IsWIndowPopup(hwnd))
+                                    if (HwndControl.IsWIndowPopup(hwnd))
                                         return true;
                                 }
 
@@ -334,7 +333,7 @@ namespace CustomWIndow.UtIl
 
                             if (SkIp == false)
                             {
-                                if (process.ProcessName == "explorer" && IsWIndowPopup(hwnd))
+                                if (process.ProcessName == "explorer" && HwndControl.IsWIndowPopup(hwnd))
                                     return true;
 
                                 else
@@ -369,7 +368,7 @@ namespace CustomWIndow.UtIl
             {
                 foreach (var hwnd in Process_WIndow_LIst)
                 {
-                    if (IsWindowEnabled(hwnd.Hwnd) == false)
+                    if (HwndControl.IsWindowEnabled(hwnd.Hwnd) == false)
                         hwnd.used = false;
                 }
 

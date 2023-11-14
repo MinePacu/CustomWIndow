@@ -4,11 +4,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using CustomWIndow.UtIl.WindowFunction;
-using static CustomWIndow.UtIl.WIndowFunctIon;
-
 
 namespace CustomWIndow.UtIl
 {
+    [Obsolete]
     public static class UWPHwndLoader
     {
         public static List<Hwndstruct> UWPHwndLIst { get; } = new();
@@ -27,18 +26,18 @@ namespace CustomWIndow.UtIl
             if (sClassTItle == "Windows.UI.Core.CoreWindow")
             {
                 int nPID = 0;
-                uint nThreadId = GetWindowThreadProcessId(hWnd, out nPID);
-                IntPtr hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
+                uint nThreadId = WindowFunction.ProcessFunction.GetWindowThreadProcessId(hWnd, out nPID);
+                IntPtr hProcess = ProcessFunction.OpenProcess(ProcessFunction.PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
                 string sPackage = string.Empty;
                 if (hProcess != IntPtr.Zero)
                 {
                     uint nSize = 260;
                     StringBuilder sPackageTItle = new StringBuilder((int)nSize);
-                    GetPackageFullTItle(hProcess, ref nSize, sPackageTItle);
+                    ProcessFunction.GetPackageFullTItle(hProcess, ref nSize, sPackageTItle);
 
                     nSize = 260;
                     StringBuilder sProcessImageTItle = new StringBuilder((int)nSize);
-                    QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
+                    ProcessFunction.QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
 
                     ep.hWnd = hWnd;
                     ep.sExe = sProcessImageTItle.ToString();
@@ -48,7 +47,7 @@ namespace CustomWIndow.UtIl
 
                     UWPHwndLIst.Add(ep);
 
-                    CloseHandle(hProcess);
+                    ProcessFunction.CloseHandle(hProcess);
                 }
             }
 
@@ -59,17 +58,17 @@ namespace CustomWIndow.UtIl
                 if (hWndFind != IntPtr.Zero)
                 {
                     int nPID = 0;
-                    uint nThreadId = GetWindowThreadProcessId(hWndFind, out nPID);
-                    IntPtr hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
+                    uint nThreadId = ProcessFunction.GetWindowThreadProcessId(hWndFind, out nPID);
+                    IntPtr hProcess = ProcessFunction.OpenProcess(ProcessFunction.PROCESS_QUERY_LIMITED_INFORMATION, false, nPID);
                     string sPackage = string.Empty;
                     if (hProcess != IntPtr.Zero)
                     {
                         uint nSize = 260;
                         StringBuilder sPackageFullTItle = new StringBuilder((int)nSize);
-                        GetPackageFullTItle(hProcess, ref nSize, sPackageFullTItle);
+                        ProcessFunction.GetPackageFullTItle(hProcess, ref nSize, sPackageFullTItle);
                         nSize = 260;
                         StringBuilder sProcessImageTItle = new StringBuilder((int)nSize);
-                        QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
+                        ProcessFunction.QueryFullProcessImageTItle(hProcess, 0, sProcessImageTItle, ref nSize);
 
                         ep.hWnd = hWnd;
                         ep.sExe = sProcessImageTItle.ToString();
@@ -78,7 +77,7 @@ namespace CustomWIndow.UtIl
 
                         UWPHwndLIst.Add(ep);
 
-                        CloseHandle(hProcess);
+                        ProcessFunction.CloseHandle(hProcess);
                     }
                 }
             }

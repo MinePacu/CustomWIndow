@@ -74,7 +74,7 @@ namespace CustomWIndow.Windows
                 classString.Clear();
                 if (item != IntPtr.Zero && DataGridCollections.Any(ptrstruct => ptrstruct.HWNDAddress.Equals(item)) == false)
                 {
-                    if (WIndowFunctIon.IsWindowEnabled(item))
+                    if (HwndControl.IsWindowEnabled(item))
                     {
                         _ = StringUtIl.GetClassName(item, classString, classString.MaxCapacity);
                         HWNDStruct tmp = new(item, classString.ToString());

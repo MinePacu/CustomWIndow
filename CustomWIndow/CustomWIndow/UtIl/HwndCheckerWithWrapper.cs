@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using CommunityToolkit.WinUI.Helpers;
+using CustomWIndow.UtIl.WindowFunction;
+
+using Microsoft.UI.Xaml;
 
 namespace CustomWIndow.UtIl
 {
@@ -20,7 +19,8 @@ namespace CustomWIndow.UtIl
         private static List<IntPtr> tmpIntptrList = new(10);
         //static GCHandle gc;
         public static bool IsSettingChanged { get; set; } = false;
-        private static IntPtr VisualStudio_HWND { get; set; } = IntPtr.Zero;
+        private static List<IntPtr> VisualStudio_HWND { get; set; } = new(5);
+        private static List<IntPtr> VisualStudio_RemoveHWND { get; set; } = new(5);
 
         public static CancellationTokenSource cts { get; set; }
         public static Task BackgroundTask { get; set; }
@@ -29,12 +29,12 @@ namespace CustomWIndow.UtIl
         {
             _ = WindowFunction.EnumHwndFunction.EnumWindows((hwnd, lp) =>
             {
-                if (!WIndowFunctIon.IsWindowVisible(hwnd))
+                if (!HwndControl.IsWindowVisible(hwnd))
                     return true;
 
                 else
                 {
-                    uint ThreadId = WIndowFunctIon.GetWindowThreadProcessId(hwnd, out int ProcessID);
+                    uint ThreadId = ProcessFunction.GetWindowThreadProcessId(hwnd, out int ProcessID);
                     using var proc = Process.GetProcessById(ProcessID);
                     int NonappList_Index = ProcessChecker.ProcessColorChangeExceptLIst.FindIndex(p => p.ProcessStrIng == proc.ProcessName);
 
@@ -150,7 +150,7 @@ namespace CustomWIndow.UtIl
                         wrapper.SetWindowBorderColorWithDwm(HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
                 }
                 */
-                if (!WIndowFunctIon.IsWindowEnabled(HWND) || !WIndowFunctIon.IsWindowVisible(HWND))
+                if (!WindowFunction.HwndControl.IsWindowEnabled(HWND) || !WindowFunction.HwndControl.IsWindowVisible(HWND))
                     tmpIntptrList.Add(HWND);
             }
 
@@ -161,22 +161,48 @@ namespace CustomWIndow.UtIl
 
             if (ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly)
             {
-                if (VisualStudio_HWND != IntPtr.Zero && wrapper.HwndList.Contains(VisualStudio_HWND))
-                    wrapper.SetWindowBorderColorWithDwm(VisualStudio_HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
-
-                else if (VisualStudio_HWND != IntPtr.Zero && wrapper.HwndList.Contains(VisualStudio_HWND) == false)
-                    VisualStudio_HWND = IntPtr.Zero;
-
-                else
+                if (VisualStudio_HWND.Count < 1)
                 {
                     var array = Process.GetProcessesByName("devenv");
-                    if (array.Count() > 0)
+                    if (array.Length > 0)
                     {
-                        VisualStudio_HWND = array[0].MainWindowHandle;
-                        wrapper.SetWindowBorderColorWithDwm(VisualStudio_HWND, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                        foreach (var window in array)
+                        {
+                            VisualStudio_HWND.Add(window.MainWindowHandle);
+                            wrapper.SetWindowBorderColorWithDwm(window.MainWindowHandle, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                        }
                     }
                 }
 
+                else
+                {
+                    foreach (var Hwnd in VisualStudio_HWND)
+                    {
+                        if (Hwnd != IntPtr.Zero && wrapper.HwndList.Contains(Hwnd))
+                            wrapper.SetWindowBorderColorWithDwm(Hwnd, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+
+                        else if (Hwnd != IntPtr.Zero && wrapper.HwndList.Contains(Hwnd) == false)
+                            VisualStudio_RemoveHWND.Add(Hwnd);
+
+                        else
+                        {
+                            var array = Process.GetProcessesByName("devenv");
+                            if (array.Length > 0)
+                            {
+                                foreach (var window in array)
+                                {
+                                    VisualStudio_HWND.Add(window.MainWindowHandle);
+                                    wrapper.SetWindowBorderColorWithDwm(window.MainWindowHandle, ConfIg.Instance.ColorConfIg.IsBorderColorTransparency);
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (var Hwnd in VisualStudio_RemoveHWND)
+                    {
+                        VisualStudio_HWND.Remove(Hwnd);
+                    }
+                }
                 //Debug.WriteLine("VisualStudio_HWND : " + VisualStudio_HWND.ToString("X"));
             }
 

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 
 using CustomWIndow.UtIl.WindowFunction;
-using static CustomWIndow.UtIl.WIndowFunctIon;
 
 namespace CustomWIndow.UtIl
 {
@@ -56,7 +55,7 @@ namespace CustomWIndow.UtIl
                                     EnumHwndFunction.EnumThreadWindows(thread.Id, 
                                         (hwnd, lP) => 
                                         {
-                                            if (IsWindowVisible(hwnd) == true)
+                                            if (HwndControl.IsWindowVisible(hwnd) == true)
                                             {
                                                 Process_WIndow[tep].Subhwnd.Add(hwnd);
                                                 Process_WIndow[tep].SubApplyed.Add(false);
@@ -102,7 +101,7 @@ namespace CustomWIndow.UtIl
                                         EnumHwndFunction.EnumThreadWindows(thread.Id, 
                                             (hwnd, lP) =>
                                             {
-                                                if (IsWindowVisible(hwnd) == true)
+                                                if (HwndControl.IsWindowVisible(hwnd) == true)
                                                 {
                                                     //Debug.WriteLine("tep_ - " + tep_);
                                                     if (tep_ < Process_WIndow[tep_].Subhwnd.Count)
@@ -134,7 +133,7 @@ namespace CustomWIndow.UtIl
                                         EnumHwndFunction.EnumThreadWindows(thread.Id, 
                                             (hwnd, lP) =>
                                             {
-                                                if (IsWindowVisible(hwnd) == true)
+                                                if (HwndControl.IsWindowVisible(hwnd) == true)
                                                 {
                                                     Process_WIndow[tep].Subhwnd.Add(hwnd);
                                                     Process_WIndow[tep].SubApplyed.Add(false);
