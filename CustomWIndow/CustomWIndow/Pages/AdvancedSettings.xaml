@@ -65,6 +65,20 @@
                 Toggled="IsSetWindowBorderColorConstantly_Toggled"
                 IsOn="{x:Bind IsSetWindowBorderColorConstantly, Mode=TwoWay}"/>
         </labs:SettingsCard>
+
+        <labs:SettingsCard
+            Header="창 적용 지연 시간"
+            Margin="0, 0, 0, 3">
+            <labs:SettingsCard.HeaderIcon>
+                <FontIcon 
+                    FontFamily="Segoe Fluent Icons" 
+                    Glyph="&#xe943;"/>
+            </labs:SettingsCard.HeaderIcon>
+            <TextBox
+                x:Name="WindowDelay_TextBox"
+                Text="{x:Bind WindowDelay_String, Mode=TwoWay}"
+                TextChanged="WindowDelay_TextBox_TextChanged"/>
+        </labs:SettingsCard>
         
         <labs:SettingsCard
             Header="창 관리자 다시 시작"

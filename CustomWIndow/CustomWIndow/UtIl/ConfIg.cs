@@ -142,6 +142,8 @@ namespace CustomWIndow.UtIl
             public bool IsSetEmptyTextToCaptionTitleConstantly { get; set; } = false;
 
             public bool IsSetWindowBorderColorConstantly { get; set; } = false;
+
+            public int WindowDelay { get; set; } = 1000;
         }
     }
 }

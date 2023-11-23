@@ -73,6 +73,29 @@ namespace CustomWIndow.Pages
             }
         }
 
+        public string WindowDelay_String
+        {
+            get => ConfIg.Instance.EtcConfIg.WindowDelay.ToString();
+            set
+            {
+                if (int.Parse(value) >= 100)
+                {
+                    ConfIg.Instance.EtcConfIg.WindowDelay = int.Parse(value);
+                    if (ConfIg.Instance.ProcessCheckermode == 0)
+                    {
+                        if (SpecificHwndCheckerWithWrapper.wrapper != null)
+                            SpecificHwndCheckerWithWrapper.IsSettingChanged = true;
+                    }
+
+                    else
+                    {
+                        if (HwndCheckerWithWrapper.wrapper != null)
+                            HwndCheckerWithWrapper.IsSettingChanged = true;
+                    }
+                }
+            }
+        }
+
         public AdvancedSettings()
         {
             this.InitializeComponent();
@@ -109,6 +132,12 @@ namespace CustomWIndow.Pages
         void IsSetWindowBorderColorConstantly_Toggled(object sender, RoutedEventArgs e)
         {
             ConfIg.Instance.EtcConfIg.IsSetWindowBorderColorConstantly = ((ToggleSwitch)sender).IsOn;
+        }
+
+        private void WindowDelay_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (((TextBox)sender).Text != "")
+                ConfIg.Instance.EtcConfIg.WindowDelay = int.Parse(((TextBox)sender).Text);
         }
     }
 }

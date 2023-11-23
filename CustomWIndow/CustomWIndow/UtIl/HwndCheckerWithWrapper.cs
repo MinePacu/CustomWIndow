@@ -25,6 +25,8 @@ namespace CustomWIndow.UtIl
         public static CancellationTokenSource cts { get; set; }
         public static Task BackgroundTask { get; set; }
 
+        public static int WindowDelay { get; set; } = 1000;
+
         static async Task GetHwndsWithEnumWindows()
         {
             _ = WindowFunction.EnumHwndFunction.EnumWindows((hwnd, lp) =>
@@ -131,6 +133,8 @@ namespace CustomWIndow.UtIl
                         wrapper.SetWindowCaptionColormode(hwnd, false);
 
                     wrapper.SetWindowCornerPropertyWithDwm(hwnd, (int)ConfIg.Instance.WindowConfig.WindowCornerOption);
+
+                    WindowDelay = ConfIg.Instance.EtcConfIg.WindowDelay;
                 }
                 IsSettingChanged = false;
             }
@@ -208,12 +212,13 @@ namespace CustomWIndow.UtIl
 
             tmpIntptrList.Clear();
 
-            await Task.Delay(1000);
+            await Task.Delay(WindowDelay);
         }
 
         public static async Task StartBackgroundTask(CancellationToken cancel, byte r, byte g, byte b)
         {
             wrapper = new(r, g, b, ConfIg.Instance.ColorConfIg.CaptIonColor_.R, ConfIg.Instance.ColorConfIg.CaptIonColor_.G, ConfIg.Instance.ColorConfIg.CaptIonColor_.B, (int)ConfIg.Instance.WindowConfig.WindowCornerOption ,ConfIg.Instance.DeveloperConfig.UseDwm);
+            WindowDelay = ConfIg.Instance.EtcConfIg.WindowDelay;
 
             if (!ConfIg.Instance.DeveloperConfig.UseDwm)
             {
