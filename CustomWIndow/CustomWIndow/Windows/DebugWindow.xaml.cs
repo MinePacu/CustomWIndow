@@ -97,7 +97,7 @@ namespace CustomWIndow.Windows
             DebugGrid.ItemsSource = null;
             DebugGrid.ItemsSource = DataGridCollections;
 
-            await Task.Delay(1000);
+            await Task.Delay(ConfIg.Instance.EtcConfIg.WindowDelay);
         }
 
 
