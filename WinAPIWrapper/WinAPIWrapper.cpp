@@ -259,7 +259,7 @@ namespace WinAPIWrapper
 				case 0:
 					string = L"Shell_TrayWnd";
 					break;
-				case 1:
+				default:
 					string = L"Shell_SecondaryTrayWnd";
 				}
 
@@ -304,7 +304,7 @@ namespace WinAPIWrapper
 				case 0:
 					string = L"Shell_TrayWnd";
 					break;
-				case 1:
+				default:
 					string = L"Shell_SecondaryTrayWnd";
 				}
 
