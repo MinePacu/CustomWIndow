@@ -144,6 +144,8 @@ namespace CustomWIndow.UtIl
             public bool IsSetWindowBorderColorConstantly { get; set; } = false;
 
             public int WindowDelay { get; set; } = 1000;
+
+            public bool NavigationPaneOpened { get; set; } = true;
         }
     }
 }

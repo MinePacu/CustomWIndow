@@ -31,6 +31,12 @@ namespace CustomWIndow
         public AppWindow app { get; set; }
         MicaHelper micaHelper;
 
+        public bool NavigationPaneOpend
+        {
+            get => ConfIg.Instance.EtcConfIg.NavigationPaneOpened;
+            set { ConfIg.Instance.EtcConfIg.NavigationPaneOpened = value; }
+        }
+
         List<(string Tag, Type page)> _pages = new(5)
         {
             ("Program", typeof(Pages.SettingsPage)),
