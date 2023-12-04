@@ -210,6 +210,7 @@ namespace CustomWIndow.UtIl
                 //Debug.WriteLine("VisualStudio_HWND : " + VisualStudio_HWND.ToString("X"));
             }
 
+            VisualStudio_RemoveHWND.Clear();
             tmpIntptrList.Clear();
 
             await Task.Delay(WindowDelay);
@@ -219,6 +220,8 @@ namespace CustomWIndow.UtIl
         {
             wrapper = new(r, g, b, ConfIg.Instance.ColorConfIg.CaptIonColor_.R, ConfIg.Instance.ColorConfIg.CaptIonColor_.G, ConfIg.Instance.ColorConfIg.CaptIonColor_.B, (int)ConfIg.Instance.WindowConfig.WindowCornerOption ,ConfIg.Instance.DeveloperConfig.UseDwm);
             WindowDelay = ConfIg.Instance.EtcConfIg.WindowDelay;
+
+            VisualStudio_HWND.Clear();
 
             if (!ConfIg.Instance.DeveloperConfig.UseDwm)
             {
