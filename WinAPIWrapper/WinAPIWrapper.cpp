@@ -146,9 +146,11 @@ namespace WinAPIWrapper
 		m_Windowmodule->cornerPreference = cornerpre;
 	}
 
-	void WindowmoduleWrapper::SetCaptionColor(byte r, byte g, byte b)
+	void WindowmoduleWrapper::SetCaptionTextColor(byte r, byte g, byte b)
 	{
-		m_Windowmodule->CaptionColor = RGB(r, g, b);
+		CaptionTextColor_R = r;
+		CaptionTextColor_G = g;
+		CaptionTextColor_B = b;
 	}
 
 	void WindowmoduleWrapper::SetBuildVer(int BuildVer)
@@ -185,7 +187,7 @@ namespace WinAPIWrapper
 	void WindowmoduleWrapper::SetWindowCaptionTextColorWithDwm(IntPtr hwnd, bool IsTransparency)
 	{
 		auto Hwnd = marshalasIntPtrToHWND(hwnd);
-		auto CaptionColor = RGB(CaptionColor_R, CaptionColor_G, CaptionColor_B); 
+		auto CaptionColor = RGB(CaptionTextColor_B, CaptionTextColor_G, CaptionTextColor_B); 
 		if (IsTransparency)
 			CaptionColor = DWMWA_COLOR_NONE;
 

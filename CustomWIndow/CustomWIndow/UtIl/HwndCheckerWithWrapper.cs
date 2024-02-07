@@ -234,6 +234,8 @@ namespace CustomWIndow.UtIl
                 wrapper.SetTaskbarRoundedCornerandBorderColor((int)ConfIg.Instance.TaskBarConfig.TaskbarBorderCornermode, r, g, b);
             //gc = GCHandle.Alloc(wrapper, GCHandleType.Pinned);
 
+            wrapper.SetCaptionTextColor(ConfIg.Instance.ColorConfIg.CaptIonTextColor_.R, ConfIg.Instance.ColorConfIg.CaptIonTextColor_.G, ConfIg.Instance.ColorConfIg.CaptIonTextColor_.B);
+
             foreach (var task in ProduceTask(cancel))
             {
                 await task;

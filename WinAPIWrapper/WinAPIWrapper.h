@@ -45,7 +45,7 @@ namespace WinAPIWrapper {
 		void TrackingWindows();
 
 		void SetCornerPre(UINT cornerPre);
-		void SetCaptionColor(byte r, byte g, byte b);
+		void SetCaptionTextColor(byte r, byte g, byte b);
 		void SetBuildVer(int BuildVer);
 
 		void SetWindowBorderColorWithDwm(IntPtr hwnd, bool IsTransparency);
@@ -95,6 +95,10 @@ namespace WinAPIWrapper {
 		byte CaptionColor_R;
 		byte CaptionColor_G;
 		byte CaptionColor_B;
+
+		byte CaptionTextColor_R;
+		byte CaptionTextColor_G;
+		byte CaptionTextColor_B;
 
 		int GetDisplayCount();
 
